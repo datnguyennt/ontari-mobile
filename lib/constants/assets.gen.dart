@@ -236,6 +236,9 @@ class $AssetsImagesGen {
   /// File path: assets/images/ic_bg.svg
   SvgGenImage get icBg => const SvgGenImage('assets/images/ic_bg.svg');
 
+  /// File path: assets/images/ic_icon.svg
+  SvgGenImage get icIcon => const SvgGenImage('assets/images/ic_icon.svg');
+
   /// File path: assets/images/onboarding_1.png
   AssetGenImage get onboarding1 =>
       const AssetGenImage('assets/images/onboarding_1.png');
@@ -249,7 +252,8 @@ class $AssetsImagesGen {
       const AssetGenImage('assets/images/onboarding_3.png');
 
   /// List of all assets
-  List<dynamic> get values => [icBg, onboarding1, onboarding2, onboarding3];
+  List<dynamic> get values =>
+      [icBg, icIcon, onboarding1, onboarding2, onboarding3];
 }
 
 class Assets {
