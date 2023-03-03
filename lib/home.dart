@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_clean_architech_bloc/constants/assets.gen.dart';
+import 'package:flutter_svg/svg.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -7,8 +9,15 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: Center(
-        child: Text("Hello", ),
+      body: Column(
+        children: [
+          Center(
+            child: Text(
+              "Hello",
+            ),
+          ),
+          Assets.icons.icCalendar.svg()
+        ],
       ),
     );
   }
