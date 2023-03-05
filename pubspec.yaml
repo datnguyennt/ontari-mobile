@@ -51,16 +51,17 @@ flavorizr:
   app:
     android:
       flavorDimensions: flavor-type
-    ios: null
+    ios:
+  ide: "vscode"
   flavors:
     prod:
       app:
         name: Ontari-Prod
         icon: assets/images/ic_app_icon.png
       android:
-        applicationId: com.app.ontari
+        applicationId: com.prod.ontari
       ios:
-        bundleId: com.app.ontari
+        bundleId: com.prod.ontari
     dev:
       app:
         name: Ontari-Dev

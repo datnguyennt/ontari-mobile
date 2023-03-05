@@ -33,7 +33,7 @@ android {
     productFlavors {
         prod {
             dimension "flavor-type"
-            applicationId "com.app.ontari"
+            applicationId "com.prod.ontari"
             resValue "string", "app_name", "Ontari-Prod"
         }
         dev {
