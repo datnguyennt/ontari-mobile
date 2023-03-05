@@ -14,8 +14,8 @@ class TextStyles {
       Theme.of(context).textTheme.headlineSmall;
 
   //Body
-  static bodyTextMedium(BuildContext context) =>
-      Theme.of(context).textTheme.bodyMedium;
+  static TextStyle bodyTextMedium(BuildContext context) =>
+      Theme.of(context).textTheme.bodyMedium!;
 
   static bodyTextSmall(BuildContext context) =>
       Theme.of(context).textTheme.bodySmall;

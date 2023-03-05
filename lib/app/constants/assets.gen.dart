@@ -233,6 +233,14 @@ class $AssetsIconsGen {
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
+  /// File path: assets/images/ic_app_icon.png
+  AssetGenImage get icAppIcon =>
+      const AssetGenImage('assets/images/ic_app_icon.png');
+
+  /// File path: assets/images/ic_app_icon_large.png
+  AssetGenImage get icAppIconLarge =>
+      const AssetGenImage('assets/images/ic_app_icon_large.png');
+
   /// File path: assets/images/ic_bg.svg
   SvgGenImage get icBg => const SvgGenImage('assets/images/ic_bg.svg');
 
@@ -252,8 +260,15 @@ class $AssetsImagesGen {
       const AssetGenImage('assets/images/onboarding_3.png');
 
   /// List of all assets
-  List<dynamic> get values =>
-      [icBg, icIcon, onboarding1, onboarding2, onboarding3];
+  List<dynamic> get values => [
+        icAppIcon,
+        icAppIconLarge,
+        icBg,
+        icIcon,
+        onboarding1,
+        onboarding2,
+        onboarding3
+      ];
 }
 
 class Assets {
