@@ -1,9 +1,5 @@
-// ignore_for_file: constant_identifier_names
-
+import 'package:flutter_clean_architech_bloc/app/modules/base/bindings/base.binging.dart';
 import 'package:get/get.dart';
-
-import '../modules/home/bindings/home_binding.dart';
-import '../modules/home/views/home_view.dart';
 import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
 import '../modules/onboarding/bindings/onboarding_binding.dart';
@@ -14,21 +10,22 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.HOME;
+  static const initial = Routes.onboarding;
 
   static final routes = [
     GetPage(
-      name: _Paths.HOME,
-      page: () => const HomeView(),
-      binding: HomeBinding(),
+      name: Routes.onboarding,
+      page: () => const OnboardingView(),
+      bindings: [BaseBinding(), OnboardingBinding()],
+      transition: Transition.noTransition,
     ),
     GetPage(
-      name: _Paths.ONBOARDING,
+      name: Routes.home,
       page: () => const OnboardingView(),
       binding: OnboardingBinding(),
     ),
     GetPage(
-      name: _Paths.LOGIN,
+      name: Routes.login,
       page: () => const LoginView(),
       binding: LoginBinding(),
     ),

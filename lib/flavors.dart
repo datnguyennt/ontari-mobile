@@ -3,7 +3,7 @@ enum Flavor {
   DEV,
 }
 
-class F {
+class AppFlavor {
   static Flavor? appFlavor;
 
   static String get name => appFlavor?.name ?? '';
@@ -18,5 +18,4 @@ class F {
         return 'title';
     }
   }
-
 }
