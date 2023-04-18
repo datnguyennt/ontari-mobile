@@ -1,8 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
 import 'package:ontari_mobile/app/modules/home/controllers/home_controller.dart';
-
+import 'package:ontari_mobile/app/routes/app_pages.dart';
 
 class HomeView extends GetView<HomeController> {
   const HomeView({super.key});
@@ -18,6 +18,12 @@ class HomeView extends GetView<HomeController> {
           'HomeView is working',
           style: TextStyle(fontSize: 20),
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async {
+          await FirebaseAuth.instance.signOut();
+          Get.offAllNamed(Routes.ONBOARDING);
+        },
       ),
     );
   }

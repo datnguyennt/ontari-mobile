@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 
 abstract class Logger {
@@ -11,9 +11,7 @@ abstract class Logger {
 class ConsoleLogger extends Logger {
   @override
   void log(String msg) {
-    if (kDebugMode) {
-      print('${DateTime.now()} : $msg');
-    }
+    debugPrint('${DateTime.now()} : $msg');
   }
 }
 

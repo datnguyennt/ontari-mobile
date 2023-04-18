@@ -1,33 +1,44 @@
 import 'package:get/get.dart';
-import 'package:ontari_mobile/app/modules/base/bindings/base.binging.dart';
-import 'package:ontari_mobile/app/modules/login/bindings/login_binding.dart';
-import 'package:ontari_mobile/app/modules/login/views/login_view.dart';
-import 'package:ontari_mobile/app/modules/onboarding/bindings/onboarding_binding.dart';
-import 'package:ontari_mobile/app/modules/onboarding/views/onboarding_view.dart';
+import 'package:ontari_mobile/app/modules/auth/bindings/auth_binding.dart';
+import 'package:ontari_mobile/app/modules/auth/views/login_view.dart';
+import 'package:ontari_mobile/app/modules/auth/views/sign_up.view.dart';
+import 'package:ontari_mobile/app/modules/base/binding/base.binding.dart';
+
+import '../modules/home/home.export.dart';
+import '../modules/onboarding/onboarding.export.dart';
+
+// ignore_for_file: constant_identifier_names
 
 part 'app_routes.dart';
 
 class AppPages {
   AppPages._();
 
-  static const String initial = Routes.onboarding;
+  static const INITIAL = Routes.ONBOARDING;
 
   static final routes = [
     GetPage(
-      name: Routes.onboarding,
-      page: () => const OnboardingView(),
-      bindings: [BaseBinding(), OnboardingBinding()],
-      transition: Transition.noTransition,
+      name: _Paths.HOME,
+      page: () => const HomeView(),
+      binding: HomeBinding(),
     ),
     GetPage(
-      name: Routes.home,
+      name: _Paths.ONBOARDING,
       page: () => const OnboardingView(),
-      binding: OnboardingBinding(),
+      bindings: [
+        BaseBinding(),
+        OnboardingBinding(),
+      ],
     ),
     GetPage(
-      name: Routes.login,
+      name: _Paths.LOGIN,
       page: () => const LoginView(),
-      binding: LoginBinding(),
+      binding: AuthBinding(),
+    ),
+    GetPage(
+      name: _Paths.SIGN_UP,
+      page: () => const SignUpView(),
+      binding: AuthBinding(),
     ),
   ];
 }

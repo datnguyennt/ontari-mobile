@@ -47,7 +47,7 @@ class AppTheme {
   }
 
   static TextStyle textStyle(Brightness brightness) {
-    return GoogleFonts.poppins(
+    return GoogleFonts.manrope(
       color: brightness == Brightness.light
           ? AppColors.kPrimaryLight
           : AppColors.kWhite,

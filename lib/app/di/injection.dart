@@ -4,7 +4,7 @@ import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 import 'package:ontari_mobile/app/di/injection.config.dart';
 
-final locator = GetIt.instance;
+final getIt = GetIt.instance;
 
 @InjectableInit()
-Future<void> configureDependencies() async => await $initGetIt(locator);
+Future<void> configureDependencies() async => await $initGetIt(getIt);

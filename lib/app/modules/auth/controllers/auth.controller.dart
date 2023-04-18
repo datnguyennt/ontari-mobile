@@ -4,9 +4,9 @@ import 'package:ontari_mobile/app/data/repository/user.repository.dart';
 import 'package:ontari_mobile/app/routes/app_pages.dart';
 
 class AuthController extends GetxController {
-  final UserRepository repository;
 
   AuthController(this.repository);
+  final UserRepository repository;
 
   static AuthController get to => Get.find<AuthController>();
 
@@ -21,7 +21,7 @@ class AuthController extends GetxController {
       email: email,
       password: password,
     );
-    result.fold(
+    await result.fold(
       (error) {
         throw Exception(error);
       },
@@ -61,7 +61,7 @@ class AuthController extends GetxController {
 
   Future<void> verifyUser() async {
     if (loggedUser == null) {
-      Get.offAllNamed(Routes.LOGIN);
+      await Get.offAllNamed(Routes.LOGIN);
     }
   }
 

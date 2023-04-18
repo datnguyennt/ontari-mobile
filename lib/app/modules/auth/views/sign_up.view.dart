@@ -1,7 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:ontari_mobile/app/constants/countries.dart';
-import 'package:ontari_mobile/app/modules/auth/views/otp.view.dart';
+import 'package:ontari_mobile/app/modules/auth/controllers/sign_up.controller.dart';
 import 'package:ontari_mobile/app/routes/app_pages.dart';
 import 'package:ontari_mobile/app/util/theme/theme.export.dart';
 import 'package:ontari_mobile/app/widgets/footer.widget.dart';
@@ -10,10 +10,8 @@ import 'package:ontari_mobile/app/widgets/rounded_button.widget.dart';
 import 'package:ontari_mobile/app/widgets/text_continue_social.widget.dart';
 import 'package:ontari_mobile/app/widgets/text_field.widget.dart';
 
-import '../controllers/sign_up.controller.dart';
-
 class SignUpView extends GetView<SignUpController> {
-  const SignUpView({Key? key}) : super(key: key);
+  const SignUpView({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -135,7 +133,6 @@ class SignUpView extends GetView<SignUpController> {
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           SvgPicture.asset(
             iconPath,
@@ -160,7 +157,6 @@ class SignUpView extends GetView<SignUpController> {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: AppSize.kSpacing20.h),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Obx(
@@ -188,7 +184,6 @@ class SignUpView extends GetView<SignUpController> {
           ),
           Flexible(
             child: RichText(
-              textAlign: TextAlign.start,
               text: TextSpan(
                 children: <TextSpan>[
                   TextSpan(
@@ -243,7 +238,7 @@ class SignUpView extends GetView<SignUpController> {
           () => TextFieldWidget(
             label: LocaleKeys.text_phone_number.tr,
             prefixIcon: controller.selectedCountry.flag,
-            hintText: "${controller.selectedCountry.phoneCode} 000 000 000",
+            hintText: '${controller.selectedCountry.phoneCode} 000 000 000',
             controller: controller.phoneController,
             keyboardType: TextInputType.phone,
             onTapPrefixIcon: () {
@@ -292,14 +287,13 @@ class SignUpView extends GetView<SignUpController> {
               child: Column(
                 children: [
                   Text(
-                    "Select country",
+                    'Select country',
                     style: AppStyles.headline4(context),
                   ),
                   SizedBox(
                     height: AppSize.kSpacing20.w,
                   ),
                   Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: List.generate(
                       commonCountry.length,
@@ -313,7 +307,6 @@ class SignUpView extends GetView<SignUpController> {
                             Navigator.of(context).pop();
                           },
                           child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               SvgPicture.asset(
@@ -342,7 +335,7 @@ class SignUpView extends GetView<SignUpController> {
                     ),
                   ),
                 ],
-              )),
+              ),),
         );
       },
     );

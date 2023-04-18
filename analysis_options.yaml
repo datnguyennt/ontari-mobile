@@ -2,8 +2,8 @@ include: package:very_good_analysis/analysis_options.yaml
 linter:
   rules:
     sort_pub_dependencies: false
-    argument_type_not_assignable: false
     public_member_api_docs: false
-    strict_raw_type: false
     one_member_abstracts: false
-    
+    unawaited_futures: false
+    avoid_bool_literals_in_conditional_expressions: false
+    invalid_assignment: false

@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import 'package:get/get.dart';
 import 'package:ontari_mobile/app/modules/onboarding/controllers/onboarding_controller.dart';
 import 'package:ontari_mobile/app/util/theme/app_color.dart';
 import 'package:ontari_mobile/app/util/theme/app_size.dart';
 import 'package:ontari_mobile/app/util/theme/app_text_style.dart';
+import 'package:ontari_mobile/generated/locales.g.dart';
 
 class OnboardingView extends GetView<OnboardingController> {
   const OnboardingView({super.key});
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+    final height = MediaQuery.of(context).size.height;
+    debugPrint('width: $width height: $height');
     return Scaffold(
       body: SafeArea(
         child: _buildBody(context),
@@ -38,12 +41,12 @@ class OnboardingView extends GetView<OnboardingController> {
         onPageChanged: controller.onPageChanged,
         controller: controller.pageController,
         itemBuilder: (context, index) {
-          final onBoardingText = controller.onboardings[index];
+          final onboardingText = controller.onboardings[index];
           return Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               Image.asset(
-                onBoardingText.image,
+                onboardingText.image,
                 width: Get.width,
                 height: 398.h,
                 fit: BoxFit.cover,
@@ -52,8 +55,8 @@ class OnboardingView extends GetView<OnboardingController> {
                 height: AppSize.kSpacing48.h,
               ),
               Text(
-                onBoardingText.title,
-                style: TextStyles.headline1(context),
+                onboardingText.title,
+                style: AppStyles.headline1(context),
               ),
               Padding(
                 padding: EdgeInsets.symmetric(
@@ -61,8 +64,8 @@ class OnboardingView extends GetView<OnboardingController> {
                   vertical: AppSize.kSpacing20.h,
                 ),
                 child: Text(
-                  onBoardingText.description,
-                  style: TextStyles.bodyTextMedium(context).copyWith(
+                  onboardingText.description,
+                  style: AppStyles.bodyTextMedium(context).copyWith(
                     color: AppColors.kGrey,
                   ),
                   textAlign: TextAlign.center,
@@ -114,10 +117,12 @@ class OnboardingView extends GetView<OnboardingController> {
               ),
             ),
             color: AppColors.kPrimaryLight,
-            onPressed: controller.nextPage,
+            onPressed: controller.onTapButton,
             child: Text(
-              'Next',
-              style: TextStyles.bodyTextMedium(context).copyWith(
+              controller.isEqualLengthList
+                  ? LocaleKeys.button_get_started.tr
+                  : LocaleKeys.button_next.tr,
+              style: AppStyles.bodyTextMedium(context).copyWith(
                 color: AppColors.kWhite,
               ),
             ),

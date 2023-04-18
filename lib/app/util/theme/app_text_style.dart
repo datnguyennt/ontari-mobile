@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class TextStyles {
-  TextStyles._();
+class AppStyles {
+  AppStyles._();
 
   //Headline
   static TextStyle headline1(BuildContext context) =>
@@ -13,6 +13,9 @@ class TextStyles {
   static TextStyle headline4(BuildContext context) =>
       Theme.of(context).textTheme.headlineSmall!;
 
+  static TextStyle headline5(BuildContext context) =>
+      Theme.of(context).textTheme.headlineSmall!;
+
   //Body
   static TextStyle bodyTextMedium(BuildContext context) =>
       Theme.of(context).textTheme.bodyMedium!;
@@ -22,8 +25,5 @@ class TextStyles {
 
 //Button
   static TextStyle buttonTextSmall(BuildContext context) =>
-      Theme.of(context).textTheme.bodySmall!.copyWith(
-            height: 16.39 / 12,
-            fontWeight: FontWeight.w600,
-          );
+      Theme.of(context).textTheme.bodySmall!;
 }
