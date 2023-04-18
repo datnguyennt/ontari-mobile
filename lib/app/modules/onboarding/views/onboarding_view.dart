@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_clean_architech_bloc/app/util/theme/app_color.dart';
-import 'package:flutter_clean_architech_bloc/app/util/theme/app_size.dart';
-import 'package:flutter_clean_architech_bloc/app/util/theme/app_text_style.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
-
-import '../controllers/onboarding_controller.dart';
+import 'package:ontari_mobile/app/modules/onboarding/controllers/onboarding_controller.dart';
+import 'package:ontari_mobile/app/util/theme/app_color.dart';
+import 'package:ontari_mobile/app/util/theme/app_size.dart';
+import 'package:ontari_mobile/app/util/theme/app_text_style.dart';
 
 class OnboardingView extends GetView<OnboardingController> {
-  const OnboardingView({Key? key}) : super(key: key);
+  const OnboardingView({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,15 +21,13 @@ class OnboardingView extends GetView<OnboardingController> {
   Widget _buildBody(BuildContext context) {
     return GetBuilder(builder: (OnboardingController controller) {
       return Column(
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _buildPageSlide(controller),
           _buildDotIndicator(controller, context),
         ],
       );
-    });
+    },);
   }
 
   Expanded _buildPageSlide(OnboardingController controller) {
@@ -41,12 +38,12 @@ class OnboardingView extends GetView<OnboardingController> {
         onPageChanged: controller.onPageChanged,
         controller: controller.pageController,
         itemBuilder: (context, index) {
-          OnboardingText onboardingText = controller.onboardings[index];
+          final onBoardingText = controller.onboardings[index];
           return Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               Image.asset(
-                onboardingText.image,
+                onBoardingText.image,
                 width: Get.width,
                 height: 398.h,
                 fit: BoxFit.cover,
@@ -55,7 +52,7 @@ class OnboardingView extends GetView<OnboardingController> {
                 height: AppSize.kSpacing48.h,
               ),
               Text(
-                onboardingText.title,
+                onBoardingText.title,
                 style: TextStyles.headline1(context),
               ),
               Padding(
@@ -64,7 +61,7 @@ class OnboardingView extends GetView<OnboardingController> {
                   vertical: AppSize.kSpacing20.h,
                 ),
                 child: Text(
-                  onboardingText.description,
+                  onBoardingText.description,
                   style: TextStyles.bodyTextMedium(context).copyWith(
                     color: AppColors.kGrey,
                   ),
@@ -79,7 +76,7 @@ class OnboardingView extends GetView<OnboardingController> {
   }
 
   Widget _buildDotIndicator(
-      OnboardingController controller, BuildContext context) {
+      OnboardingController controller, BuildContext context,) {
     return Padding(
       padding: EdgeInsets.fromLTRB(
         AppSize.kSpacing32.w,
@@ -89,7 +86,6 @@ class OnboardingView extends GetView<OnboardingController> {
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Row(
             children: List.generate(
@@ -120,7 +116,7 @@ class OnboardingView extends GetView<OnboardingController> {
             color: AppColors.kPrimaryLight,
             onPressed: controller.nextPage,
             child: Text(
-              "Next",
+              'Next',
               style: TextStyles.bodyTextMedium(context).copyWith(
                 color: AppColors.kWhite,
               ),

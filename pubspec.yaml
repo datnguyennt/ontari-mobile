@@ -1,88 +1,48 @@
-name: flutter_clean_architech_bloc
-description: A new Flutter project.
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+name: ontari_mobile
 version: 1.0.0+1
-
-environment:
+publish_to: none
+description: A new Flutter project.
+environment: 
   sdk: '>=2.18.4 <3.0.0'
-dependencies:
-  flutter:
-    sdk: flutter
-  cupertino_icons: ^1.0.2
+
+dependencies: 
+  cupertino_icons: ^1.0.5
   google_fonts: ^4.0.3
-  flutter_svg: ^1.1.5
-  flutter_screenutil: ^5.6.1
-  dio: ^5.0.1
+  flutter_svg: ^1.1.6
+  flutter_screenutil: ^5.7.0
+  dio: ^5.1.1
   get_it: ^7.2.0
-  injectable: ^1.5.0
-  json_annotation: ^4.4.0
+  injectable: ^2.1.1
+  json_annotation: ^4.8.0
   get: ^4.6.5
   equatable: ^2.0.5
-
-
-
-dev_dependencies:
-  build_runner:
-  flutter_gen_runner: ^5.0.1
-  flutter_native_splash: ^2.2.11
-  very_good_analysis:
-  json_serializable:
-  injectable_generator: ^1.5.1
-  flutter_localizations:
+  flutter: 
     sdk: flutter
+  flutter_localization: ^0.1.10
 
+dev_dependencies: 
+  build_runner: ^2.3.3
+  flutter_native_splash: ^2.2.11
+  flutter_launcher_icons: ^0.11.0
+  very_good_analysis: ^3.0.2
+  json_serializable: ^6.6.1
+  injectable_generator: ^2.1.5
   flutter_test:
     sdk: flutter
-  integration_test:
-    sdk: flutter
-  mocktail: ^0.3.0
-  flutter_lints: ^2.0.0
-flutter:
+
+flutter: 
   uses-material-design: true
   assets:
     - assets/images/
     - assets/icons/
-
-#Flutter gen
-flutter_gen:
-  output: lib/constants/ # Optional (default: lib/gen/)
-  line_length: 80 # Optional (default: 80)
-
-  # Optional
-  integrations:
-    flutter_svg: true
-    flare_flutter: true
-    rive: true
-    lottie: true
-    assets:
-      outputs:
-        style: camel-case
-
+    - assets/locales/
 flutter_native_splash:
   color: '#193D71'
   image: assets/images/ic_app_icon_large.png
   android_screen_orientation: locked
-
-flavorizr:
-  app:
-    android:
-      flavorDimensions: flavor-type
-    ios:
-  ide: "vscode"
-  flavors:
-    prod:
-      app:
-        name: Ontari-Prod
-        icon: assets/images/ic_app_icon.png
-      android:
-        applicationId: com.prod.ontari
-      ios:
-        bundleId: com.prod.ontari
-    dev:
-      app:
-        name: Ontari-Dev
-        icon: assets/images/ic_app_icon.png
-      android:
-        applicationId: com.dev.ontari
-      ios:
-        bundleId: com.dev.ontari
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  remove_alpha_ios: true
+  image_path: "assets/images/ic_app_icon.png"
+  min_sdk_android: 21 # android min sdk min:16, default 21

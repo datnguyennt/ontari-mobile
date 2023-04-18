@@ -1,5 +1,5 @@
-import 'package:flutter_clean_architech_bloc/app/modules/base/controllers/base.controller.dart';
 import 'package:get/get.dart';
+import 'package:ontari_mobile/app/modules/base/controllers/base.controller.dart';
 
 
 class BaseBinding extends Bindings {

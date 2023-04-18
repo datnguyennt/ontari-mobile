@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_clean_architech_bloc/app/enums/language.enum.dart';
+import 'package:ontari_mobile/app/enums/language.enum.dart';
 
 const List<Locale> supportedLocales = [
   Locale(LanguageEnum.english, ''),

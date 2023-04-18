@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 
 abstract class Logger {
@@ -10,17 +11,19 @@ abstract class Logger {
 class ConsoleLogger extends Logger {
   @override
   void log(String msg) {
-    print('${DateTime.now()} : $msg');
+    if (kDebugMode) {
+      print('${DateTime.now()} : $msg');
+    }
   }
 }
 
 @injectable
 class FileLogger extends Logger {
-  File file;
   FileLogger(this.file);
+  File file;
   @override
   void log(String msg) {
-    String logMsg = '${DateTime.now()} $msg \n';
+    final logMsg = '${DateTime.now()} $msg \n';
     file.writeAsString(logMsg, mode: FileMode.append);
   }
 }
