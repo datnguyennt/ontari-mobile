@@ -6,4 +6,5 @@ linter:
     one_member_abstracts: false
     unawaited_futures: false
     avoid_bool_literals_in_conditional_expressions: false
-    invalid_assignment: false
+    avoid_dynamic_calls: false
+    inference_failure_on_function_invocation: false
