@@ -10,14 +10,5 @@ class AppFlavor {
 
   static String get name => appFlavor?.name ?? '';
 
-  static String get title {
-    switch (appFlavor) {
-      case Flavor.PROD:
-        return 'Ontari-Prod';
-      case Flavor.DEV:
-        return 'Ontari-Dev';
-      default:
-        return 'title';
-    }
-  }
+  static String get title => 'Ontari';
 }

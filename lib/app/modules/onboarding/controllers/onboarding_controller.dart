@@ -1,4 +1,4 @@
-// ignore_for_file: lines_longer_than_80_chars
+// ignore_for_file: lines_longer_than_80_chars, inference_failure_on_function_invocation
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

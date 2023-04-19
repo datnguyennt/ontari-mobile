@@ -13,7 +13,7 @@ enum AuthResultStatus {
 }
 
 class AuthExceptionHandler {
-  static dynamic handleException(e) {
+  static AuthResultStatus handleException(dynamic e) {
     AuthResultStatus status;
     switch (e.code) {
       case 'invalid-email':
@@ -52,7 +52,7 @@ class AuthExceptionHandler {
   ///
   /// Accepts AuthExceptionHandler.errorType
   ///
-  static String generateExceptionMessage(exceptionCode) {
+  static String generateExceptionMessage(AuthResultStatus exceptionCode) {
     String errorMessage;
     switch (exceptionCode) {
       case AuthResultStatus.invalidEmail:
@@ -83,8 +83,12 @@ class AuthExceptionHandler {
       case AuthResultStatus.accountExistsWithDifferentCredential:
         errorMessage = 'The account already exists with a different credential';
         break;
-      default:
-        errorMessage = 'An undefined Error happened.';
+      case AuthResultStatus.successful:
+        errorMessage = '';
+        break;
+      case AuthResultStatus.undefined:
+        errorMessage = 'Undefined';
+        break;
     }
 
     return errorMessage;

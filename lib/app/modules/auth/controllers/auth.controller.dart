@@ -1,4 +1,6 @@
 
+// ignore_for_file: inference_failure_on_function_invocation
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:ontari_mobile/app/data/repository/user.repository.dart';

@@ -4,8 +4,8 @@ import 'package:ontari_mobile/app/modules/auth/views/login_view.dart';
 import 'package:ontari_mobile/app/modules/auth/views/sign_up.view.dart';
 import 'package:ontari_mobile/app/modules/base/binding/base.binding.dart';
 
-import '../modules/home/home.export.dart';
-import '../modules/onboarding/onboarding.export.dart';
+import 'package:ontari_mobile/app/modules/home/home.export.dart';
+import 'package:ontari_mobile/app/modules/onboarding/onboarding.export.dart';
 
 // ignore_for_file: constant_identifier_names
 

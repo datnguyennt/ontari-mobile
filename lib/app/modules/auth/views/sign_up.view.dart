@@ -1,3 +1,5 @@
+// ignore_for_file: inference_failure_on_function_invocation
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:ontari_mobile/app/constants/countries.dart';

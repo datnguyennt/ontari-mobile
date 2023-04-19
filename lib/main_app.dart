@@ -35,9 +35,9 @@ Future<void> mainApp(Flavor flavor) async {
 }
 
 Future<void> initializeApp() async {
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+  // await Firebase.initializeApp(
+  //   options: DefaultFirebaseOptions.currentPlatform,
+  // );
   await setPreferredOrientations();
   FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
 

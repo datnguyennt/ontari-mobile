@@ -1,3 +1,5 @@
+// ignore_for_file: inference_failure_on_function_invocation, unnecessary_lambdas, lines_longer_than_80_chars
+
 import 'package:flutter/material.dart';
 import 'package:ontari_mobile/app/modules/auth/controllers/sign_up.controller.dart';
 import 'package:ontari_mobile/app/modules/auth/widgets/otp_input.widget.dart';
