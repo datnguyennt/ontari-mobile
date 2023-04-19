@@ -11,6 +11,7 @@ class DioClient {
   DioClient(this._dio) {
     updateDioInterceptors();
   }
+  @singleton
   final Dio _dio;
 
   void updateAuthorization(String token) {

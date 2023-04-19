@@ -6,23 +6,23 @@ import 'package:ontari_mobile/app/constants/app_assets.dart';
 import 'package:ontari_mobile/app/modules/auth/controllers/auth.controller.dart';
 import 'package:ontari_mobile/app/routes/app_pages.dart';
 
-class OnboardingController extends GetxController {
+class OnBoardingController extends GetxController {
     final AuthController _authController = AuthController.to;
   final count = 0.obs;
-  List<OnboardingText> onboardings = [
-    OnboardingText(
+  List<OnBoardingText> onboardings = [
+    OnBoardingText(
       title: 'Learn from Best',
       description:
           'Learn everything to improve your skills taught by the best mentors.',
       image: AppAssets.onboarding1,
     ),
-    OnboardingText(
+    OnBoardingText(
       title: 'Download Course',
       description:
           'Dont worry if you’re offline, download the video and enjoy the video. ',
       image: AppAssets.onboarding2,
     ),
-    OnboardingText(
+    OnBoardingText(
       title: 'Explore Courses',
       description:
           'Lets explore courses. In this application have 1000 courses and 200 mentors.',
@@ -53,13 +53,13 @@ class OnboardingController extends GetxController {
   }
   @override
   Future<void> onInit()async {
-            await _authController.verifyUser();
+            // await _authController.verifyUser();
     super.onInit();
   }
 }
 
-class OnboardingText {
-  OnboardingText({
+class OnBoardingText {
+  OnBoardingText({
     required this.title,
     required this.description,
     required this.image,

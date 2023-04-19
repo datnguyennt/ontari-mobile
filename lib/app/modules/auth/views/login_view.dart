@@ -132,7 +132,9 @@ class LoginView extends GetView<LoginController> {
 
   RoundedButton _buildButtonSignIn(BuildContext context) {
     return RoundedButton(
-      onPressed: () {},
+      onPressed: () {
+        controller.signInCredential();
+      },
       buttonColor:
           Get.isDarkMode ? AppColors.kPrimaryDark : AppColors.kSecondaryLight,
       child: Text(

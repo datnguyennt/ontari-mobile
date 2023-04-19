@@ -5,8 +5,8 @@ import 'package:ontari_mobile/app/modules/onboarding/controllers/onboarding_cont
 class OnboardingBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<OnboardingController>(
-      OnboardingController.new,
+    Get.lazyPut<OnBoardingController>(
+      OnBoardingController.new,
     );
   }
 }

@@ -7,7 +7,7 @@ import 'package:ontari_mobile/app/util/theme/app_size.dart';
 import 'package:ontari_mobile/app/util/theme/app_text_style.dart';
 import 'package:ontari_mobile/generated/locales.g.dart';
 
-class OnboardingView extends GetView<OnboardingController> {
+class OnboardingView extends GetView<OnBoardingController> {
   const OnboardingView({super.key});
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ class OnboardingView extends GetView<OnboardingController> {
   }
 
   Widget _buildBody(BuildContext context) {
-    return GetBuilder(builder: (OnboardingController controller) {
+    return GetBuilder(builder: (OnBoardingController controller) {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -33,7 +33,7 @@ class OnboardingView extends GetView<OnboardingController> {
     },);
   }
 
-  Expanded _buildPageSlide(OnboardingController controller) {
+  Expanded _buildPageSlide(OnBoardingController controller) {
     return Expanded(
       child: PageView.builder(
         itemCount: controller.onboardings.length,
@@ -79,7 +79,7 @@ class OnboardingView extends GetView<OnboardingController> {
   }
 
   Widget _buildDotIndicator(
-      OnboardingController controller, BuildContext context,) {
+      OnBoardingController controller, BuildContext context,) {
     return Padding(
       padding: EdgeInsets.fromLTRB(
         AppSize.kSpacing32.w,

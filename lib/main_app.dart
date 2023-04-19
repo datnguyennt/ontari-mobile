@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:dio/dio.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
@@ -39,8 +40,8 @@ Future<void> initializeApp() async {
   //   options: DefaultFirebaseOptions.currentPlatform,
   // );
   await setPreferredOrientations();
-  FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
-
+  // FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
+  getIt.registerSingleton(Dio());
   /// Init dependencies
   await configureDependencies();
 }

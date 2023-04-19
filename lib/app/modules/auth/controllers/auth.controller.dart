@@ -14,7 +14,7 @@ class AuthController extends GetxController {
   static AuthController get to => Get.find<AuthController>();
 
   //
-  final Rx<User?> _loggedUser = FirebaseAuth.instance.currentUser.obs;
+  final Rx<User?> _loggedUser = null.obs;
   User? get loggedUser => _loggedUser.value;
   Future<void> createUserByEmail({
     required String email,

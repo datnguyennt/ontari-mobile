@@ -15,7 +15,6 @@ class App extends StatelessWidget {
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: ScreenUtilInit(
         designSize: const Size(375, 812),
-        minTextAdapt: true,
         splitScreenMode: true,
         builder: (context, child) {
           return GetMaterialApp(
