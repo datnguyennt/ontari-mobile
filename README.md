@@ -2,7 +2,29 @@
 
 Ontari platform
 
-##
+## Configure Firebase Key with multiple environment
+```sh
+npm install -g firebase-tools
+
+dart pub global activate flutterfire_cli
+
+flutterfire configure
+
+# Dev environment
+flutterfire config \
+  --project=ontari-mobile-eb78f \
+  --out=lib/firebase_options_dev.dart \
+  --ios-bundle-id=com.dev.ontari \
+  --android-app-id=com.dev.ontari
+
+# Product environment
+flutterfire config \
+  --project=ontari-mobile-eb78f \
+  --out=lib/firebase_options_prod.dart \
+  --ios-bundle-id=com.prod.ontari \
+  --android-app-id=com.prod.ontari
+
+```
 
 ## Translate
 

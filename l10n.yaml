@@ -1,0 +1,8 @@
+arb-dir: assets/locales
+template-arb-file: locale_en.arb
+
+output-dir: lib/generated
+synthetic-package: false
+
+output-localization-file: app_localizations.g.dart
+output-class: AppLocalizations
