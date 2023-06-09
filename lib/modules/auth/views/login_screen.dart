@@ -3,17 +3,22 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:ontari_mobile/core/bloc/state.dart';
 import 'package:ontari_mobile/core/common/theme/theme.export.dart';
+import 'package:ontari_mobile/core/constant/locales.dart';
 import 'package:ontari_mobile/core/widget/base_widget.dart';
 import 'package:ontari_mobile/core/widget/footter.widget.dart';
 import 'package:ontari_mobile/core/widget/header.widget.dart';
 import 'package:ontari_mobile/core/widget/rounded_button.widget.dart';
 import 'package:ontari_mobile/core/widget/text_field.widget.dart';
+import 'package:ontari_mobile/di/di.dart';
 import 'package:ontari_mobile/generated/locale_keys.g.dart';
 import 'package:ontari_mobile/modules/auth/bloc/login_bloc/login_bloc.dart';
+import 'package:ontari_mobile/modules/core/blocs/bloc/theme_bloc.dart';
+import 'package:ontari_mobile/modules/core/blocs/bloc/theme_event.dart';
 
 @RoutePage()
 class LoginScreen extends BaseView<LoginBloc> {
-  const LoginScreen({super.key});
+  LoginScreen({super.key});
+  final ThemeBloc themeBloc = getIt<ThemeBloc>();
 
   @override
   Widget buildView(BuildContext context, BaseState state) {
@@ -128,7 +133,14 @@ class LoginScreen extends BaseView<LoginBloc> {
 
   RoundedButton _buildButtonSignIn(BuildContext context) {
     return RoundedButton(
-      onPressed: () {
+      onPressed: () async {
+        themeBloc.add(ThemeSwitchedEvent());
+        // if (context.locale == AppLocales.vi) {
+        //   await context.setLocale(AppLocales.en);
+        // } else {
+        //   await context.setLocale(AppLocales.vi);
+        // }
+
         // controller.signInCredential();
       },
       // buttonColor:
@@ -187,18 +199,18 @@ class LoginScreen extends BaseView<LoginBloc> {
         SizedBox(
           height: AppSize.kRadius16.h,
         ),
-TextFieldWidget(
-            label: LocaleKeys.text_password.tr(),
-            prefixIcon: AppAssets.icPassword,
-            hintText: LocaleKeys.text_enter_password.tr(),
-            controller: TextEditingController(),
-            keyboardType: TextInputType.visiblePassword,
-            // obscureText: controller.showPassword ? false : true,
-            // suffixIcon: controller.showPassword
-            //     ? AppAssets.icEyeOpen
-            //     : AppAssets.icEyeClosed,
-            // onTapSuffixIcon: controller.onChangeVisiblePassword,
-          ),
+        TextFieldWidget(
+          label: LocaleKeys.text_password.tr(),
+          prefixIcon: AppAssets.icPassword,
+          hintText: LocaleKeys.text_enter_password.tr(),
+          controller: TextEditingController(),
+          keyboardType: TextInputType.visiblePassword,
+          // obscureText: controller.showPassword ? false : true,
+          // suffixIcon: controller.showPassword
+          //     ? AppAssets.icEyeOpen
+          //     : AppAssets.icEyeClosed,
+          // onTapSuffixIcon: controller.onChangeVisiblePassword,
+        ),
       ],
     );
   }

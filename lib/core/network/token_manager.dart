@@ -1,4 +1,4 @@
-import 'package:ontari_mobile/core/constant/app_constants.dart';
+import 'package:ontari_mobile/core/constant/hive_keys.dart';
 import 'package:ontari_mobile/core/hive.helper.dart';
 
 class TokenManager {
@@ -6,47 +6,36 @@ class TokenManager {
 
   Future<String?> getAccessToken() async {
     return await HiveHelper.get(
-      boxName: HiveKeys.authBox,
-      keyValue: HiveKeys.accessToken,
+      HiveKeys.accessToken,
     );
   }
 
   Future<String> getRefreshToken() async {
-    return await HiveHelper.get(
-          boxName: HiveKeys.authBox,
-          keyValue: HiveKeys.refreshToken,
-        ) ??
-        '';
+    return await HiveHelper.get(HiveKeys.refreshToken) ?? '';
   }
 
   Future<DateTime?> getTokenExpiredTime() async {
-    String expiredTime = await HiveHelper.get(
-      boxName: HiveKeys.authBox,
-      keyValue: HiveKeys.expiresIn,
-    );
+    String expiredTime = await HiveHelper.get(HiveKeys.expiresIn);
     return DateTime.parse(expiredTime);
   }
 
   Future<void> setAccessToken(String accessToken) async {
     await HiveHelper.put(
-      boxName: HiveKeys.authBox,
-      keyValue: HiveKeys.accessToken,
+      key: HiveKeys.accessToken,
       value: accessToken,
     );
   }
 
   Future<void> setRefreshToken(String refreshToken) async {
     await HiveHelper.put(
-      boxName: HiveKeys.authBox,
-      keyValue: HiveKeys.refreshToken,
+      key: HiveKeys.refreshToken,
       value: refreshToken,
     );
   }
 
   Future<void> setTokenExpiredTime(int expiredTime) async {
     await HiveHelper.put(
-      boxName: HiveKeys.authBox,
-      keyValue: HiveKeys.expiresIn,
+      key: HiveKeys.expiresIn,
       value:
           DateTime.now().add(Duration(seconds: expiredTime)).toIso8601String(),
     );
@@ -68,6 +57,6 @@ class TokenManager {
   }
 
   Future<void> cleanAuthBox() async {
-    await HiveHelper.clear(boxName: HiveKeys.authBox);
+    await HiveHelper.clear();
   }
 }

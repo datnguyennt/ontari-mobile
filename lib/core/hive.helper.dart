@@ -1,59 +1,65 @@
 
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:ontari_mobile/core/constant/hive_keys.dart';
 
 abstract class HiveHelper {
-  static Future<Box> openBox(String boxName) async {
-    return await Hive.openBox(boxName);
+  static late Box _box;
+  static Future<void> openBox() async {
+    _box = await Hive.openBox(HiveKeys.authBox);
   }
 
   static Future<void> put({
-    required String boxName,
-    required String keyValue,
+    required String key,
     required dynamic value,
   }) async {
-    final Box box = await openBox(boxName);
-    return await box.put(keyValue, value);
+    if (!_box.isOpen) {
+      await openBox();
+    }
+    return await _box.put(key, value);
   }
 
-  static Future<void> putAll({
-    required String boxName,
-    required Map<dynamic, dynamic> value,
-  }) async {
-    final Box box = await openBox(boxName);
-    return await box.putAll(value);
+  static Future<void> putAll(
+    Map<dynamic, dynamic> value,
+  ) async {
+    if (!_box.isOpen) {
+      await openBox();
+    }
+    return await _box.putAll(value);
   }
 
-  static Future<dynamic> get({
-    required String boxName,
-    required String keyValue,
-  }) async {
-    final Box box = await openBox(boxName);
-    return box.get(keyValue);
+  static Future<dynamic> get(String key) async {
+    if (!_box.isOpen) {
+      await openBox();
+    }
+    return await _box.get(key);
   }
 
-  static Future<List<dynamic>> getAll({required String boxName}) async {
-    final Box box = await openBox(boxName);
-    return box.values.toList();
+  static Future<List<dynamic>> getAll() async {
+    if (!_box.isOpen) {
+      await openBox();
+    }
+    return _box.values.toList();
   }
 
-  static Future<Map<dynamic, dynamic>> getBoxMap({
-    required String boxName,
-  }) async {
-    final Box box = await openBox(boxName);
+  static Future<Map<dynamic, dynamic>> getBoxMap() async {
+    if (!_box.isOpen) {
+      await openBox();
+    }
 
-    return box.toMap();
+    return _box.toMap();
   }
 
-  static Future<void> delete({
-    required String boxName,
-    required String keyValue,
-  }) async {
-    final Box box = await openBox(boxName);
-    return await box.delete(keyValue);
+  static Future<void> delete(String key) async {
+    if (!_box.isOpen) {
+      await openBox();
+    }
+    return await _box.delete(key);
   }
 
-  static Future<int> clear({required String boxName}) async {
-    final Box box = await openBox(boxName);
-    return await box.clear();
+  static Future<int> clear() async {
+    if (!_box.isOpen) {
+      await openBox();
+    }
+    return await _box.clear();
   }
 }

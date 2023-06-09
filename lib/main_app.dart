@@ -8,7 +8,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:ontari_mobile/core/constant/app_constants.dart';
+import 'package:ontari_mobile/core/bloc/event.dart';
+import 'package:ontari_mobile/core/bloc/state.dart';
+import 'package:ontari_mobile/core/constant/hive_keys.dart';
 import 'package:ontari_mobile/core/constant/locales.dart';
 import 'package:ontari_mobile/core/file.utils.dart';
 import 'package:ontari_mobile/core/hive.helper.dart';
@@ -19,6 +21,7 @@ import 'package:ontari_mobile/core/widget/internet_status.view.dart';
 import 'package:ontari_mobile/di/di.dart';
 import 'package:ontari_mobile/flavors.dart';
 import 'package:ontari_mobile/modules/auth/bloc/auth_bloc/auth_bloc.dart';
+import 'package:ontari_mobile/modules/core/blocs/bloc/theme_bloc.dart';
 
 Future<void> mainApp(Flavor flavor, currentPlatform) async {
   AppFlavor.appFlavor = flavor;
@@ -43,14 +46,15 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   final _appRouter = getIt<AppRouter>();
+  ThemeMode themeMode = ThemeMode.system;
 
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        // BlocProvider(
-        //   create: (context) => getIt<CoreBloc>()..add(InitCoreEvent()),
-        // ),
+        BlocProvider(
+          create: (context) => getIt<ThemeBloc>()..add(InitialEvent()),
+        ),
         BlocProvider(
           create: (context) => getIt<AuthBloc>(),
         ),
@@ -59,7 +63,16 @@ class _MyAppState extends State<MyApp> {
         onPointerDown: (_) {
           FocusManager.instance.primaryFocus?.unfocus();
         },
-        child: ScreenUtilInit(
+        child: BlocListener<ThemeBloc, BaseState>(
+          listener: (context, state) {
+            if (state is InitialState) {
+              themeMode = ThemeMode.system;
+            } else if (state is SuccessState) {
+              bool isDarkMode = state.data;
+              themeMode = isDarkMode ? ThemeMode.dark : ThemeMode.light;
+            }
+          },
+          child: ScreenUtilInit(
             designSize: const Size(375, 812),
             minTextAdapt: true,
             splitScreenMode: true,
@@ -68,6 +81,7 @@ class _MyAppState extends State<MyApp> {
                 title: AppFlavor.title,
                 theme: AppThemeData.lightThemeData,
                 darkTheme: AppThemeData.darkThemeData,
+                themeMode: themeMode,
                 debugShowCheckedModeBanner: false,
                 routerConfig: _appRouter.config(),
                 localizationsDelegates: context.localizationDelegates,
@@ -86,7 +100,9 @@ class _MyAppState extends State<MyApp> {
                   return _buildApp(child);
                 },
               );
-            }),
+            },
+          ),
+        ),
       ),
     );
   }
@@ -153,7 +169,7 @@ Future<void> initializeApp(FirebaseOptions currentPlatform) async {
   EasyLocalization.logger.enableBuildModes = [];
   await Hive.initFlutter();
   await FileUtil.getApplicationDir();
-  await HiveHelper.openBox(HiveKeys.authBox);
+  await HiveHelper.openBox();
   configureDependencies();
   await Firebase.initializeApp(
     options: currentPlatform,

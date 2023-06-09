@@ -10,8 +10,8 @@
   },
   "text": {
     "enter": {
-      "email": "Enter your email address",
-      "password": "Enter your password"
+      "email": "Nhập vào địa chỉ email",
+      "password": "Nhập vào mật khẩu"
     },
     "forgot_password": "Forgot password?",
     "continue_social_account": "Or continue with social account",

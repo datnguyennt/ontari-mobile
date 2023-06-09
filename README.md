@@ -35,6 +35,26 @@ Run:
 $ flutter packages pub run build_runner build --delete-conflicting-outputs
 ```
 
+
+## Generate localizations
+
+Run:
+
+```bash
+$ fvm flutter pub run easy_localization:generate -S assets/locales -f keys -O lib/generated -o locale_keys.g.dart
+```
+
+## Generate app flavor
+
+View [document](https://pub.dev/packages/flutter_flavorizr) for details
+
+Run:
+
+```bash
+$ fvm flutter pub run flutter_flavorizr
+```
+
+
 ## Generate icon and splash
 
 ```sh

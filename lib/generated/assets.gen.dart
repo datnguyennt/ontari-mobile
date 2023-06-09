@@ -279,14 +279,14 @@ class $AssetsImagesGen {
 class $AssetsLocalesGen {
   const $AssetsLocalesGen();
 
-  /// File path: assets/locales/en.json
-  String get en => 'assets/locales/en.json';
+  /// File path: assets/locales/en-US.json
+  String get enUS => 'assets/locales/en-US.json';
 
-  /// File path: assets/locales/vn.json
-  String get vn => 'assets/locales/vn.json';
+  /// File path: assets/locales/vi-VN.json
+  String get viVN => 'assets/locales/vi-VN.json';
 
   /// List of all assets
-  List<String> get values => [en, vn];
+  List<String> get values => [enUS, viVN];
 }
 
 class Assets {
