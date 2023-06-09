@@ -1,0 +1,64 @@
+// DO NOT EDIT. This is code generated via package:easy_localization/generate.dart
+
+abstract class  LocaleKeys {
+  static const button_next = 'button.next';
+  static const button_get_started = 'button.get_started';
+  static const button_sign_in = 'button.sign_in';
+  static const button_sign_up = 'button.sign_up';
+  static const button_sign_in_google = 'button.sign_in_google';
+  static const button_sign_in_facebook = 'button.sign_in_facebook';
+  static const button_send_link = 'button.send_link';
+  static const button = 'button';
+  static const text_enter_email = 'text.enter.email';
+  static const text_enter_password = 'text.enter.password';
+  static const text_enter = 'text.enter';
+  static const text_forgot_password = 'text.forgot_password';
+  static const text_continue_social_account = 'text.continue_social_account';
+  static const text_already_have_account_sign_in = 'text.already_have_account_sign_in';
+  static const text_email = 'text.email';
+  static const text_password = 'text.password';
+  static const text_phone_number = 'text.phone_number';
+  static const text_policy_description = 'text.policy.description';
+  static const text_policy_term_and_condition = 'text.policy.term_and_condition';
+  static const text_policy = 'text.policy';
+  static const text_phone_verification = 'text.phone_verification';
+  static const text_google = 'text.google';
+  static const text_facebook = 'text.facebook';
+  static const text_we_have_sent_code = 'text.we_have_sent_code';
+  static const text = 'text';
+  static const sign_in_header_title = 'sign_in.header.title';
+  static const sign_in_header_description = 'sign_in.header.description';
+  static const sign_in_header = 'sign_in.header';
+  static const sign_in_body_don_have_account = 'sign_in.body.don_have_account';
+  static const sign_in_body_create_here = 'sign_in.body.create_here';
+  static const sign_in_body = 'sign_in.body';
+  static const sign_in = 'sign_in';
+  static const sign_up_header_title = 'sign_up.header.title';
+  static const sign_up_header_description = 'sign_up.header.description';
+  static const sign_up_header = 'sign_up.header';
+  static const sign_up_body_already_have_account = 'sign_up.body.already_have_account';
+  static const sign_up_body_sign_in = 'sign_up.body.sign_in';
+  static const sign_up_body = 'sign_up.body';
+  static const sign_up = 'sign_up';
+  static const reset_password_use_code_from_phone = 'reset_password.use_code_from_phone';
+  static const reset_password_reset_password_description = 'reset_password.reset_password_description';
+  static const reset_password_send_to_email = 'reset_password.send_to.email';
+  static const reset_password_send_to_email_description = 'reset_password.send_to.email_description';
+  static const reset_password_send_to_phone = 'reset_password.send_to.phone';
+  static const reset_password_send_to_phone_description = 'reset_password.send_to.phone_description';
+  static const reset_password_send_to = 'reset_password.send_to';
+  static const reset_password_resend = 'reset_password.resend';
+  static const reset_password = 'reset_password';
+  static const subscription_title = 'subscription.title';
+  static const subscription_devices = 'subscription.devices';
+  static const subscription_detail = 'subscription.detail';
+  static const subscription_type_individual = 'subscription.type.individual';
+  static const subscription_type_family = 'subscription.type.family';
+  static const subscription_type = 'subscription.type';
+  static const subscription_description = 'subscription.description';
+  static const subscription_use_individual_plan = 'subscription.use.individual_plan';
+  static const subscription_use_individual_description = 'subscription.use.individual_description';
+  static const subscription_use = 'subscription.use';
+  static const subscription = 'subscription';
+
+}

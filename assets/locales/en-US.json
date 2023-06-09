@@ -1,0 +1,76 @@
+{
+  "button": {
+    "next": "Next",
+    "get_started": "Get Started",
+    "sign_in": "Sign in",
+    "sign_up": "Sign up",
+    "sign_in_google": "Sign In with Google",
+    "sign_in_facebook": "Sign In with Facebook",
+    "send_link": "Send Link"
+  },
+  "text": {
+    "enter": {
+      "email": "Enter your email address",
+      "password": "Enter your password"
+    },
+    "forgot_password": "Forgot password?",
+    "continue_social_account": "Or continue with social account",
+    "already_have_account_sign_in": "Already have an account? Sign in",
+    "email": "Email address",
+    "password": "Password",
+    "phone_number": "Phone Number",
+    "policy": {
+      "description": "By Creating your account you have to agree with our ",
+      "term_and_condition": "Terms and Condition"
+    },
+    "phone_verification": "Phone Verification",
+    "google": "Google",
+    "facebook": "Facebook",
+    "we_have_sent_code": "We have sent code to your number @phone_number"
+  },
+  "sign_in": {
+    "header": {
+      "title": "Welcome Back!",
+      "description": "Log in with your data that you entered during registration."
+    },
+    "body": {
+      "don_have_account": "Don’t have an account? ",
+      "create_here": "Create Here"
+    }
+  },
+  "sign_up": {
+    "header": {
+      "title": "Come on in!",
+      "description": "Create an account so you can enjoy the courses"
+    },
+    "body": {
+      "already_have_account": "Already have an account? ",
+      "sign_in": "Sign in"
+    }
+  },
+  "reset_password": {
+    "use_code_from_phone": "Use code from your phone",
+    "reset_password_description": "Please select option to send link reset password",
+    "send_to": {
+      "email": "Send to your email",
+      "email_description": "Link reset will be send to your email address registered",
+      "phone": "Send to your phone number",
+      "phone_description": "Link reset will be send to your phone number registered"
+    },
+    "resend": "Didn’t receive link? Resend"
+  },
+  "subscription": {
+    "title": "Subscription",
+    "devices": "@device devices",
+    "detail": "Please Select your plan that’s right for you",
+    "type": {
+      "individual": "Individual",
+      "family": "Family"
+    },
+    "description": "By continuing the purchase, you acknowledge that you have read our Terms & Condition and that you agree to our Privacy Policy.",
+    "use": {
+      "individual_plan": "Uses Individual Plan",
+      "individual_description": "Plan automatically renews monthly until cancelled."
+    }
+  }
+}

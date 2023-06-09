@@ -30,7 +30,7 @@ class TokenInterceptor extends InterceptorsWrapper with LogMixin {
 
   @override
   Future<void> onError(
-      DioException err, ErrorInterceptorHandler handler) async {
+      DioException err, ErrorInterceptorHandler handler,) async {
     try {
       if (_accessToken != null && err.response?.statusCode == 401) {
         // await _refreshToken(err, handler, options);

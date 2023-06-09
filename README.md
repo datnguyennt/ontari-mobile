@@ -3,6 +3,8 @@
 Ontari platform
 
 ## Configure Firebase Key with multiple environment
+
+Run:
 ```sh
 npm install -g firebase-tools
 
@@ -26,12 +28,11 @@ flutterfire config \
 
 ```
 
-## Translate
+## Translate, DI, Assets
 
-Generate Keys
-
+Run:
 ```bash
-$ get generate locales
+$ flutter packages pub run build_runner build --delete-conflicting-outputs
 ```
 
 ## Generate icon and splash
@@ -53,11 +54,7 @@ $ fvm flutter pub get
 
 ## Run build_runner
 
-Run:
 
-```bash
-$ flutter packages pub run build_runner build --delete-conflicting-outputs
-```
 
 ## Build Android/iOS release
 
@@ -67,7 +64,7 @@ fvm flutter build apk --release --flavor <env_name> -t lib/main_<env_name>.dart
 fvm flutter build ipa --release --flavor <env_name> -t lib/main_<env_name>.dart
 ```
 
-Example: Build QA
+Example: Build Dev
 
 ```bash
 fvm flutter build apk --release --flavor dev -t lib/main_dev.dart
@@ -75,16 +72,9 @@ fvm flutter build apk --release --flavor dev -t lib/main_dev.dart
 fvm flutter build ipa --release --flavor dev -t lib/main_dev.dart
 ```
 
-## Build web release
 
-### Dev
+### Web
 
 ```bash
 fvm flutter build web --web-renderer html --release -t lib/main_dev.dart
-```
-
-### Staging
-
-```bash
-fvm flutter build web --web-renderer html --release -t lib/main_staging.dart
 ```

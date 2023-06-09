@@ -19,7 +19,8 @@ dependencies:
   equatable: ^2.0.5
   auto_route: ^6.0.4
   firebase_core: ^2.8.0
-  # firebase_crashlytics: ^3.3.2
+  path: ^1.8.2
+  firebase_crashlytics: ^3.3.2
   dartz: ^0.10.1
   connectivity_plus: ^3.0.0
   http_parser: ^4.0.2
@@ -27,7 +28,7 @@ dependencies:
   formz: ^0.6.0
   firebase_auth: ^4.4.0
   path_provider: ^2.0.15
-  intl: ^0.17.0
+  easy_localization: ^3.0.1
   flutter: 
     sdk: flutter
   flutter_localizations: 
@@ -41,6 +42,7 @@ dev_dependencies:
   injectable_generator: ^2.1.5
   flutter_gen_runner: ^5.3.1
   auto_route_generator: ^6.0.4
+  
   flutter_test:
     sdk: flutter
 
