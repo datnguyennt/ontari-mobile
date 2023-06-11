@@ -72,5 +72,10 @@
       "individual_plan": "Uses Individual Plan",
       "individual_description": "Plan automatically renews monthly until cancelled."
     }
+  },
+  "validator": {
+    "not_empty":"Please enter {field}",
+    "invalid":"Please enter an valid {field}",
+    "not_match":"{field} does not match"
   }
 }

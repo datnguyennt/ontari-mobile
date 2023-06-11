@@ -41,7 +41,7 @@ $ flutter packages pub run build_runner build --delete-conflicting-outputs
 Run:
 
 ```bash
-$ fvm flutter pub run easy_localization:generate -S assets/locales -f keys -O lib/generated -o locale_keys.g.dart
+$  flutter pub run easy_localization:generate -S assets/locales -f keys -O lib/generated -o locale_keys.g.dart
 ```
 
 ## Generate app flavor

@@ -60,5 +60,9 @@ abstract class  LocaleKeys {
   static const subscription_use_individual_description = 'subscription.use.individual_description';
   static const subscription_use = 'subscription.use';
   static const subscription = 'subscription';
+  static const validator_not_empty = 'validator.not_empty';
+  static const validator_invalid = 'validator.invalid';
+  static const validator_not_match = 'validator.not_match';
+  static const validator = 'validator';
 
 }

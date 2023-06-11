@@ -10,8 +10,8 @@
   },
   "text": {
     "enter": {
-      "email": "Nhập vào địa chỉ email",
-      "password": "Nhập vào mật khẩu"
+      "email": "Enter your email address",
+      "password": "Enter your password"
     },
     "forgot_password": "Forgot password?",
     "continue_social_account": "Or continue with social account",
@@ -72,5 +72,10 @@
       "individual_plan": "Uses Individual Plan",
       "individual_description": "Plan automatically renews monthly until cancelled."
     }
+  },
+  "validator": {
+    "not_empty":"Please enter {field}",
+    "invalid":"Please enter an valid {field}",
+    "not_match":"{field} does not match"
   }
 }

@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:injectable/injectable.dart';
 import 'package:ontari_mobile/core/network/dio.helper.dart';
 import 'package:ontari_mobile/core/network/failure.dart';
+import 'package:ontari_mobile/data/remote/dto/user_credential.dto.dart';
 import 'package:ontari_mobile/data/remote/provider/user.provider.dart';
 
 @Singleton()
@@ -17,11 +18,8 @@ class UserRepository implements IUserProvider {
   }
 
   @override
-  Future<Either<Failure, User>> signInWithEmail({
-    required String email,
-    required String password,
-  }) {
-    return _userProvider.signInWithEmail(email: email, password: password);
+  Future<Either<Failure, User>> signInWithEmail(UserCreadentialDto userDto) {
+    return _userProvider.signInWithEmail(userDto);
   }
 
   @override
@@ -33,10 +31,9 @@ class UserRepository implements IUserProvider {
   }
 
   @override
-  Future<Either<DioException, HttpResponse>> signInCredential({
-    required String email,
-    required String password,
-  }) {
-    return _userProvider.signInCredential(email: email, password: password);
+  Future<Either<DioException, HttpResponse>> signInCredential(
+    UserCreadentialDto userDto,
+  ) {
+    return _userProvider.signInCredential(userDto);
   }
 }

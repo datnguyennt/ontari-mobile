@@ -1,32 +1,105 @@
+import 'package:equatable/equatable.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ontari_mobile/core/bloc/base_bloc.dart';
-import 'package:ontari_mobile/core/bloc/event.dart';
-import 'package:ontari_mobile/core/bloc/state.dart';
+import 'package:formz/formz.dart';
+import 'package:injectable/injectable.dart';
+import 'package:ontari_mobile/core/common/validators/login_validate.index.dart';
+import 'package:ontari_mobile/data/remote/dto/user_credential.dto.dart';
+import 'package:ontari_mobile/data/remote/repository/user.repository.dart';
+import 'package:ontari_mobile/di/di.dart';
+import 'package:ontari_mobile/modules/auth/bloc/auth_bloc/auth_bloc.dart';
+import 'package:ontari_mobile/modules/auth/bloc/auth_bloc/auth_event.dart';
 
-class LoginBloc extends BaseBloc {
-  LoginBloc() : super(const InitialState());
+part 'login_event.dart';
+part 'login_state.dart';
 
-  @override
-  Future<void> handleEvent(BaseEvent event, Emitter<BaseState> emit) async {
-    // if (event is LoginUsernameChanged) {
-    //   userName = event.username;
-    // } else if (event is LoginPasswordChanged) {
-    //   password = event.password;
-    // } else if (event is LoginSubmitted) {
-    //   await safeDataCall(
-    //     emit,
-    //     callToHost:
-    //         _loginRepository.performLogin(LoginRequest("0987654321", "123456")),
-    //     success: (Emitter<BaseState> emit, LoginResponse? data) {
-    //       Fimber.e("login success data - ${data?.token}");
-    //       hideDialogState();
-    //       token = data?.token ?? "";
-    //       navigationService.pushAndRemoveUntil(
-    //         const HomeScreenRoute(),
-    //         predicate: (route) => false,
-    //       );
-    //     },
-    //   );
-    // }
+@injectable
+class LoginBloc extends Bloc<LoginEvent, LoginState> {
+  LoginBloc({
+    required this.userRepository,
+  }) : super(const LoginState()) {
+    on<LoginEmailChanged>(_onEmailChanged);
+    on<LoginPasswordChanged>(_onPasswordChanged);
+    on<LoginSubmitted>(_onLoginSubmitted);
+    //
+  }
+  final UserRepository userRepository;
+
+  void _onEmailChanged(
+    LoginEmailChanged event,
+    Emitter<LoginState> emit,
+  ) {
+    final emailModel = EmailValidateModel.dirty(event.email);
+    emit(
+      state.copyWith(
+        email: emailModel,
+        formStatus: Formz.validate([emailModel, state.email])
+            ? FormzSubmissionStatus.success
+            : FormzSubmissionStatus.failure,
+        loginStatus: LoginStatus.validating,
+      ),
+    );
+  }
+
+  void _onPasswordChanged(
+    LoginPasswordChanged event,
+    Emitter<LoginState> emit,
+  ) {
+    final passwordModel = PasswordValidateModel.dirty(event.password);
+    emit(
+      state.copyWith(
+        password: passwordModel,
+        formStatus: Formz.validate([state.email, passwordModel])
+            ? FormzSubmissionStatus.success
+            : FormzSubmissionStatus.failure,
+        loginStatus: LoginStatus.validating,
+      ),
+    );
+  }
+
+  Future<void> _onLoginSubmitted(
+    LoginSubmitted event,
+    Emitter<LoginState> emit,
+  ) async {
+    final emailModel = EmailValidateModel.dirty(event.email);
+    final passwordModel = PasswordValidateModel.dirty(event.password);
+
+    if (!Formz.validate([emailModel, state.email]) ||
+        !Formz.validate([emailModel, passwordModel])) {
+      emit(
+        state.copyWith(
+          email: emailModel,
+          password: passwordModel,
+          formStatus: FormzSubmissionStatus.failure,
+          loginStatus: LoginStatus.validating,
+        ),
+      );
+      return;
+    }
+    final AuthBloc authBloc = getIt<AuthBloc>();
+    emit(state.copyWith(loginStatus: LoginStatus.inProgress));
+
+    final userDto = UserCreadentialDto(
+      email: event.email,
+      password: event.password,
+    );
+
+    try {
+      final response = await userRepository.signInWithEmail(userDto);
+      response.fold((failure) {
+        emit(
+          state.copyWith(
+            loginStatus: LoginStatus.failure,
+            errorMessage: failure.message,
+          ),
+        );
+      }, (authResponse) {
+        authBloc.add(AuthChanged(authResponse));
+        emit(state.copyWith(loginStatus: LoginStatus.success));
+      });
+    } catch (e) {
+      emit(state.copyWith(
+          loginStatus: LoginStatus.failure, errorMessage: e.toString()));
+    }
   }
 }

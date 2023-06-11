@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:ontari_mobile/core/bloc/event.dart';
 
 abstract class AuthEvent extends BaseEvent {
@@ -6,9 +7,10 @@ abstract class AuthEvent extends BaseEvent {
 }
 
 class AuthChanged extends AuthEvent {
-  AuthChanged();
+  final User? user;
+  AuthChanged(this.user);
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [user];
 }
 
 class AppLogoutRequested extends AuthEvent {

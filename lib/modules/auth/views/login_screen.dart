@@ -1,47 +1,53 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:ontari_mobile/core/bloc/state.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ontari_mobile/core/common/theme/theme.export.dart';
-import 'package:ontari_mobile/core/constant/locales.dart';
-import 'package:ontari_mobile/core/widget/base_widget.dart';
+import 'package:ontari_mobile/core/routes/router.dart';
 import 'package:ontari_mobile/core/widget/footter.widget.dart';
 import 'package:ontari_mobile/core/widget/header.widget.dart';
 import 'package:ontari_mobile/core/widget/rounded_button.widget.dart';
 import 'package:ontari_mobile/core/widget/text_field.widget.dart';
+import 'package:ontari_mobile/data/remote/repository/user.repository.dart';
 import 'package:ontari_mobile/di/di.dart';
+import 'package:ontari_mobile/generated/assets.gen.dart';
 import 'package:ontari_mobile/generated/locale_keys.g.dart';
 import 'package:ontari_mobile/modules/auth/bloc/login_bloc/login_bloc.dart';
+import 'package:ontari_mobile/modules/auth/widgets/continue_soicial_account.widget.dart';
 import 'package:ontari_mobile/modules/core/blocs/bloc/theme_bloc.dart';
-import 'package:ontari_mobile/modules/core/blocs/bloc/theme_event.dart';
 
 @RoutePage()
-class LoginScreen extends BaseView<LoginBloc> {
+class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
   final ThemeBloc themeBloc = getIt<ThemeBloc>();
-
+  final LoginBloc loginBloc = getIt<LoginBloc>();
+ final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
   @override
-  Widget buildView(BuildContext context, BaseState state) {
-    return Scaffold(
-      body: SingleChildScrollView(
-        physics: const BouncingScrollPhysics(),
-        child: Column(
-          children: [
-            _buildHeader(context),
-            _buildBody(context),
-          ],
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) => loginBloc,
+      child: Scaffold(
+        body: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
+          child: Column(
+            children: [
+              _buildHeader(context),
+              _buildBody(context),
+            ],
+          ),
         ),
+        bottomNavigationBar: _buildFooter(context),
       ),
-      bottomNavigationBar: _buildFooter(),
     );
   }
 
-  FooterWidget _buildFooter() {
+  FooterWidget _buildFooter(BuildContext context) {
     return FooterWidget(
       firstString: LocaleKeys.sign_in_body_don_have_account.tr(),
       lastString: LocaleKeys.sign_in_body_create_here.tr(),
       onTap: () {
-        // Get.toNamed(Routes.SIGN_UP);
+        context.router.pushNamed(Routes.register);
       },
     );
   }
@@ -64,7 +70,7 @@ class LoginScreen extends BaseView<LoginBloc> {
           _buildLoginForm(),
           _buildForgotPassword(context),
           _buildButtonSignIn(context),
-          // const ContinueSocialAccountWidget(),
+          const ContinueSocialAccountWidget(),
           _buildSocialButtons(context),
         ],
       ),
@@ -131,28 +137,44 @@ class LoginScreen extends BaseView<LoginBloc> {
     );
   }
 
-  RoundedButton _buildButtonSignIn(BuildContext context) {
-    return RoundedButton(
-      onPressed: () async {
-        themeBloc.add(ThemeSwitchedEvent());
-        // if (context.locale == AppLocales.vi) {
-        //   await context.setLocale(AppLocales.en);
-        // } else {
-        //   await context.setLocale(AppLocales.vi);
-        // }
-
-        // controller.signInCredential();
+  Widget _buildButtonSignIn(BuildContext context) {
+    return BlocConsumer<LoginBloc, LoginState>(
+      listenWhen: (context, state) {
+        return state.loginStatus == LoginStatus.failure;
       },
-      // buttonColor:
-      //     Get.isDarkMode ? AppColors.kPrimaryDark : AppColors.kSecondaryLight,
-      child: Text(
-        LocaleKeys.button_sign_in.tr(),
-        style: AppStyles.bodyTextMedium(context).copyWith(
-          color: AppColors.kWhite,
-          fontSize: 14.sp,
-          fontWeight: FontWeight.w600,
-        ),
-      ),
+      listener: (context, state) {
+        if (state.errorMessage.isNotEmpty &&
+            state.loginStatus == LoginStatus.failure) {
+          debugPrint(state.errorMessage);
+        }
+      },
+      builder: (context, state) {
+        return RoundedButton(
+          onPressed: () async {
+            loginBloc.add( LoginSubmitted(email: emailController.text, password: passwordController.text));
+            // themeBloc.add(ThemeSwitchedEvent());
+            // if (context.locale == AppLocales.vi) {
+            //   await context.setLocale(AppLocales.en);
+            // } else {
+            //   await context.setLocale(AppLocales.vi);
+            // }
+
+            // controller.signInCredential();
+          },
+          backgroundColor: themeBloc.isDarkMode
+              ? AppColors.kPrimaryDark
+              : AppColors.kSecondaryLight,
+          isLoading: state.loginStatus == LoginStatus.inProgress,
+          child: Text(
+            LocaleKeys.button_sign_in.tr(),
+            style: AppStyles.bodyTextMedium(context).copyWith(
+              color: AppColors.kWhite,
+              fontSize: 14.sp,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+        );
+      },
     );
   }
 
@@ -189,34 +211,45 @@ class LoginScreen extends BaseView<LoginBloc> {
   Column _buildLoginForm() {
     return Column(
       children: [
-        TextFieldWidget(
-          label: LocaleKeys.text_email.tr(),
-          prefixIcon: AppAssets.icEmail,
-          hintText: LocaleKeys.text_enter_email.tr(),
-          controller: TextEditingController(),
-          keyboardType: TextInputType.emailAddress,
+        BlocBuilder<LoginBloc, LoginState>(
+          buildWhen: (previous, current) => previous.email != current.email,
+          builder: (context, state) {
+            return TextFieldWidget(
+              label: LocaleKeys.text_email.tr(),
+              prefixIcon: Assets.icons.icEmail.svg(),
+              hintText: LocaleKeys.text_enter_email.tr(),
+              controller: emailController,
+              errorText: state.email.displayError,
+              keyboardType: TextInputType.emailAddress,
+              onChanged: (email) => loginBloc.add(LoginEmailChanged(email)),
+            );
+          },
         ),
         SizedBox(
           height: AppSize.kRadius16.h,
         ),
-        TextFieldWidget(
-          label: LocaleKeys.text_password.tr(),
-          prefixIcon: AppAssets.icPassword,
-          hintText: LocaleKeys.text_enter_password.tr(),
-          controller: TextEditingController(),
-          keyboardType: TextInputType.visiblePassword,
-          // obscureText: controller.showPassword ? false : true,
-          // suffixIcon: controller.showPassword
-          //     ? AppAssets.icEyeOpen
-          //     : AppAssets.icEyeClosed,
-          // onTapSuffixIcon: controller.onChangeVisiblePassword,
+        BlocBuilder<LoginBloc, LoginState>(
+          buildWhen: (previous, current) =>
+              previous.password != current.password,
+          builder: (context, state) {
+            return TextFieldWidget(
+              label: LocaleKeys.text_password.tr(),
+              prefixIcon: Assets.icons.icPassword.svg(),
+              hintText: LocaleKeys.text_enter_password.tr(),
+              controller: passwordController,
+              keyboardType: TextInputType.visiblePassword,
+              errorText: state.password.displayError,
+              onChanged: (password) =>
+                  loginBloc.add(LoginPasswordChanged(password)),
+              // obscureText: controller.showPassword ? false : true,
+              // suffixIcon: controller.showPassword
+              //     ? AppAssets.icEyeOpen
+              //     : AppAssets.icEyeClosed,
+              // onTapSuffixIcon: controller.onChangeVisiblePassword,
+            );
+          },
         ),
       ],
     );
-  }
-
-  @override
-  LoginBloc createBloc() {
-    return LoginBloc();
   }
 }

@@ -3,7 +3,6 @@ import 'package:injectable/injectable.dart';
 import 'package:ontari_mobile/core/bloc/base_bloc.dart';
 import 'package:ontari_mobile/core/bloc/state.dart';
 import 'package:ontari_mobile/core/bloc/event.dart';
-import 'package:ontari_mobile/core/common/exception/result.dart';
 import 'package:ontari_mobile/core/constant/hive_keys.dart';
 import 'package:ontari_mobile/core/hive.helper.dart';
 import 'package:ontari_mobile/modules/core/blocs/bloc/theme_event.dart';
@@ -11,38 +10,34 @@ import 'package:ontari_mobile/modules/core/blocs/bloc/theme_event.dart';
 @singleton
 class ThemeBloc extends BaseBloc {
   ThemeBloc() : super(const InitialState());
-
-  @override
-  Future<void> onInit(Emitter<BaseState> emit) async {
-    await safeDataCall(
-      emit,
-      callToDb: isDark(),
-      success: (emit, data) => emit.call(SuccessState(data)),
-    );
-  }
+  bool isDarkMode = false;
 
   @override
   Future<void> handleEvent(BaseEvent event, Emitter<BaseState> emit) async {
+    if (event is InitialEvent) {
+      await _handleInit(emit);
+    }
+
     if (event is ThemeSwitchedEvent) {
-      bool isDarkMode = false;
-      await safeDataCall(
-        emit,
-        callToDb: isDark(),
-        success: (emit, data) {
-          isDarkMode = data ?? false;
-          emit.call(SuccessState(!isDarkMode));
-        },
-      );
-      setTheme(!isDarkMode);
+      await _onSwichTheme(emit);
     }
   }
 
-  Future<Result<bool>> isDark() async {
-    final bool? isDarkMode = await HiveHelper.get(HiveKeys.isDarkMode);
-    return Success(isDarkMode ?? false);
+  Future<void> _handleInit(Emitter<BaseState> emit) async {
+    final bool isDarkTheme = await isDark();
+    emit.call(SuccessState(isDarkTheme));
+    isDarkMode = isDarkTheme;
   }
 
-  Future<void> setTheme(bool isDark) async {
-    await HiveHelper.put(key: HiveKeys.isDarkMode, value: isDark);
+  Future<bool> isDark() async {
+    final bool? isDarkMode = await HiveHelper.get(HiveKeys.isDarkMode);
+    return isDarkMode ?? false;
+  }
+
+  Future<void> _onSwichTheme(Emitter<BaseState> emit) async {
+    bool darkMode = !isDarkMode;
+    await HiveHelper.put(key: HiveKeys.isDarkMode, value: darkMode);
+    isDarkMode = darkMode;
+    emit.call(SuccessState(darkMode));
   }
 }

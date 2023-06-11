@@ -8,15 +8,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:ontari_mobile/core/bloc/app_bloc_observer.dart';
 import 'package:ontari_mobile/core/bloc/event.dart';
 import 'package:ontari_mobile/core/bloc/state.dart';
-import 'package:ontari_mobile/core/constant/hive_keys.dart';
 import 'package:ontari_mobile/core/constant/locales.dart';
 import 'package:ontari_mobile/core/file.utils.dart';
 import 'package:ontari_mobile/core/hive.helper.dart';
 import 'package:ontari_mobile/core/routes/router.dart';
 import 'package:ontari_mobile/core/common/theme/app_theme.dart';
 import 'package:ontari_mobile/core/common/size_config.dart';
+import 'package:ontari_mobile/core/service/navigation_service.dart';
 import 'package:ontari_mobile/core/widget/internet_status.view.dart';
 import 'package:ontari_mobile/di/di.dart';
 import 'package:ontari_mobile/flavors.dart';
@@ -47,6 +48,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   final _appRouter = getIt<AppRouter>();
   ThemeMode themeMode = ThemeMode.system;
+  NavigationService get navigationService => getIt<NavigationService>();
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +58,7 @@ class _MyAppState extends State<MyApp> {
           create: (context) => getIt<ThemeBloc>()..add(InitialEvent()),
         ),
         BlocProvider(
-          create: (context) => getIt<AuthBloc>(),
+          create: (context) => getIt<AuthBloc>()..add(InitialEvent()),
         ),
       ],
       child: Listener(
@@ -120,8 +122,8 @@ class _MyAppState extends State<MyApp> {
         return Stack(
           fit: StackFit.expand,
           children: [
-            child ?? const SizedBox.shrink(),
-            // _buildAppListener(child),
+            // child ?? const SizedBox.shrink(),
+            _buildAppListener(child),
             if (!isConnectedInternet &&
                 result.connectionState != ConnectionState.waiting)
               const InternetStatusView(),
@@ -131,40 +133,53 @@ class _MyAppState extends State<MyApp> {
     );
   }
 
-// MultiBlocListener _buildAppListener(Widget? child) {
-//   return MultiBlocListener(
-//     listeners: [
-//       BlocListener<AuthBloc, AuthState>(
-//         listener: (context, state) {
-//           if (state is AuthenticatedState) {
-//             AppInitializationStatus.setAppInitializationStatus(
-//                 AppInitEnum.authInitialized);
-//             if (AppInitializationStatus.isAppInitializated()) {
-//               getIt<AppRouter>().replaceAll([DashboardRoute()]);
-//             }
-//           } else if (state is UnauthenticatedState) {
-//             getIt<AppRouter>().replaceAll([const LoginRoute()]);
-//           }
-//         },
-//       ),
-//       // BlocListener<CoreBloc, CoreState>(
-//       //   listener: (context, state) {
-//       //     if (state is ReadyCoreState) {
-//       //       AppInitializationStatus.setAppInitializationStatus(
-//       //           AppInitEnum.coreInitialized);
-//       //       if (AppInitializationStatus.isAppInitializated()) {
-//       //         getIt<AppRouter>().replaceAll([DashboardRoute()]);
-//       //       }
-//       //     }
-//       //   },
-//       // ),
-//     ],
-//     child: child ?? const SizedBox.shrink(),
-//   );
-// }
+  MultiBlocListener _buildAppListener(Widget? child) {
+    return MultiBlocListener(
+      listeners: [
+        BlocListener<AuthBloc, BaseState>(
+          listener: (context, state) {
+            if (state is ErrorViewState) {
+              _appRouter.replaceAll([LoginRoute()]);
+
+              //  navigationService.pushAndRemoveUntil(
+              //   LoginRoute(),
+              //   predicate: (Route<dynamic> route) {
+              //     return false;
+              //   },
+              // );
+              // getIt<AppRouter>().replaceAll([LoginRoute()]);
+            } else if (state is SuccessState) {
+              // _appRouter.popUntilRouteWithPath(Routes.home);
+              //  .re(
+              //   HomeRoute(),
+              //   predicate: (Route<dynamic> route) {
+              //     return false;
+              //   },
+              // );
+              getIt<AppRouter>().replaceAll([ HomeRoute()]);
+            }
+          },
+        ),
+        // BlocListener<CoreBloc, CoreState>(
+        //   listener: (context, state) {
+        //     if (state is ReadyCoreState) {
+        //       AppInitializationStatus.setAppInitializationStatus(
+        //           AppInitEnum.coreInitialized);
+        //       if (AppInitializationStatus.isAppInitializated()) {
+        //         getIt<AppRouter>().replaceAll([DashboardRoute()]);
+        //       }
+        //     }
+        //   },
+        // ),
+      ],
+      child: child ?? const SizedBox.shrink(),
+    );
+  }
 }
 
 Future<void> initializeApp(FirebaseOptions currentPlatform) async {
+  Bloc.observer = AppBlocObserver();
+
   await EasyLocalization.ensureInitialized();
   EasyLocalization.logger.enableBuildModes = [];
   await Hive.initFlutter();

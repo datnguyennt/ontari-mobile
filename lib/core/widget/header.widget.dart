@@ -87,9 +87,12 @@ class HeaderWidget extends StatelessWidget {
                       AppSize.kRadius10.r,
                     ),
                   ),
-                  buttonColor: AppColors.kWhite,
-                  child:
-                  Assets.icons.icClose.svg(height: 15.w, width: 15.w, color: AppColors.kPrimaryLight,),
+                  backgroundColor: AppColors.kWhite,
+                  child: Assets.icons.icClose.svg(
+                    height: 15.w,
+                    width: 15.w,
+                    color: AppColors.kPrimaryLight,
+                  ),
                 ),
               ),
             ],

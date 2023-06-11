@@ -1,22 +1,19 @@
-import 'package:ontari_mobile/core/bloc/event.dart';
+part of 'login_bloc.dart';
 
-abstract class LoginEvent extends BaseEvent {
-  @override
-  List<Object?> get props => [];
+abstract class LoginEvent extends Equatable {
+  const LoginEvent();
 }
 
-class LoginUsernameChanged extends LoginEvent {
-  LoginUsernameChanged(this.username);
-
-  final String username;
+class LoginEmailChanged extends LoginEvent {
+  const LoginEmailChanged(this.email);
+  final String email;
 
   @override
-  List<Object> get props => [username];
+  List<Object> get props => [email];
 }
 
 class LoginPasswordChanged extends LoginEvent {
-  LoginPasswordChanged(this.password);
-
+  const LoginPasswordChanged(this.password);
   final String password;
 
   @override
@@ -24,5 +21,25 @@ class LoginPasswordChanged extends LoginEvent {
 }
 
 class LoginSubmitted extends LoginEvent {
-  LoginSubmitted();
+  const LoginSubmitted({required this.email, required this.password});
+  final String email;
+  final String password;
+
+  @override
+  List<Object> get props => [email,password];
+}
+
+class LoginWithGoogleEvent extends LoginEvent {
+  @override
+  List<Object?> get props => [];
+}
+
+class LoginWithFacebookEvent extends LoginEvent {
+  @override
+  List<Object?> get props => [];
+}
+
+class LoginWithAppleEvent extends LoginEvent {
+  @override
+  List<Object?> get props => [];
 }
