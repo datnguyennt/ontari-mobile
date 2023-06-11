@@ -1,6 +1,5 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ontari_mobile/core/bloc/state.dart';
 import 'package:ontari_mobile/core/widget/base_widget.dart';
 import 'package:ontari_mobile/di/di.dart';
@@ -18,10 +17,11 @@ class HomeScreen extends BaseView<HomeBloc> {
     return Scaffold(
       body: Center(
         child: InkWell(
-            onTap: () async {
-              authBloc.add(AppLogoutRequested());
-            },
-            child: Text('Home View')),
+          onTap: () async {
+            authBloc.add(AppLogoutRequested());
+          },
+          child: Text('Home View'),
+        ),
       ),
     );
   }

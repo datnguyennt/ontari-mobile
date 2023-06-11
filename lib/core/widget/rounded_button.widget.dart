@@ -69,6 +69,7 @@ class RoundedButton extends StatelessWidget {
             ),
         elevation: elevation,
         padding: padding,
+        color: backgroundColor,
         onPressed: (isDisable || isLoading) ? null : onPressed,
         disabledColor:
             disableBackgroundColor ?? AppColors.kPrimaryDark.withOpacity(0.5),
@@ -84,11 +85,13 @@ class RoundedButton extends StatelessWidget {
         height: 20,
         child: Platform.isIOS
             ? CupertinoActivityIndicator(
-                color: loadingColor ?? AppColors.kWhite)
+                color: loadingColor ?? AppColors.kWhite,
+              )
             : CircularProgressIndicator(
                 strokeWidth: 1.8,
                 valueColor: AlwaysStoppedAnimation<Color>(
-                    loadingColor ?? AppColors.kWhite),
+                  loadingColor ?? AppColors.kWhite,
+                ),
               ),
       );
     }

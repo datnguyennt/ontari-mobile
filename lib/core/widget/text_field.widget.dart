@@ -135,40 +135,27 @@ class TextFieldWidget extends StatelessWidget {
               child: Padding(
                 padding: prefixPadding ??
                     EdgeInsets.symmetric(
-                      horizontal: AppSize.kHorizonSpace.w,
+                      horizontal: AppSize.kSpacing12.w,
                     ),
                 child: prefixIcon,
               ),
             )
           : null,
       isDense: true,
-      prefixIconConstraints: const BoxConstraints(),
-      suffixIconConstraints: const BoxConstraints(),
       counterText: '',
       suffixIcon: suffixIcon != null
           ? GestureDetector(
               onTap: onTapSuffixIcon ?? () {},
+              behavior: HitTestBehavior.opaque,
               child: Padding(
-                padding:
-                    suffixPadding ?? const EdgeInsets.symmetric(horizontal: 16),
+                padding: suffixPadding ??
+                    EdgeInsets.symmetric(horizontal: AppSize.kSpacing12.w),
                 child: suffixIcon,
               ),
             )
           : null,
       hintText: hintText,
-      // label: ,
-      // labelStyle: AppStyles.body2.copyWith(
-      //   fontWeight: FontWeight.w700,
-      //   color: AppColors.kBlack8,
-      //   fontSize: 12,
-      //   height: 16 / 12,
-      //   leadingDistribution: TextLeadingDistribution.even,
-      // ),
       constraints: const BoxConstraints(),
-      contentPadding: EdgeInsets.symmetric(
-        horizontal: AppSize.kHorizonSpace.w,
-        vertical: AppSize.kSpacing12.h,
-      ),
       hintStyle: AppStyles.bodyTextMedium(context).copyWith(
         color: AppColors.kBorderColor,
       ),

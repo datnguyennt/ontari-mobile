@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 import 'package:injectable/injectable.dart';
@@ -21,6 +20,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     on<LoginEmailChanged>(_onEmailChanged);
     on<LoginPasswordChanged>(_onPasswordChanged);
     on<LoginSubmitted>(_onLoginSubmitted);
+    on<TonglePasswordEvent>(_onTongledPassword);
     //
   }
   final UserRepository userRepository;
@@ -53,6 +53,18 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
             ? FormzSubmissionStatus.success
             : FormzSubmissionStatus.failure,
         loginStatus: LoginStatus.validating,
+      ),
+    );
+  }
+
+  void _onTongledPassword(
+    TonglePasswordEvent event,
+    Emitter<LoginState> emit,
+  ) {
+    emit(
+      state.copyWith(
+        loginStatus: LoginStatus.validating,
+        showPassword: !state.showPassword,
       ),
     );
   }
@@ -98,8 +110,12 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         emit(state.copyWith(loginStatus: LoginStatus.success));
       });
     } catch (e) {
-      emit(state.copyWith(
-          loginStatus: LoginStatus.failure, errorMessage: e.toString()));
+      emit(
+        state.copyWith(
+          loginStatus: LoginStatus.failure,
+          errorMessage: e.toString(),
+        ),
+      );
     }
   }
 }

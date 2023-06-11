@@ -26,7 +26,7 @@ class LoginSubmitted extends LoginEvent {
   final String password;
 
   @override
-  List<Object> get props => [email,password];
+  List<Object> get props => [email, password];
 }
 
 class LoginWithGoogleEvent extends LoginEvent {
@@ -42,4 +42,11 @@ class LoginWithFacebookEvent extends LoginEvent {
 class LoginWithAppleEvent extends LoginEvent {
   @override
   List<Object?> get props => [];
+}
+
+class TonglePasswordEvent extends LoginEvent {
+  const TonglePasswordEvent();
+
+  @override
+  List<Object> get props => [];
 }

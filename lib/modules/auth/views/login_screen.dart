@@ -2,13 +2,13 @@ import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:formz/formz.dart';
 import 'package:ontari_mobile/core/common/theme/theme.export.dart';
 import 'package:ontari_mobile/core/routes/router.dart';
 import 'package:ontari_mobile/core/widget/footter.widget.dart';
 import 'package:ontari_mobile/core/widget/header.widget.dart';
 import 'package:ontari_mobile/core/widget/rounded_button.widget.dart';
 import 'package:ontari_mobile/core/widget/text_field.widget.dart';
-import 'package:ontari_mobile/data/remote/repository/user.repository.dart';
 import 'package:ontari_mobile/di/di.dart';
 import 'package:ontari_mobile/generated/assets.gen.dart';
 import 'package:ontari_mobile/generated/locale_keys.g.dart';
@@ -21,7 +21,7 @@ class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
   final ThemeBloc themeBloc = getIt<ThemeBloc>();
   final LoginBloc loginBloc = getIt<LoginBloc>();
- final TextEditingController emailController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
@@ -150,17 +150,16 @@ class LoginScreen extends StatelessWidget {
       },
       builder: (context, state) {
         return RoundedButton(
+          height: 52.h,
           onPressed: () async {
-            loginBloc.add( LoginSubmitted(email: emailController.text, password: passwordController.text));
-            // themeBloc.add(ThemeSwitchedEvent());
-            // if (context.locale == AppLocales.vi) {
-            //   await context.setLocale(AppLocales.en);
-            // } else {
-            //   await context.setLocale(AppLocales.vi);
-            // }
-
-            // controller.signInCredential();
+            loginBloc.add(
+              LoginSubmitted(
+                email: emailController.text,
+                password: passwordController.text,
+              ),
+            );
           },
+          disableBackgroundColor: AppColors.kGrey,
           backgroundColor: themeBloc.isDarkMode
               ? AppColors.kPrimaryDark
               : AppColors.kSecondaryLight,
@@ -170,6 +169,7 @@ class LoginScreen extends StatelessWidget {
             style: AppStyles.bodyTextMedium(context).copyWith(
               color: AppColors.kWhite,
               fontSize: 14.sp,
+              height: 1,
               fontWeight: FontWeight.w600,
             ),
           ),
@@ -230,7 +230,8 @@ class LoginScreen extends StatelessWidget {
         ),
         BlocBuilder<LoginBloc, LoginState>(
           buildWhen: (previous, current) =>
-              previous.password != current.password,
+              previous.password != current.password ||
+              previous.showPassword != current.showPassword,
           builder: (context, state) {
             return TextFieldWidget(
               label: LocaleKeys.text_password.tr(),
@@ -241,11 +242,11 @@ class LoginScreen extends StatelessWidget {
               errorText: state.password.displayError,
               onChanged: (password) =>
                   loginBloc.add(LoginPasswordChanged(password)),
-              // obscureText: controller.showPassword ? false : true,
-              // suffixIcon: controller.showPassword
-              //     ? AppAssets.icEyeOpen
-              //     : AppAssets.icEyeClosed,
-              // onTapSuffixIcon: controller.onChangeVisiblePassword,
+              obscureText: state.showPassword ? false : true,
+              suffixIcon: state.showPassword
+                  ? Assets.icons.icEyeOpen.svg()
+                  : Assets.icons.icEyeClosed.svg(),
+              onTapSuffixIcon: () => loginBloc.add(const TonglePasswordEvent()),
             );
           },
         ),
