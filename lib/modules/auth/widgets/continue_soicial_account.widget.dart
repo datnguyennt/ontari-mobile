@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:ontari_mobile/core/common/theme/theme.export.dart';
 import 'package:ontari_mobile/di/di.dart';
 import 'package:ontari_mobile/generated/locale_keys.g.dart';
-import 'package:ontari_mobile/modules/core/blocs/bloc/theme_bloc.dart';
+import 'package:ontari_mobile/modules/core/blocs/theme_bloc/theme_bloc.dart';
 
 class ContinueSocialAccountWidget extends StatelessWidget {
   const ContinueSocialAccountWidget({super.key});

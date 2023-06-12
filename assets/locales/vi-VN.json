@@ -77,5 +77,11 @@
     "not_empty":"Please enter {field}",
     "invalid":"Please enter an valid {field}",
     "not_match":"{field} does not match"
+  },
+  "dashboard":{
+    "home":"Home",
+    "activity":"Activity",
+    "category":"Category",
+    "setting":"Setting"
   }
 }

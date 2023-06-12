@@ -13,7 +13,7 @@ import 'package:ontari_mobile/generated/assets.gen.dart';
 import 'package:ontari_mobile/generated/locale_keys.g.dart';
 import 'package:ontari_mobile/modules/auth/bloc/login_bloc/login_bloc.dart';
 import 'package:ontari_mobile/modules/auth/widgets/continue_soicial_account.widget.dart';
-import 'package:ontari_mobile/modules/core/blocs/bloc/theme_bloc.dart';
+import 'package:ontari_mobile/modules/core/blocs/theme_bloc/theme_bloc.dart';
 
 @RoutePage()
 class LoginScreen extends StatelessWidget {

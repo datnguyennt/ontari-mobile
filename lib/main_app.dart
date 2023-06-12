@@ -22,7 +22,7 @@ import 'package:ontari_mobile/core/widget/internet_status.view.dart';
 import 'package:ontari_mobile/di/di.dart';
 import 'package:ontari_mobile/flavors.dart';
 import 'package:ontari_mobile/modules/auth/bloc/auth_bloc/auth_bloc.dart';
-import 'package:ontari_mobile/modules/core/blocs/bloc/theme_bloc.dart';
+import 'package:ontari_mobile/modules/core/blocs/theme_bloc/theme_bloc.dart';
 
 Future<void> mainApp(Flavor flavor, currentPlatform) async {
   AppFlavor.appFlavor = flavor;
@@ -140,23 +140,8 @@ class _MyAppState extends State<MyApp> {
           listener: (context, state) {
             if (state is ErrorViewState) {
               _appRouter.replaceAll([LoginRoute()]);
-
-              //  navigationService.pushAndRemoveUntil(
-              //   LoginRoute(),
-              //   predicate: (Route<dynamic> route) {
-              //     return false;
-              //   },
-              // );
-              // getIt<AppRouter>().replaceAll([LoginRoute()]);
             } else if (state is SuccessState) {
-              // _appRouter.popUntilRouteWithPath(Routes.home);
-              //  .re(
-              //   HomeRoute(),
-              //   predicate: (Route<dynamic> route) {
-              //     return false;
-              //   },
-              // );
-              getIt<AppRouter>().replaceAll([ HomeRoute()]);
+              getIt<AppRouter>().replaceAll([DashBoardRoute()]);
             }
           },
         ),
@@ -178,17 +163,28 @@ class _MyAppState extends State<MyApp> {
 }
 
 Future<void> initializeApp(FirebaseOptions currentPlatform) async {
+  //Bloc logger
   Bloc.observer = AppBlocObserver();
-
-  await EasyLocalization.ensureInitialized();
-  EasyLocalization.logger.enableBuildModes = [];
-  await Hive.initFlutter();
-  await FileUtil.getApplicationDir();
-  await HiveHelper.openBox();
-  configureDependencies();
+  
+  //Init firebase app
   await Firebase.initializeApp(
     options: currentPlatform,
   );
+
+  //Init translation
+  await EasyLocalization.ensureInitialized();
+  EasyLocalization.logger.enableBuildModes = [];
+  
+  // Init Depedency Injection
+  configureDependencies();
+
+  //Init Local Stogare 
+  await Hive.initFlutter();
+  await HiveHelper.openBox();
+  
+  // Init Application Directory
+  await FileUtil.getApplicationDir();
+
   // Pass all uncaught asynchronous errors that aren't handled by the Flutter framework to Crashlytics
   // PlatformDispatcher.instance.onError = (error, stack) {
   //   FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);

@@ -64,5 +64,10 @@ abstract class  LocaleKeys {
   static const validator_invalid = 'validator.invalid';
   static const validator_not_match = 'validator.not_match';
   static const validator = 'validator';
+  static const dashboard_home = 'dashboard.home';
+  static const dashboard_activity = 'dashboard.activity';
+  static const dashboard_category = 'dashboard.category';
+  static const dashboard_setting = 'dashboard.setting';
+  static const dashboard = 'dashboard';
 
 }

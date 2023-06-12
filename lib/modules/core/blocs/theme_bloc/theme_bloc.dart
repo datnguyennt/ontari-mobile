@@ -5,7 +5,7 @@ import 'package:ontari_mobile/core/bloc/state.dart';
 import 'package:ontari_mobile/core/bloc/event.dart';
 import 'package:ontari_mobile/core/constant/hive_keys.dart';
 import 'package:ontari_mobile/core/hive.helper.dart';
-import 'package:ontari_mobile/modules/core/blocs/bloc/theme_event.dart';
+import 'package:ontari_mobile/modules/core/blocs/theme_bloc/theme_event.dart';
 
 @singleton
 class ThemeBloc extends BaseBloc {

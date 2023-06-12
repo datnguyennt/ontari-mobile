@@ -29,6 +29,12 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const SplashScreen(),
       );
     },
+    RegisterRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const RegisterScreen(),
+      );
+    },
     LoginRoute.name: (routeData) {
       final args = routeData.argsAs<LoginRouteArgs>(
           orElse: () => const LoginRouteArgs());
@@ -37,10 +43,30 @@ abstract class _$AppRouter extends RootStackRouter {
         child: LoginScreen(key: args.key),
       );
     },
-    RegisterRoute.name: (routeData) {
+    CategoryRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const RegisterScreen(),
+        child: const CategoryScreen(),
+      );
+    },
+    ActivityRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const ActivityScreen(),
+      );
+    },
+    SettingRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const SettingScreen(),
+      );
+    },
+    DashBoardRoute.name: (routeData) {
+      final args = routeData.argsAs<DashBoardRouteArgs>(
+          orElse: () => const DashBoardRouteArgs());
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: DashBoardScreen(key: args.key),
       );
     },
   };
@@ -89,6 +115,20 @@ class SplashRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [RegisterScreen]
+class RegisterRoute extends PageRouteInfo<void> {
+  const RegisterRoute({List<PageRouteInfo>? children})
+      : super(
+          RegisterRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'RegisterRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
 /// [LoginScreen]
 class LoginRoute extends PageRouteInfo<LoginRouteArgs> {
   LoginRoute({
@@ -117,15 +157,72 @@ class LoginRouteArgs {
 }
 
 /// generated route for
-/// [RegisterScreen]
-class RegisterRoute extends PageRouteInfo<void> {
-  const RegisterRoute({List<PageRouteInfo>? children})
+/// [CategoryScreen]
+class CategoryRoute extends PageRouteInfo<void> {
+  const CategoryRoute({List<PageRouteInfo>? children})
       : super(
-          RegisterRoute.name,
+          CategoryRoute.name,
           initialChildren: children,
         );
 
-  static const String name = 'RegisterRoute';
+  static const String name = 'CategoryRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [ActivityScreen]
+class ActivityRoute extends PageRouteInfo<void> {
+  const ActivityRoute({List<PageRouteInfo>? children})
+      : super(
+          ActivityRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'ActivityRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [SettingScreen]
+class SettingRoute extends PageRouteInfo<void> {
+  const SettingRoute({List<PageRouteInfo>? children})
+      : super(
+          SettingRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'SettingRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [DashBoardScreen]
+class DashBoardRoute extends PageRouteInfo<DashBoardRouteArgs> {
+  DashBoardRoute({
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
+          DashBoardRoute.name,
+          args: DashBoardRouteArgs(key: key),
+          initialChildren: children,
+        );
+
+  static const String name = 'DashBoardRoute';
+
+  static const PageInfo<DashBoardRouteArgs> page =
+      PageInfo<DashBoardRouteArgs>(name);
+}
+
+class DashBoardRouteArgs {
+  const DashBoardRouteArgs({this.key});
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'DashBoardRouteArgs{key: $key}';
+  }
 }
