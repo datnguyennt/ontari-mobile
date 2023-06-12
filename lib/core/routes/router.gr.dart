@@ -23,10 +23,24 @@ abstract class _$AppRouter extends RootStackRouter {
         child: HomeScreen(key: args.key),
       );
     },
+    DashBoardRoute.name: (routeData) {
+      final args = routeData.argsAs<DashBoardRouteArgs>(
+          orElse: () => const DashBoardRouteArgs());
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: DashBoardScreen(key: args.key),
+      );
+    },
     SplashRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const SplashScreen(),
+      );
+    },
+    CategoryRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const CategoryScreen(),
       );
     },
     RegisterRoute.name: (routeData) {
@@ -51,6 +65,18 @@ abstract class _$AppRouter extends RootStackRouter {
           key: args.key,
           loginBloc: args.loginBloc,
         ),
+      );
+    },
+    ActivityRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const ActivityScreen(),
+      );
+    },
+    SettingRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const SettingScreen(),
       );
     },
   };
@@ -85,6 +111,35 @@ class HomeRouteArgs {
 }
 
 /// generated route for
+/// [DashBoardScreen]
+class DashBoardRoute extends PageRouteInfo<DashBoardRouteArgs> {
+  DashBoardRoute({
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
+          DashBoardRoute.name,
+          args: DashBoardRouteArgs(key: key),
+          initialChildren: children,
+        );
+
+  static const String name = 'DashBoardRoute';
+
+  static const PageInfo<DashBoardRouteArgs> page =
+      PageInfo<DashBoardRouteArgs>(name);
+}
+
+class DashBoardRouteArgs {
+  const DashBoardRouteArgs({this.key});
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'DashBoardRouteArgs{key: $key}';
+  }
+}
+
+/// generated route for
 /// [SplashScreen]
 class SplashRoute extends PageRouteInfo<void> {
   const SplashRoute({List<PageRouteInfo>? children})
@@ -94,6 +149,20 @@ class SplashRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'SplashRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [CategoryScreen]
+class CategoryRoute extends PageRouteInfo<void> {
+  const CategoryRoute({List<PageRouteInfo>? children})
+      : super(
+          CategoryRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'CategoryRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }
@@ -176,4 +245,32 @@ class LogInPhoneNumberRouteArgs {
   String toString() {
     return 'LogInPhoneNumberRouteArgs{key: $key, loginBloc: $loginBloc}';
   }
+}
+
+/// generated route for
+/// [ActivityScreen]
+class ActivityRoute extends PageRouteInfo<void> {
+  const ActivityRoute({List<PageRouteInfo>? children})
+      : super(
+          ActivityRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'ActivityRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [SettingScreen]
+class SettingRoute extends PageRouteInfo<void> {
+  const SettingRoute({List<PageRouteInfo>? children})
+      : super(
+          SettingRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'SettingRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
 }

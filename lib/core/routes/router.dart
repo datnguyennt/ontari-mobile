@@ -18,11 +18,10 @@ part 'router.gr.dart';
 class Routes {
   static const splash = '/';
   static const login = '/login';
-  static const home = '/home';
+  static const home = 'home';
   static const register = '/register';
   static const loginInPhone = '/log_in_phone';
   static const dashboard = '/dashboard';
-  static const home = 'home';
   static const category = 'category';
   static const activity = 'activity';
   static const setting = 'setting';

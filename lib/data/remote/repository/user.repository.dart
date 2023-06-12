@@ -38,7 +38,7 @@ class UserRepository implements IUserProvider {
   }
 
   @override
-  Future<Either<Failure, User>> signInWithPhoneNumber(String phoneNumber) {
+  Future<Either<Failure, UserModel>> signInWithPhoneNumber(String phoneNumber) {
     return _userProvider.signInWithPhoneNumber(phoneNumber);
   }
 }

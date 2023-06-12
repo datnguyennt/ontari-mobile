@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:dartz/dartz.dart';
@@ -20,9 +19,9 @@ abstract class IUserProvider {
     UserCreadentialDto userDto,
   );
 
-  Future<Either<Failure, User>> signInWithPhoneNumber(String phoneNumber);
+  Future<Either<Failure, UserModel>> signInWithPhoneNumber(String phoneNumber);
   Future<Either<Failure, UserModel>> signInWithEmail(
-      UserCreadentialDto userDto);
+      UserCreadentialDto userDto,);
   Future<Either<Failure, UserModel>> signUpWithEmail({
     required String email,
     required String password,
@@ -136,7 +135,7 @@ class UserProvider implements IUserProvider {
   }
 
   @override
-  Future<Either<Failure, User>> signInWithPhoneNumber(String phoneNumber) {
+  Future<Either<Failure, UserModel>> signInWithPhoneNumber(String phoneNumber) {
     // TODO: implement signInWithPhoneNumber
     throw UnimplementedError();
   }
