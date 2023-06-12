@@ -81,6 +81,17 @@ class LoginScreen extends StatelessWidget {
       children: [
         _buildSocialButton(
           context,
+          buttonText: LocaleKeys.button_sign_in_phone,
+          iconPath: Assets.icons.icPhone.path,
+          onTap: () {
+            context.router.push(LogInPhoneNumberRoute(loginBloc: loginBloc));
+          },
+        ),
+        SizedBox(
+          height: AppSize.kSpacing16.h,
+        ),
+        _buildSocialButton(
+          context,
           buttonText: LocaleKeys.button_sign_in_google,
           iconPath: AppAssets.icGoogle,
           onTap: () {},
@@ -152,7 +163,7 @@ class LoginScreen extends StatelessWidget {
           height: 52.h,
           onPressed: () async {
             loginBloc.add(
-              LoginSubmitted(
+              LoginCreadentialSubmitted(
                 email: emailController.text,
                 password: passwordController.text,
               ),

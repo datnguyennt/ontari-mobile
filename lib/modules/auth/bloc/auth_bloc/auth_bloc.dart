@@ -4,11 +4,14 @@ import 'package:injectable/injectable.dart';
 import 'package:ontari_mobile/core/bloc/base_bloc.dart';
 import 'package:ontari_mobile/core/bloc/state.dart';
 import 'package:ontari_mobile/core/bloc/event.dart';
+import 'package:ontari_mobile/di/di.dart';
 import 'package:ontari_mobile/modules/auth/bloc/auth_bloc/auth_event.dart';
 
 @singleton
 class AuthBloc extends BaseBloc {
   AuthBloc() : super(const InitialState());
+
+  static AuthBloc get to => getIt<AuthBloc>();
 
   Future<void> _onAuthChanged(Emitter<BaseState> emit) async {
     emit.call(LoadingViewState());

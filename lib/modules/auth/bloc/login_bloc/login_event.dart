@@ -20,13 +20,26 @@ class LoginPasswordChanged extends LoginEvent {
   List<Object> get props => [password];
 }
 
-class LoginSubmitted extends LoginEvent {
-  const LoginSubmitted({required this.email, required this.password});
+class LoginCreadentialSubmitted extends LoginEvent {
+  const LoginCreadentialSubmitted({
+    required this.email,
+    required this.password,
+  });
   final String email;
   final String password;
 
   @override
   List<Object> get props => [email, password];
+}
+
+class LoginWithPhoneSubmitted extends LoginEvent {
+  const LoginWithPhoneSubmitted({
+    required this.phoneNumber,
+  });
+  final String phoneNumber;
+
+  @override
+  List<Object> get props => [phoneNumber];
 }
 
 class LoginWithGoogleEvent extends LoginEvent {
@@ -49,4 +62,12 @@ class TonglePasswordEvent extends LoginEvent {
 
   @override
   List<Object> get props => [];
+}
+
+class LoginPhoneChanged extends LoginEvent {
+  const LoginPhoneChanged(this.phone);
+  final String phone;
+
+  @override
+  List<Object> get props => [phone];
 }

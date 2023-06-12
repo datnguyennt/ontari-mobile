@@ -43,30 +43,14 @@ abstract class _$AppRouter extends RootStackRouter {
         child: LoginScreen(key: args.key),
       );
     },
-    CategoryRoute.name: (routeData) {
+    LogInPhoneNumberRoute.name: (routeData) {
+      final args = routeData.argsAs<LogInPhoneNumberRouteArgs>();
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const CategoryScreen(),
-      );
-    },
-    ActivityRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const ActivityScreen(),
-      );
-    },
-    SettingRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const SettingScreen(),
-      );
-    },
-    DashBoardRoute.name: (routeData) {
-      final args = routeData.argsAs<DashBoardRouteArgs>(
-          orElse: () => const DashBoardRouteArgs());
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: DashBoardScreen(key: args.key),
+        child: LogInPhoneNumberScreen(
+          key: args.key,
+          loginBloc: args.loginBloc,
+        ),
       );
     },
   };
@@ -157,72 +141,39 @@ class LoginRouteArgs {
 }
 
 /// generated route for
-/// [CategoryScreen]
-class CategoryRoute extends PageRouteInfo<void> {
-  const CategoryRoute({List<PageRouteInfo>? children})
-      : super(
-          CategoryRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'CategoryRoute';
-
-  static const PageInfo<void> page = PageInfo<void>(name);
-}
-
-/// generated route for
-/// [ActivityScreen]
-class ActivityRoute extends PageRouteInfo<void> {
-  const ActivityRoute({List<PageRouteInfo>? children})
-      : super(
-          ActivityRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'ActivityRoute';
-
-  static const PageInfo<void> page = PageInfo<void>(name);
-}
-
-/// generated route for
-/// [SettingScreen]
-class SettingRoute extends PageRouteInfo<void> {
-  const SettingRoute({List<PageRouteInfo>? children})
-      : super(
-          SettingRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'SettingRoute';
-
-  static const PageInfo<void> page = PageInfo<void>(name);
-}
-
-/// generated route for
-/// [DashBoardScreen]
-class DashBoardRoute extends PageRouteInfo<DashBoardRouteArgs> {
-  DashBoardRoute({
+/// [LogInPhoneNumberScreen]
+class LogInPhoneNumberRoute extends PageRouteInfo<LogInPhoneNumberRouteArgs> {
+  LogInPhoneNumberRoute({
     Key? key,
+    required LoginBloc loginBloc,
     List<PageRouteInfo>? children,
   }) : super(
-          DashBoardRoute.name,
-          args: DashBoardRouteArgs(key: key),
+          LogInPhoneNumberRoute.name,
+          args: LogInPhoneNumberRouteArgs(
+            key: key,
+            loginBloc: loginBloc,
+          ),
           initialChildren: children,
         );
 
-  static const String name = 'DashBoardRoute';
+  static const String name = 'LogInPhoneNumberRoute';
 
-  static const PageInfo<DashBoardRouteArgs> page =
-      PageInfo<DashBoardRouteArgs>(name);
+  static const PageInfo<LogInPhoneNumberRouteArgs> page =
+      PageInfo<LogInPhoneNumberRouteArgs>(name);
 }
 
-class DashBoardRouteArgs {
-  const DashBoardRouteArgs({this.key});
+class LogInPhoneNumberRouteArgs {
+  const LogInPhoneNumberRouteArgs({
+    this.key,
+    required this.loginBloc,
+  });
 
   final Key? key;
 
+  final LoginBloc loginBloc;
+
   @override
   String toString() {
-    return 'DashBoardRouteArgs{key: $key}';
+    return 'LogInPhoneNumberRouteArgs{key: $key, loginBloc: $loginBloc}';
   }
 }

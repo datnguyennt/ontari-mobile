@@ -20,6 +20,7 @@ abstract class IUserProvider {
     UserCreadentialDto userDto,
   );
 
+  Future<Either<Failure, User>> signInWithPhoneNumber(String phoneNumber);
   Future<Either<Failure, UserModel>> signInWithEmail(
       UserCreadentialDto userDto);
   Future<Either<Failure, UserModel>> signUpWithEmail({
@@ -132,5 +133,11 @@ class UserProvider implements IUserProvider {
     } on DioException catch (e) {
       return Left(e);
     }
+  }
+
+  @override
+  Future<Either<Failure, User>> signInWithPhoneNumber(String phoneNumber) {
+    // TODO: implement signInWithPhoneNumber
+    throw UnimplementedError();
   }
 }

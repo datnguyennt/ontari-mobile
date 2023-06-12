@@ -36,4 +36,9 @@ class UserRepository implements IUserProvider {
   ) {
     return _userProvider.signInCredential(userDto);
   }
+
+  @override
+  Future<Either<Failure, User>> signInWithPhoneNumber(String phoneNumber) {
+    return _userProvider.signInWithPhoneNumber(phoneNumber);
+  }
 }
