@@ -56,9 +56,11 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
     SettingRoute.name: (routeData) {
+      final args = routeData.argsAs<SettingRouteArgs>(
+          orElse: () => const SettingRouteArgs());
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const SettingScreen(),
+        child: SettingScreen(key: args.key),
       );
     },
     DashBoardRoute.name: (routeData) {
@@ -186,16 +188,31 @@ class ActivityRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [SettingScreen]
-class SettingRoute extends PageRouteInfo<void> {
-  const SettingRoute({List<PageRouteInfo>? children})
-      : super(
+class SettingRoute extends PageRouteInfo<SettingRouteArgs> {
+  SettingRoute({
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
           SettingRoute.name,
+          args: SettingRouteArgs(key: key),
           initialChildren: children,
         );
 
   static const String name = 'SettingRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static const PageInfo<SettingRouteArgs> page =
+      PageInfo<SettingRouteArgs>(name);
+}
+
+class SettingRouteArgs {
+  const SettingRouteArgs({this.key});
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'SettingRouteArgs{key: $key}';
+  }
 }
 
 /// generated route for

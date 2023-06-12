@@ -10,6 +10,7 @@ class AppColors {
 //Dark Theme
   static const kPrimaryDark = Color(0xff356AD1);
   static const kSecondaryDark = Color(0xff21273B);
+  static const kDarkBlack = Color(0xff1A1F2E);
 
 //Comon theme
   static const kYellow = Color(0xffFBBC05);

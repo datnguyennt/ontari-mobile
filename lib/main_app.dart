@@ -22,7 +22,7 @@ import 'package:ontari_mobile/core/widget/internet_status.view.dart';
 import 'package:ontari_mobile/di/di.dart';
 import 'package:ontari_mobile/flavors.dart';
 import 'package:ontari_mobile/modules/auth/bloc/auth_bloc/auth_bloc.dart';
-import 'package:ontari_mobile/modules/core/blocs/theme_bloc/theme_bloc.dart';
+import 'package:ontari_mobile/modules/core/blocs/app_bloc/app_bloc.dart';
 
 Future<void> mainApp(Flavor flavor, currentPlatform) async {
   AppFlavor.appFlavor = flavor;
@@ -30,7 +30,7 @@ Future<void> mainApp(Flavor flavor, currentPlatform) async {
   await initializeApp(currentPlatform);
   runApp(
     EasyLocalization(
-      supportedLocales: const [AppLocales.en, AppLocales.vi],
+      supportedLocales: AppLocales.supportedLocales,
       path: AppLocales.path,
       fallbackLocale: AppLocales.en,
       child: const MyApp(),
@@ -55,7 +55,7 @@ class _MyAppState extends State<MyApp> {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => getIt<ThemeBloc>()..add(InitialEvent()),
+          create: (context) => getIt<AppBloc>()..add(InitialEvent()),
         ),
         BlocProvider(
           create: (context) => getIt<AuthBloc>()..add(InitialEvent()),
@@ -65,45 +65,42 @@ class _MyAppState extends State<MyApp> {
         onPointerDown: (_) {
           FocusManager.instance.primaryFocus?.unfocus();
         },
-        child: BlocListener<ThemeBloc, BaseState>(
-          listener: (context, state) {
-            if (state is InitialState) {
-              themeMode = ThemeMode.system;
-            } else if (state is SuccessState) {
-              bool isDarkMode = state.data;
-              themeMode = isDarkMode ? ThemeMode.dark : ThemeMode.light;
-            }
+        child: BlocBuilder<AppBloc, BaseState>(
+          builder: (context, state) {
+            final appBloc = getIt<AppBloc>();
+            themeMode = appBloc.isDarkMode ? ThemeMode.dark : ThemeMode.light;
+            debugPrint(appBloc.currentLocale);
+            final locale = appBloc.currentLocale == AppLocales.vi.languageCode
+                ? AppLocales.vi
+                : AppLocales.en;
+
+            context.setLocale(locale);
+            return ScreenUtilInit(
+              designSize: const Size(375, 812),
+              minTextAdapt: true,
+              splitScreenMode: true,
+              builder: (context, child) {
+                return MaterialApp.router(
+                  title: AppFlavor.title,
+                  theme: AppThemeData.lightThemeData,
+                  darkTheme: AppThemeData.darkThemeData,
+                  themeMode: themeMode,
+                  debugShowCheckedModeBanner: false,
+                  routerConfig: _appRouter.config(),
+                  localizationsDelegates: context.localizationDelegates,
+                  supportedLocales: context.supportedLocales,
+                  locale: context.locale,
+                  builder: (context, child) {
+                    if (state is LoadingDialogState) {
+                      return const SizedBox.shrink();
+                    }
+                    SizeConfig.init(context);
+                    return _buildApp(child);
+                  },
+                );
+              },
+            );
           },
-          child: ScreenUtilInit(
-            designSize: const Size(375, 812),
-            minTextAdapt: true,
-            splitScreenMode: true,
-            builder: (context, child) {
-              return MaterialApp.router(
-                title: AppFlavor.title,
-                theme: AppThemeData.lightThemeData,
-                darkTheme: AppThemeData.darkThemeData,
-                themeMode: themeMode,
-                debugShowCheckedModeBanner: false,
-                routerConfig: _appRouter.config(),
-                localizationsDelegates: context.localizationDelegates,
-                supportedLocales: context.supportedLocales,
-                locale: context.locale,
-                localeResolutionCallback: (deviceLocale, supportedLocales) {
-                  if (deviceLocale != null &&
-                      supportedLocales.contains(deviceLocale)) {
-                    return deviceLocale;
-                  } else {
-                    return const Locale('en', 'US');
-                  }
-                },
-                builder: (context, child) {
-                  SizeConfig.init(context);
-                  return _buildApp(child);
-                },
-              );
-            },
-          ),
         ),
       ),
     );
@@ -165,7 +162,7 @@ class _MyAppState extends State<MyApp> {
 Future<void> initializeApp(FirebaseOptions currentPlatform) async {
   //Bloc logger
   Bloc.observer = AppBlocObserver();
-  
+
   //Init firebase app
   await Firebase.initializeApp(
     options: currentPlatform,
@@ -174,14 +171,14 @@ Future<void> initializeApp(FirebaseOptions currentPlatform) async {
   //Init translation
   await EasyLocalization.ensureInitialized();
   EasyLocalization.logger.enableBuildModes = [];
-  
+
   // Init Depedency Injection
   configureDependencies();
 
-  //Init Local Stogare 
+  //Init Local Stogare
   await Hive.initFlutter();
   await HiveHelper.openBox();
-  
+
   // Init Application Directory
   await FileUtil.getApplicationDir();
 
