@@ -14,6 +14,30 @@
             ]
         },
         {
+            "name": "Flutter QA",
+            "type": "dart",
+            "request": "launch",
+            "program": "lib/main_qa.dart",
+            "flutterMode": "debug",
+            "args": [
+                "--flavor",
+                "qa",
+                "--enable-software-rendering"
+            ]
+        },
+        {
+            "name": "Flutter Staging",
+            "type": "dart",
+            "request": "launch",
+            "program": "lib/main_staging.dart",
+            "flutterMode": "debug",
+            "args": [
+                "--flavor",
+                "staging",
+                "--enable-software-rendering"
+            ]
+        },
+        {
             "name": "Flutter Production",
             "type": "dart",
             "request": "launch",

@@ -158,7 +158,7 @@ class LoginScreen extends StatelessWidget {
               ),
             );
           },
-          disableBackgroundColor: AppColors.kGrey,
+          disableBackgroundColor: AppColors.kGreyscale,
           backgroundColor: themeBloc.isDarkMode
               ? AppColors.kPrimaryDark
               : AppColors.kSecondaryLight,

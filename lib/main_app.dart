@@ -3,7 +3,8 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
 
-// import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -24,17 +25,30 @@ import 'package:ontari_mobile/flavors.dart';
 import 'package:ontari_mobile/modules/auth/bloc/auth_bloc/auth_bloc.dart';
 import 'package:ontari_mobile/modules/core/blocs/app_bloc/app_bloc.dart';
 
-Future<void> mainApp(Flavor flavor, currentPlatform) async {
+Future<void> mainApp(Flavor flavor) async {
   AppFlavor.appFlavor = flavor;
-  WidgetsFlutterBinding.ensureInitialized();
-  await initializeApp(currentPlatform);
-  runApp(
-    EasyLocalization(
-      supportedLocales: AppLocales.supportedLocales,
-      path: AppLocales.path,
-      fallbackLocale: AppLocales.en,
-      child: const MyApp(),
-    ),
+  runZonedGuarded<Future<void>>(
+    () async {
+      await initializeApp();
+      FlutterError.onError = (errorDetails) {
+        FirebaseCrashlytics.instance.recordFlutterFatalError(errorDetails);
+      };
+      // Pass all uncaught asynchronous errors that aren't handled by the Flutter framework to Crashlytics
+      PlatformDispatcher.instance.onError = (error, stack) {
+        FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
+        return true;
+      };
+      runApp(
+        EasyLocalization(
+          supportedLocales: AppLocales.supportedLocales,
+          path: AppLocales.path,
+          fallbackLocale: AppLocales.en,
+          child: const MyApp(),
+        ),
+      );
+    },
+    (error, stack) =>
+        FirebaseCrashlytics.instance.recordError(error, stack, fatal: true),
   );
 }
 
@@ -159,14 +173,13 @@ class _MyAppState extends State<MyApp> {
   }
 }
 
-Future<void> initializeApp(FirebaseOptions currentPlatform) async {
+Future<void> initializeApp() async {
+    WidgetsFlutterBinding.ensureInitialized();
   //Bloc logger
   Bloc.observer = AppBlocObserver();
 
   //Init firebase app
-  await Firebase.initializeApp(
-    options: currentPlatform,
-  );
+  await Firebase.initializeApp(options: AppFlavor.firebaseConfig);
 
   //Init translation
   await EasyLocalization.ensureInitialized();
@@ -182,9 +195,4 @@ Future<void> initializeApp(FirebaseOptions currentPlatform) async {
   // Init Application Directory
   await FileUtil.getApplicationDir();
 
-  // Pass all uncaught asynchronous errors that aren't handled by the Flutter framework to Crashlytics
-  // PlatformDispatcher.instance.onError = (error, stack) {
-  //   FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
-  //   return true;
-  // };
 }

@@ -8,3 +8,9 @@ extension DarkMode on BuildContext {
     return brightness == Brightness.dark;
   }
 }
+extension DarkModeExt on Brightness {
+  /// is dark mode currently enabled?
+  bool get isDarkMode {
+    return this == Brightness.dark;
+  }
+}

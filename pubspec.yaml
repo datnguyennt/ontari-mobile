@@ -80,6 +80,8 @@ flavorizr:
         applicationId: com.prod.ontari
       ios:
         bundleId: com.prod.ontari
+        buildSettings:
+          FIREBASE_APPLE_APP_ID: 1:409239618751:ios:43ae91ea92d2a06297720a
     dev:
       app:
         name: Ontari-Dev
@@ -88,6 +90,9 @@ flavorizr:
         applicationId: com.dev.ontari
       ios:
         bundleId: com.dev.ontari
+        buildSettings:
+          FIREBASE_APPLE_APP_ID: 1:409239618751:ios:b53ce2521cb6c83f97720a
+
 
 flutter_gen:
   output: lib/generated/

@@ -34,6 +34,12 @@ class SettingScreen extends StatelessWidget {
                     : AppColors.kGreyscale.shade700,
               ),
             ),
+            ElevatedButton(
+              onPressed: () {
+                throw Exception('Error recored ${DateTime.now().toLocal()}');
+              },
+              child: Text('record error'),
+            ),
             BlocBuilder<AppBloc, BaseState>(
               builder: (context, state) {
                 return Switch(
