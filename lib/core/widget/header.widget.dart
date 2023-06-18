@@ -1,17 +1,18 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:ontari_mobile/core/common/size_config.dart';
-import 'package:ontari_mobile/core/common/theme/theme.export.dart';
-import 'package:ontari_mobile/core/widget/rounded_button.widget.dart';
-import 'package:ontari_mobile/generated/assets.gen.dart';
+
+import '../../generated/assets.gen.dart';
+import '../common/size_config.dart';
+import '../common/theme/theme.export.dart';
+import 'rounded_button.widget.dart';
 
 class HeaderWidget extends StatelessWidget {
   final String title;
   final String description;
   const HeaderWidget({
-    super.key,
     required this.description,
     required this.title,
+    super.key,
   });
 
   @override

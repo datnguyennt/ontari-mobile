@@ -4,13 +4,13 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:injectable/injectable.dart';
-import 'package:ontari_mobile/core/common/exception/auth_exception.dart';
-import 'package:ontari_mobile/core/constant/firebase_constants.dart';
-import 'package:ontari_mobile/core/network/dio.helper.dart';
-import 'package:ontari_mobile/core/network/failure.dart';
-import 'package:ontari_mobile/data/database/firebase_database.dart';
-import 'package:ontari_mobile/data/models/user.model.dart';
-import 'package:ontari_mobile/data/remote/dto/user_credential.dto.dart';
+import '../../../core/common/exception/auth_exception.dart';
+import '../../../core/constant/firebase_constants.dart';
+import '../../../core/network/dio.helper.dart';
+import '../../../core/network/failure.dart';
+import '../../database/firebase_database.dart';
+import '../../models/user.model.dart';
+import '../dto/user_credential.dto.dart';
 
 abstract class IUserProvider {
   Future<void> logout();

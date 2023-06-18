@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:ontari_mobile/core/common/theme/theme.export.dart';
+import 'theme.export.dart';
 
 class AppThemeData {
   static const MaterialColor kprimary =

@@ -1,13 +1,13 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:ontari_mobile/core/common/validators/form_validator.dart';
-import 'package:ontari_mobile/core/common/validators/login_validate.index.dart';
-import 'package:ontari_mobile/core/common/validators/phone_number.validate.dart';
-import 'package:ontari_mobile/data/remote/dto/user_credential.dto.dart';
-import 'package:ontari_mobile/data/remote/repository/user.repository.dart';
-import 'package:ontari_mobile/modules/auth/bloc/auth_bloc/auth_bloc.dart';
-import 'package:ontari_mobile/modules/auth/bloc/auth_bloc/auth_event.dart';
+import '../../../../core/common/validators/form_validator.dart';
+import '../../../../core/common/validators/login_validate.index.dart';
+import '../../../../core/common/validators/phone_number.validate.dart';
+import '../../../../data/remote/dto/user_credential.dto.dart';
+import '../../../../data/remote/repository/user.repository.dart';
+import '../auth_bloc/auth_bloc.dart';
+import '../auth_bloc/auth_event.dart';
 
 part 'login_event.dart';
 part 'login_state.dart';

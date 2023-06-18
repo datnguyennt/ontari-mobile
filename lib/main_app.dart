@@ -1,28 +1,29 @@
 import 'dart:async';
+
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
-
 // import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:ontari_mobile/core/bloc/app_bloc_observer.dart';
-import 'package:ontari_mobile/core/bloc/event.dart';
-import 'package:ontari_mobile/core/bloc/state.dart';
-import 'package:ontari_mobile/core/constant/locales.dart';
-import 'package:ontari_mobile/core/file.utils.dart';
-import 'package:ontari_mobile/core/hive.helper.dart';
-import 'package:ontari_mobile/core/routes/router.dart';
-import 'package:ontari_mobile/core/common/theme/app_theme.dart';
-import 'package:ontari_mobile/core/common/size_config.dart';
-import 'package:ontari_mobile/core/service/navigation_service.dart';
-import 'package:ontari_mobile/core/widget/internet_status.view.dart';
-import 'package:ontari_mobile/di/di.dart';
-import 'package:ontari_mobile/flavors.dart';
-import 'package:ontari_mobile/modules/auth/bloc/auth_bloc/auth_bloc.dart';
-import 'package:ontari_mobile/modules/core/blocs/theme_bloc/theme_bloc.dart';
+
+import 'core/bloc/app_bloc_observer.dart';
+import 'core/bloc/event.dart';
+import 'core/bloc/state.dart';
+import 'core/common/size_config.dart';
+import 'core/common/theme/app_theme.dart';
+import 'core/constant/locales.dart';
+import 'core/file.utils.dart';
+import 'core/hive.helper.dart';
+import 'core/routes/router.dart';
+import 'core/service/navigation_service.dart';
+import 'core/widget/internet_status.view.dart';
+import 'di/di.dart';
+import 'flavors.dart';
+import 'modules/auth/bloc/auth_bloc/auth_bloc.dart';
+import 'modules/core/blocs/theme_bloc/theme_bloc.dart';
 
 Future<void> mainApp(Flavor flavor, currentPlatform) async {
   AppFlavor.appFlavor = flavor;
@@ -70,7 +71,7 @@ class _MyAppState extends State<MyApp> {
             if (state is InitialState) {
               themeMode = ThemeMode.system;
             } else if (state is SuccessState) {
-              bool isDarkMode = state.data;
+              final bool isDarkMode = state.data;
               themeMode = isDarkMode ? ThemeMode.dark : ThemeMode.light;
             }
           },
@@ -114,7 +115,7 @@ class _MyAppState extends State<MyApp> {
       stream: Connectivity().onConnectivityChanged,
       builder:
           (BuildContext context, AsyncSnapshot<ConnectivityResult> result) {
-        bool isConnectedInternet = [
+        final bool isConnectedInternet = [
           ConnectivityResult.mobile,
           ConnectivityResult.wifi,
           ConnectivityResult.ethernet,
@@ -165,7 +166,7 @@ class _MyAppState extends State<MyApp> {
 Future<void> initializeApp(FirebaseOptions currentPlatform) async {
   //Bloc logger
   Bloc.observer = AppBlocObserver();
-  
+
   //Init firebase app
   await Firebase.initializeApp(
     options: currentPlatform,
@@ -174,14 +175,14 @@ Future<void> initializeApp(FirebaseOptions currentPlatform) async {
   //Init translation
   await EasyLocalization.ensureInitialized();
   EasyLocalization.logger.enableBuildModes = [];
-  
+
   // Init Depedency Injection
   configureDependencies();
 
-  //Init Local Stogare 
+  //Init Local Stogare
   await Hive.initFlutter();
   await HiveHelper.openBox();
-  
+
   // Init Application Directory
   await FileUtil.getApplicationDir();
 

@@ -1,8 +1,8 @@
 import 'dart:io';
 import 'package:dio/dio.dart';
-import 'package:ontari_mobile/core/common/logger.dart';
-import 'package:ontari_mobile/core/constant/app_constants.dart';
-import 'package:ontari_mobile/core/network/token_manager.dart';
+import '../common/logger.dart';
+import '../constant/app_constants.dart';
+import 'token_manager.dart';
 
 class TokenInterceptor extends InterceptorsWrapper with LogMixin {
   final Dio _dio;
@@ -12,7 +12,7 @@ class TokenInterceptor extends InterceptorsWrapper with LogMixin {
   TokenInterceptor(this._dio);
 
   @override
-  void onRequest(
+  Future<void> onRequest(
     RequestOptions options,
     RequestInterceptorHandler handler,
   ) async {

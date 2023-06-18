@@ -1,8 +1,9 @@
 import 'package:bloc/src/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:ontari_mobile/core/bloc/base_bloc.dart';
-import 'package:ontari_mobile/core/bloc/state.dart';
-import 'package:ontari_mobile/core/bloc/event.dart';
+
+import '../../../core/bloc/base_bloc.dart';
+import '../../../core/bloc/event.dart';
+import '../../../core/bloc/state.dart';
 
 part 'home_state.dart';
 

@@ -1,4 +1,4 @@
-import 'package:ontari_mobile/core/bloc/event.dart';
+import '../../../../core/bloc/event.dart';
 
 abstract class ThemeEvent extends BaseEvent {
   @override

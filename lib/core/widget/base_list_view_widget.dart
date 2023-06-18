@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:ontari_mobile/core/bloc/base_bloc.dart';
-import 'package:ontari_mobile/core/bloc/state.dart';
-import 'package:ontari_mobile/core/widget/base_widget.dart';
+import '../bloc/base_bloc.dart';
+import '../bloc/state.dart';
+import 'base_widget.dart';
 
 abstract class BaseListView<B extends BaseBloc, M> extends BaseView<B> {
   const BaseListView({Key? key}) : super(key: key);
@@ -18,7 +18,7 @@ abstract class BaseListView<B extends BaseBloc, M> extends BaseView<B> {
     if (state is InitialState || state is LoadingViewState) {
       return loadingView(context);
     } else if (state is SuccessState) {
-      var dataList = state.data;
+      final dataList = state.data;
       if (dataList is List<M>) {
         return successView(context, dataList);
       } else {

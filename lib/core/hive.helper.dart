@@ -1,11 +1,11 @@
 
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:ontari_mobile/core/constant/hive_keys.dart';
+import 'constant/hive_keys.dart';
 
 abstract class HiveHelper {
   static late Box _box;
   static Future<void> openBox() async {
-    _box = await Hive.openBox(HiveKeys.authBox);
+    _box = await Hive.openBox<dynamic>(HiveKeys.authBox);
   }
 
   static Future<void> put({

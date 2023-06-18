@@ -1,9 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:ontari_mobile/core/common/theme/theme.export.dart';
-import 'package:ontari_mobile/core/routes/router.dart';
-import 'package:ontari_mobile/generated/assets.gen.dart';
-import 'package:ontari_mobile/generated/locale_keys.g.dart';
+
+import '../../../generated/assets.gen.dart';
+import '../../../generated/locale_keys.g.dart';
+import '../../routes/router.dart';
+import '../theme/theme.export.dart';
 
 abstract class AppIndexEnum {
   static const int homeTab = 0;

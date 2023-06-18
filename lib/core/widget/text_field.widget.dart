@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:ontari_mobile/core/common/theme/theme.export.dart';
-import 'package:ontari_mobile/di/di.dart';
-import 'package:ontari_mobile/modules/core/blocs/theme_bloc/theme_bloc.dart';
+
+import '../../di/di.dart';
+import '../../modules/core/blocs/theme_bloc/theme_bloc.dart';
+import '../common/theme/theme.export.dart';
 
 class TextFieldWidget extends StatelessWidget {
   final String hintText;
@@ -33,13 +34,13 @@ class TextFieldWidget extends StatelessWidget {
   final bool enabled;
 
   const TextFieldWidget({
+    required this.controller,
     super.key,
     this.hintText = '',
     this.onChanged,
     this.onTapPrefixIcon,
     this.onSaved,
     this.prefixIcon,
-    required this.controller,
     this.label = '',
     this.onFieldSubmitted,
     this.keyboardType,

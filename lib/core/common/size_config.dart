@@ -13,7 +13,7 @@ class SizeConfig {
   static double safeBlockVertical = 0;
 
   static void init(BuildContext context) {
-    MediaQueryData mediaQueryData = MediaQuery.of(context);
+    final mediaQueryData = MediaQuery.of(context);
     screenSize = mediaQueryData.size;
     screenWidth = mediaQueryData.size.width;
     screenHeight = mediaQueryData.size.height;

@@ -1,15 +1,16 @@
 import 'dart:io';
-import 'package:mime/mime.dart';
+
 import 'package:flutter/services.dart';
-import 'package:http_parser/http_parser.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:flutter/services.dart' show rootBundle;
+import 'package:http_parser/http_parser.dart';
+import 'package:mime/mime.dart';
+import 'package:path_provider/path_provider.dart';
 
 class FileUtil {
   static String applicationDir = '';
 
   static Future<void> getApplicationDir() async {
-    String dir = (await getApplicationSupportDirectory()).path;
+    final String dir = (await getApplicationSupportDirectory()).path;
     FileUtil.applicationDir = dir.replaceAll('files', '');
   }
 

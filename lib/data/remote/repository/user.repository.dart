@@ -1,11 +1,11 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
-import 'package:ontari_mobile/core/network/dio.helper.dart';
-import 'package:ontari_mobile/core/network/failure.dart';
-import 'package:ontari_mobile/data/models/user.model.dart';
-import 'package:ontari_mobile/data/remote/dto/user_credential.dto.dart';
-import 'package:ontari_mobile/data/remote/provider/user.provider.dart';
+import '../../../core/network/dio.helper.dart';
+import '../../../core/network/failure.dart';
+import '../../models/user.model.dart';
+import '../dto/user_credential.dto.dart';
+import '../provider/user.provider.dart';
 
 @Singleton()
 class UserRepository implements IUserProvider {

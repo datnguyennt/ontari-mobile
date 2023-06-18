@@ -1,11 +1,12 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ontari_mobile/core/bloc/event.dart';
-import 'package:ontari_mobile/core/bloc/state.dart';
-import 'package:ontari_mobile/core/common/logger.dart';
-import 'package:ontari_mobile/core/network/failure.dart';
-import 'package:ontari_mobile/core/service/navigation_service.dart';
-import 'package:ontari_mobile/di/di.dart';
+
+import '../../di/di.dart';
+import '../common/logger.dart';
+import '../network/failure.dart';
+import '../service/navigation_service.dart';
+import 'event.dart';
+import 'state.dart';
 
 abstract class BaseBloc extends Bloc<BaseEvent, BaseState> with LogMixin {
   NavigationService get navigationService => getIt<NavigationService>();
@@ -45,11 +46,11 @@ abstract class BaseBloc extends Bloc<BaseEvent, BaseState> with LogMixin {
     // case 2: Only call db to get data
     if (callToDb != null) {
       logD('start call db');
-      (await callToDb).fold(
+      await (await callToDb).fold(
         (failed) async {
           if (callToHost == null) {
             if (errorFuncCallBack == null) {
-              hideDialogState();
+              await hideDialogState();
               emit(ErrorDialogState(message: failed.message));
             } else {
               errorFuncCallBack.call(emit, failed.message);
@@ -58,7 +59,7 @@ abstract class BaseBloc extends Bloc<BaseEvent, BaseState> with LogMixin {
         },
         (success) async {
           if (callToHost == null && successFuncCallBack == null) {
-            hideDialogState();
+            await hideDialogState();
           }
           successFuncCallBack != null
               ? successFuncCallBack.call(emit, success)
@@ -70,10 +71,10 @@ abstract class BaseBloc extends Bloc<BaseEvent, BaseState> with LogMixin {
     // call data from host.
     if (callToHost != null) {
       logD('start call host');
-      (await callToHost).fold(
+      await (await callToHost).fold(
         (error) async {
           if (errorFuncCallBack == null) {
-            hideDialogState();
+            await hideDialogState();
           }
           errorFuncCallBack != null
               ? errorFuncCallBack.call(emit, error.message)
@@ -81,7 +82,7 @@ abstract class BaseBloc extends Bloc<BaseEvent, BaseState> with LogMixin {
         },
         (success) async {
           if (successFuncCallBack == null) {
-            hideDialogState();
+            await hideDialogState();
             emit(SuccessState(success));
           } else {
             successFuncCallBack.call(emit, success);

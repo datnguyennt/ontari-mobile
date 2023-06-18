@@ -1,17 +1,17 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-
 import 'package:injectable/injectable.dart';
-import 'package:ontari_mobile/modules/auth/bloc/login_bloc/login_bloc.dart';
-import 'package:ontari_mobile/modules/auth/views/login_phone_number_screen.dart';
-import 'package:ontari_mobile/modules/activity/views/activity_screen.dart';
-import 'package:ontari_mobile/modules/auth/views/login_screen.dart';
-import 'package:ontari_mobile/modules/auth/views/register_screen.dart';
-import 'package:ontari_mobile/modules/category/views/category_screen.dart';
-import 'package:ontari_mobile/modules/core/views/dashboard.screen.dart';
-import 'package:ontari_mobile/modules/core/views/splash_screen.dart';
-import 'package:ontari_mobile/modules/home/views/home_screen.dart';
-import 'package:ontari_mobile/modules/setting/views/setting_screen.dart';
+
+import '../../modules/activity/views/activity_screen.dart';
+import '../../modules/auth/bloc/login_bloc/login_bloc.dart';
+import '../../modules/auth/views/login_phone_number_screen.dart';
+import '../../modules/auth/views/login_screen.dart';
+import '../../modules/auth/views/register_screen.dart';
+import '../../modules/category/views/category_screen.dart';
+import '../../modules/core/views/dashboard.screen.dart';
+import '../../modules/core/views/splash_screen.dart';
+import '../../modules/home/views/home_screen.dart';
+import '../../modules/setting/views/setting_screen.dart';
 
 part 'router.gr.dart';
 

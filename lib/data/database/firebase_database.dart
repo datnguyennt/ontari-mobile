@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:injectable/injectable.dart';
-import 'package:ontari_mobile/core/common/logger.dart';
+import '../../core/common/logger.dart';
 
 @singleton
 class FirebaseDataBase with LogMixin {
@@ -16,7 +16,7 @@ class FirebaseDataBase with LogMixin {
     required String collectionName,
     required String docId,
   }) async {
-    CollectionReference collection = await _getCollection(collectionName);
+    final CollectionReference collection = await _getCollection(collectionName);
     return collection.doc(docId);
   }
 
@@ -24,7 +24,7 @@ class FirebaseDataBase with LogMixin {
     required String collectionName,
     required String docId,
   }) async {
-    CollectionReference collection = await _getCollection(collectionName);
+    final CollectionReference collection = await _getCollection(collectionName);
     return await collection.doc(docId).get();
   }
 
@@ -32,7 +32,7 @@ class FirebaseDataBase with LogMixin {
     required String collectionName,
     required Map<String, dynamic> data,
   }) async {
-    CollectionReference collection = await _getCollection(collectionName);
+    final CollectionReference collection = await _getCollection(collectionName);
     try {
       await collection.add(data);
     } catch (e) {
@@ -44,8 +44,9 @@ class FirebaseDataBase with LogMixin {
     required String collectionName,
   }) async {
     try {
-      CollectionReference collection = await _getCollection(collectionName);
-      QuerySnapshot query = await collection.get();
+      final CollectionReference collection =
+          await _getCollection(collectionName);
+      final QuerySnapshot query = await collection.get();
       for (DocumentSnapshot snapshot in query.docs) {
         debugPrint(snapshot.data().toString());
       }
@@ -59,7 +60,7 @@ class FirebaseDataBase with LogMixin {
     required String id,
   }) async {
     try {
-      DocumentSnapshot snapshot = await _getDocumentSnapshot(
+      final DocumentSnapshot snapshot = await _getDocumentSnapshot(
         collectionName: collectionName,
         docId: id,
       );
@@ -77,7 +78,7 @@ class FirebaseDataBase with LogMixin {
     required Map<String, dynamic> dataUpdate,
   }) async {
     try {
-      DocumentReference doc = await _getDocumentRefrence(
+      final DocumentReference doc = await _getDocumentRefrence(
         collectionName: collectionName,
         docId: id,
       );
@@ -92,7 +93,7 @@ class FirebaseDataBase with LogMixin {
     required String id,
   }) async {
     try {
-      DocumentReference doc = await _getDocumentRefrence(
+      final DocumentReference doc = await _getDocumentRefrence(
         collectionName: collectionName,
         docId: id,
       );
@@ -108,7 +109,8 @@ class FirebaseDataBase with LogMixin {
     required Map<String, dynamic> data,
   }) async {
     try {
-      CollectionReference collection = await _getCollection(collectionName);
+      final CollectionReference collection =
+          await _getCollection(collectionName);
       await collection.doc(id).set(data);
     } catch (e) {
       throw Exception(e.toString());

@@ -1,8 +1,7 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:ontari_mobile/core/common/enum/app_index.enum.dart';
+import '../../../../core/common/enum/app_index.enum.dart';
 
 part 'dashboard_event.dart';
 part 'dashboard_state.dart';
@@ -38,13 +37,4 @@ class DashBoardBloc extends Bloc<DashBoardEvent, DashBoardState> {
     }
   }
 
-  void _onScroll(ScrollController? scrollController) {
-    if (scrollController != null && scrollController.hasClients) {
-      scrollController.animateTo(
-        0,
-        duration: const Duration(seconds: 1),
-        curve: Curves.fastOutSlowIn,
-      );
-    }
-  }
 }

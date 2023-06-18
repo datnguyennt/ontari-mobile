@@ -15,13 +15,13 @@ class UserModel {
   final DateTime? lastLogin;
   final DateTime? lastUpdate;
   UserModel({
+    required this.userId,
     this.address,
     this.avatarUrl,
     this.birthDay,
     this.email,
     this.fullName,
     this.phoneNumber,
-    required this.userId,
     this.createAt,
     this.lastLogin,
     this.lastUpdate,

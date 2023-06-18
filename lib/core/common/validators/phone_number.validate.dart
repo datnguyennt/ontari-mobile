@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:ontari_mobile/core/common/validators/form_validator.dart';
-import 'package:ontari_mobile/generated/locale_keys.g.dart';
+
+import '../../../generated/locale_keys.g.dart';
+import 'form_validator.dart';
 
 class PhoneNumberValidateModel extends FormzInput<String, String> {
   const PhoneNumberValidateModel.pure() : super.pure('');

@@ -1,11 +1,12 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:ontari_mobile/core/bloc/base_bloc.dart';
-import 'package:ontari_mobile/core/bloc/state.dart';
-import 'package:ontari_mobile/core/bloc/event.dart';
-import 'package:ontari_mobile/core/constant/hive_keys.dart';
-import 'package:ontari_mobile/core/hive.helper.dart';
-import 'package:ontari_mobile/modules/core/blocs/theme_bloc/theme_event.dart';
+
+import '../../../../core/bloc/base_bloc.dart';
+import '../../../../core/bloc/event.dart';
+import '../../../../core/bloc/state.dart';
+import '../../../../core/constant/hive_keys.dart';
+import '../../../../core/hive.helper.dart';
+import 'theme_event.dart';
 
 @singleton
 class ThemeBloc extends BaseBloc {
@@ -35,7 +36,7 @@ class ThemeBloc extends BaseBloc {
   }
 
   Future<void> _onSwichTheme(Emitter<BaseState> emit) async {
-    bool darkMode = !isDarkMode;
+    final bool darkMode = !isDarkMode;
     await HiveHelper.put(key: HiveKeys.isDarkMode, value: darkMode);
     isDarkMode = darkMode;
     emit.call(SuccessState(darkMode));

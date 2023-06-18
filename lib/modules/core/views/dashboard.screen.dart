@@ -1,14 +1,15 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ontari_mobile/core/common/enum/app_index.enum.dart';
-import 'package:ontari_mobile/core/common/theme/theme.export.dart';
-import 'package:ontari_mobile/di/di.dart';
-import 'package:ontari_mobile/modules/activity/views/activity_screen.dart';
-import 'package:ontari_mobile/modules/category/views/category_screen.dart';
-import 'package:ontari_mobile/modules/core/blocs/dashboard_bloc/dashboard_bloc.dart';
-import 'package:ontari_mobile/modules/home/views/home_screen.dart';
-import 'package:ontari_mobile/modules/setting/views/setting_screen.dart';
+
+import '../../../core/common/enum/app_index.enum.dart';
+import '../../../core/common/theme/theme.export.dart';
+import '../../../di/di.dart';
+import '../../activity/views/activity_screen.dart';
+import '../../category/views/category_screen.dart';
+import '../../home/views/home_screen.dart';
+import '../../setting/views/setting_screen.dart';
+import '../blocs/dashboard_bloc/dashboard_bloc.dart';
 
 @RoutePage()
 class DashBoardScreen extends StatelessWidget {

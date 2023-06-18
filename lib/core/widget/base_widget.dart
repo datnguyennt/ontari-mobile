@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ontari_mobile/core/bloc/base_bloc.dart';
-import 'package:ontari_mobile/core/bloc/event.dart';
-import 'package:ontari_mobile/core/bloc/state.dart';
+import '../bloc/base_bloc.dart';
+import '../bloc/event.dart';
+import '../bloc/state.dart';
 
 abstract class BaseView<B extends BaseBloc> extends StatelessWidget {
   const BaseView({Key? key}) : super(key: key);
@@ -70,7 +70,7 @@ abstract class BaseView<B extends BaseBloc> extends StatelessWidget {
 
   B createBloc();
 
-  showDialogView({required BuildContext context, required Widget content}) {
+  void showDialogView({required BuildContext context, required Widget content}) {
     showDialog(
       barrierDismissible: false,
       context: context,

@@ -1,5 +1,5 @@
-import 'package:ontari_mobile/core/bloc/event.dart';
-import 'package:ontari_mobile/data/models/user.model.dart';
+import '../../../../core/bloc/event.dart';
+import '../../../../data/models/user.model.dart';
 
 abstract class AuthEvent extends BaseEvent {
   @override

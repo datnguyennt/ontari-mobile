@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ontari_mobile/core/common/logger.dart';
+import '../common/logger.dart';
 
 class AppBlocObserver extends BlocObserver with LogMixin{
   @override

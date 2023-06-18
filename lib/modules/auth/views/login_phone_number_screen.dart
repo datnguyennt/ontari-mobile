@@ -2,20 +2,23 @@ import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ontari_mobile/core/common/theme/theme.export.dart';
-import 'package:ontari_mobile/core/routes/router.dart';
-import 'package:ontari_mobile/core/widget/footter.widget.dart';
-import 'package:ontari_mobile/core/widget/header.widget.dart';
-import 'package:ontari_mobile/core/widget/rounded_button.widget.dart';
-import 'package:ontari_mobile/core/widget/text_field.widget.dart';
-import 'package:ontari_mobile/generated/assets.gen.dart';
-import 'package:ontari_mobile/generated/locale_keys.g.dart';
-import 'package:ontari_mobile/modules/auth/bloc/login_bloc/login_bloc.dart';
-import 'package:ontari_mobile/modules/auth/widgets/continue_soicial_account.widget.dart';
+import '../../../core/common/theme/theme.export.dart';
+import '../../../core/routes/router.dart';
+import '../../../core/widget/footter.widget.dart';
+import '../../../core/widget/header.widget.dart';
+import '../../../core/widget/rounded_button.widget.dart';
+import '../../../core/widget/text_field.widget.dart';
+import '../../../generated/assets.gen.dart';
+import '../../../generated/locale_keys.g.dart';
+import '../bloc/login_bloc/login_bloc.dart';
+import '../widgets/continue_soicial_account.widget.dart';
 
 @RoutePage()
 class LogInPhoneNumberScreen extends StatelessWidget {
-  LogInPhoneNumberScreen({super.key, required this.loginBloc});
+  LogInPhoneNumberScreen({
+    required this.loginBloc,
+    super.key,
+  });
   final LoginBloc loginBloc;
   final TextEditingController phoneController = TextEditingController();
   @override

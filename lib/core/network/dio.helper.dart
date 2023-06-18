@@ -1,17 +1,19 @@
 import 'dart:io';
+
 import 'package:dio/dio.dart';
-import 'package:ontari_mobile/core/common/logger.dart';
-import 'package:ontari_mobile/core/file.utils.dart';
-import 'package:ontari_mobile/core/network/dio_interceptors.dart';
-import 'package:ontari_mobile/data/remote/service/service_constants.dart';
-import 'package:path/path.dart';
 import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
+import 'package:path/path.dart';
+
+import '../../data/remote/service/service_constants.dart';
+import '../common/logger.dart';
+import '../file.utils.dart';
+import 'dio_interceptors.dart';
 
 @lazySingleton
 class DioHelper with LogMixin {
-  getDio() {
-    Dio dio = Dio();
+  Dio getDio() {
+    final Dio dio = Dio();
     dio.options = BaseOptions(
       baseUrl: ServiceConstants.baseUrl,
       contentType: NetworkRequestValues.contentType,
@@ -197,7 +199,9 @@ class DioHelper with LogMixin {
     logD('REQUEST: PATCH => $url');
     final dio = getDio();
     try {
-      if (formData != null) data = formData;
+      if (formData != null) {
+        data = formData;
+      }
       final Response response =
           await dio.patch(url, data: data, options: options);
       return HttpResponse(
@@ -301,7 +305,7 @@ class DioHelper with LogMixin {
   }) async {
     logD('REQUEST: PUT => $url');
 
-    Dio dio = Dio();
+    final Dio dio = Dio();
     final Response response = await dio.put(url, data: data, options: options);
     return HttpResponse(
       body: response.data,
