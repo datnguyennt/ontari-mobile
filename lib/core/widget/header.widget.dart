@@ -1,15 +1,16 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-
-import '../../generated/assets.gen.dart';
-import '../common/size_config.dart';
-import '../common/theme/theme.export.dart';
-import 'rounded_button.widget.dart';
+import 'package:ontari_mobile/core/common/extension/context.extension.dart';
+import 'package:ontari_mobile/core/common/size_config.dart';
+import 'package:ontari_mobile/core/common/theme/theme.export.dart';
+import 'package:ontari_mobile/core/widget/rounded_button.widget.dart';
+import 'package:ontari_mobile/generated/assets.gen.dart';
 
 class HeaderWidget extends StatelessWidget {
   final String title;
   final String description;
   const HeaderWidget({
+    super.key,
     required this.description,
     required this.title,
     super.key,
@@ -27,8 +28,10 @@ class HeaderWidget extends StatelessWidget {
           Container(
             height: 178.h,
             width: screenWidth,
-            decoration: const BoxDecoration(
-              color: AppColors.kLightBlue,
+            decoration: BoxDecoration(
+              color: context.isDarkMode
+                  ? AppColors.kDarkBlack
+                  : AppColors.kLightBlue,
             ),
           ),
           Positioned(
@@ -60,13 +63,20 @@ class HeaderWidget extends StatelessWidget {
                     children: [
                       Text(
                         title,
-                        style: AppStyles.headline2(context),
+                        style: AppStyles.headline2(context).copyWith(
+                          fontSize: 22.sp,
+                          fontWeight: FontWeight.w700,
+                          color: context.isDarkMode
+                              ? AppColors.kWhite
+                              : AppColors.kGreyscale.shade700,
+                        ),
                       ),
                       Flexible(
                         child: Text(
                           description,
-                          style: AppStyles.bodyTextMedium(context)
-                              .copyWith(color: AppColors.kGrey),
+                          style: AppStyles.bodyTextMedium(context).copyWith(
+                            color: AppColors.kGreyscale.shade500,
+                          ),
                         ),
                       ),
                     ],

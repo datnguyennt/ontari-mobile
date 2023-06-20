@@ -10,8 +10,8 @@ class PasswordValidateModel extends FormzInput<String, String?> {
 
   const PasswordValidateModel.dirty([super.value = '']) : super.dirty();
 
-  static final _passwordRegex =
-      RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$');
+  // static final _passwordRegex =
+  //     RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$');
 
   @override
   String? validator(String value) {
