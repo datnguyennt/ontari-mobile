@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../../generated/assets.gen.dart';
-import '../common/size_config.dart';
 import '../common/theme/theme.export.dart';
+import '../utils/size_config.dart';
 
 class InternetStatusView extends StatelessWidget {
   const InternetStatusView({super.key});

@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import '../../../generated/locale_keys.g.dart';
 
 @RoutePage()
-class ActivityScreen extends StatelessWidget {
-  const ActivityScreen({super.key});
+class ActivityView extends StatelessWidget {
+  const ActivityView({super.key});
 
   @override
   Widget build(BuildContext context) {

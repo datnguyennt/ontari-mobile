@@ -1,5 +1,5 @@
 import '../constant/hive_keys.dart';
-import '../hive.helper.dart';
+import '../utils/hive.helper.dart';
 
 class TokenManager {
   const TokenManager();

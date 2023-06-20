@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:dio/dio.dart';
-import '../common/logger.dart';
 import '../constant/app_constants.dart';
+import '../utils/logger.dart';
 import 'token_manager.dart';
 
 class TokenInterceptor extends InterceptorsWrapper with LogMixin {

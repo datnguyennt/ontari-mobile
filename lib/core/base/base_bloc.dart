@@ -2,9 +2,9 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../di/di.dart';
-import '../common/logger.dart';
 import '../network/failure.dart';
 import '../service/navigation_service.dart';
+import '../utils/logger.dart';
 import 'event.dart';
 import 'state.dart';
 
@@ -92,7 +92,7 @@ abstract class BaseBloc extends Bloc<BaseEvent, BaseState> with LogMixin {
     }
   }
 
-  Future<void> hideDialogState()async {
+  Future<void> hideDialogState() async {
     if (state is DialogState) {
       await navigationService.pop();
     }

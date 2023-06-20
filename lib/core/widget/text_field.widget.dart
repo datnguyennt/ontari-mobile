@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:ontari_mobile/core/common/extension/context.extension.dart';
-import 'package:ontari_mobile/core/common/theme/theme.export.dart';
+import '../common/extension/context.extension.dart';
+import '../common/theme/theme.export.dart';
 
 class TextFieldWidget extends StatelessWidget {
   final String hintText;

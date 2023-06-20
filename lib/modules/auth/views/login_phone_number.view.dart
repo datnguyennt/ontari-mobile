@@ -14,8 +14,8 @@ import '../bloc/login_bloc/login_bloc.dart';
 import '../widgets/continue_soicial_account.widget.dart';
 
 @RoutePage()
-class LogInPhoneNumberScreen extends StatelessWidget {
-  LogInPhoneNumberScreen({
+class LogInPhoneNumberView extends StatelessWidget {
+  LogInPhoneNumberView({
     required this.loginBloc,
     super.key,
   });
@@ -90,7 +90,7 @@ class LogInPhoneNumberScreen extends StatelessWidget {
         _buildSocialButton(
           context,
           buttonText: LocaleKeys.button_sign_in_google,
-          iconPath: AppAssets.icGoogle,
+          iconPath: Assets.icons.icGoogle.path,
           onTap: () {},
         ),
         SizedBox(
@@ -99,7 +99,7 @@ class LogInPhoneNumberScreen extends StatelessWidget {
         _buildSocialButton(
           context,
           buttonText: LocaleKeys.button_sign_in_facebook,
-          iconPath: AppAssets.icFacebook,
+          iconPath: Assets.icons.icFacebook.path,
           onTap: () async {},
         ),
       ],
@@ -165,7 +165,7 @@ class LogInPhoneNumberScreen extends StatelessWidget {
               ),
             );
           },
-          disableBackgroundColor: AppColors.kGrey,
+          disableBackgroundColor: AppColors.kGreyscale,
           // backgroundColor: context.isDarkMode
           //     ? AppColors.kPrimaryDark
           //     : AppColors.kSecondaryLight,

@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import '../../../generated/locale_keys.g.dart';
 
 @RoutePage()
-class CategoryScreen extends StatelessWidget {
-  const CategoryScreen({super.key});
+class CategoryView extends StatelessWidget {
+  const CategoryView({super.key});
 
   @override
   Widget build(BuildContext context) {

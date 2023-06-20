@@ -1,6 +1,6 @@
 
 import 'package:hive_flutter/hive_flutter.dart';
-import 'constant/hive_keys.dart';
+import '../constant/hive_keys.dart';
 
 abstract class HiveHelper {
   static late Box _box;

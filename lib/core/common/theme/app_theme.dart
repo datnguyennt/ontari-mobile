@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:ontari_mobile/core/common/extension/context.extension.dart';
-import 'package:ontari_mobile/core/common/theme/theme.export.dart';
+import '../extension/context.extension.dart';
+import 'theme.export.dart';
 
 class AppThemeData {
   // Light Theme
@@ -17,7 +17,7 @@ class AppThemeData {
       colorScheme: lightColorScheme(brightness),
       textTheme: _textTheme,
       primaryTextTheme: _textTheme,
-      appBarTheme: AppBarTheme(
+      appBarTheme: const AppBarTheme(
         elevation: 0,
         iconTheme: IconThemeData(),
       ),
@@ -98,7 +98,7 @@ class AppThemeData {
     );
   }
 
-  static lightColorScheme(Brightness brightness) => ColorScheme(
+  static ColorScheme lightColorScheme(Brightness brightness) => ColorScheme(
     brightness: brightness,
     primary: brightness.isDarkMode ?const Color(0xFFB0C6FF): const Color(0xFF365CA8),
     onPrimary: const Color(0xFFFFFFFF),

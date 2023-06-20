@@ -1,16 +1,16 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:ontari_mobile/core/common/extension/context.extension.dart';
-import 'package:ontari_mobile/core/common/size_config.dart';
-import 'package:ontari_mobile/core/common/theme/theme.export.dart';
-import 'package:ontari_mobile/core/widget/rounded_button.widget.dart';
-import 'package:ontari_mobile/generated/assets.gen.dart';
+
+import '../../generated/assets.gen.dart';
+import '../common/extension/context.extension.dart';
+import '../common/theme/theme.export.dart';
+import '../utils/size_config.dart';
+import 'rounded_button.widget.dart';
 
 class HeaderWidget extends StatelessWidget {
   final String title;
   final String description;
   const HeaderWidget({
-    super.key,
     required this.description,
     required this.title,
     super.key,
@@ -102,7 +102,10 @@ class HeaderWidget extends StatelessWidget {
                   child: Assets.icons.icClose.svg(
                     height: 15.w,
                     width: 15.w,
-                    color: AppColors.kPrimaryLight,
+                    colorFilter: const ColorFilter.mode(
+                      AppColors.kPrimaryLight,
+                      BlendMode.srcIn,
+                    ),
                   ),
                 ),
               ),

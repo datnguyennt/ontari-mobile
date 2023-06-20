@@ -1,11 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:ontari_mobile/core/bloc/base_bloc.dart';
-import 'package:ontari_mobile/core/bloc/state.dart';
-import 'package:ontari_mobile/core/bloc/event.dart';
-import 'package:ontari_mobile/di/di.dart';
-import 'package:ontari_mobile/modules/auth/bloc/auth_bloc/auth_event.dart';
+
+import '../../../../core/base/base_bloc.dart';
+import '../../../../core/base/event.dart';
+import '../../../../core/base/state.dart';
+import '../../../../di/di.dart';
+import 'auth_event.dart';
 
 @singleton
 class AuthBloc extends BaseBloc {

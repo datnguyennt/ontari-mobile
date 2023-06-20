@@ -1,7 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:injectable/injectable.dart';
-import '../../core/common/logger.dart';
+
+import '../../core/utils/logger.dart';
 
 @singleton
 class FirebaseDataBase with LogMixin {

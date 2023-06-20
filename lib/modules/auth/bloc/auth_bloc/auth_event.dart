@@ -1,4 +1,5 @@
-import '../../../../core/bloc/event.dart';
+import '../../../../core/base/event.dart';
+
 import '../../../../data/models/user.model.dart';
 
 abstract class AuthEvent extends BaseEvent {

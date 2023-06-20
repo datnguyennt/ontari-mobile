@@ -2,16 +2,16 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../modules/activity/views/activity_screen.dart';
+import '../../modules/activity/views/activity.view.dart';
 import '../../modules/auth/bloc/login_bloc/login_bloc.dart';
-import '../../modules/auth/views/login_phone_number_screen.dart';
-import '../../modules/auth/views/login_screen.dart';
-import '../../modules/auth/views/register_screen.dart';
-import '../../modules/category/views/category_screen.dart';
-import '../../modules/core/views/dashboard.screen.dart';
-import '../../modules/core/views/splash_screen.dart';
-import '../../modules/home/views/home_screen.dart';
-import '../../modules/setting/views/setting_screen.dart';
+import '../../modules/auth/views/login.view.dart';
+import '../../modules/auth/views/login_phone_number.view.dart';
+import '../../modules/auth/views/register.view.dart';
+import '../../modules/category/views/category.view.dart';
+import '../../modules/core/views/dashboard.view.dart';
+import '../../modules/core/views/splash.view.dart';
+import '../../modules/home/views/home.view.dart';
+import '../../modules/setting/views/setting.view.dart';
 
 part 'router.gr.dart';
 
@@ -31,8 +31,12 @@ class Routes {
 }
 
 @lazySingleton
-@AutoRouterConfig(replaceInRouteName: 'Screen,Route')
+@AutoRouterConfig(replaceInRouteName: 'View,Route')
 class AppRouter extends _$AppRouter {
+
+  @override      
+RouteType get defaultRouteType => const RouteType.cupertino();
+
   @override
   final List<AutoRoute> routes = [
     AutoRoute(page: SplashRoute.page, initial: true, path: Routes.splash),
@@ -42,10 +46,22 @@ class AppRouter extends _$AppRouter {
       path: Routes.dashboard,
       page: DashBoardRoute.page,
       children: [
-    AutoRoute(page: HomeRoute.page, path: Routes.home),
-        AutoRoute(path: Routes.activity, page: ActivityRoute.page),
-        AutoRoute(path: Routes.category, page: CategoryRoute.page),
-        AutoRoute(path: Routes.setting, page: SettingRoute.page),
+        AutoRoute(
+          path: Routes.home,
+          page: HomeRoute.page,
+        ),
+        AutoRoute(
+          path: Routes.activity,
+          page: ActivityRoute.page,
+        ),
+        AutoRoute(
+          path: Routes.category,
+          page: CategoryRoute.page,
+        ),
+        AutoRoute(
+          path: Routes.setting,
+          page: SettingRoute.page,
+        ),
       ],
     ),
     AutoRoute(page: LogInPhoneNumberRoute.page, path: Routes.loginInPhone),

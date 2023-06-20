@@ -16,61 +16,21 @@ abstract class _$AppRouter extends RootStackRouter {
   @override
   final Map<String, PageFactory> pagesMap = {
     HomeRoute.name: (routeData) {
-      final args =
-          routeData.argsAs<HomeRouteArgs>(orElse: () => const HomeRouteArgs());
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: HomeScreen(key: args.key),
-      );
-    },
-    DashBoardRoute.name: (routeData) {
-      final args = routeData.argsAs<DashBoardRouteArgs>(
-          orElse: () => const DashBoardRouteArgs());
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: DashBoardScreen(key: args.key),
+        child: HomeView(),
       );
     },
     SplashRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const SplashScreen(),
+        child: const SplashView(),
       );
     },
-    CategoryRoute.name: (routeData) {
+    DashBoardRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const CategoryScreen(),
-      );
-    },
-    RegisterRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const RegisterScreen(),
-      );
-    },
-    LoginRoute.name: (routeData) {
-      final args = routeData.argsAs<LoginRouteArgs>(
-          orElse: () => const LoginRouteArgs());
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: LoginScreen(key: args.key),
-      );
-    },
-    LogInPhoneNumberRoute.name: (routeData) {
-      final args = routeData.argsAs<LogInPhoneNumberRouteArgs>();
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: LogInPhoneNumberScreen(
-          key: args.key,
-          loginBloc: args.loginBloc,
-        ),
-      );
-    },
-    ActivityRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const ActivityScreen(),
+        child: const DashBoardView(),
       );
     },
     SettingRoute.name: (routeData) {
@@ -78,71 +38,64 @@ abstract class _$AppRouter extends RootStackRouter {
           orElse: () => const SettingRouteArgs());
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: SettingScreen(key: args.key),
+        child: SettingView(key: args.key),
+      );
+    },
+    RegisterRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const RegisterView(),
+      );
+    },
+    LoginRoute.name: (routeData) {
+      final args = routeData.argsAs<LoginRouteArgs>(
+          orElse: () => const LoginRouteArgs());
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: LoginView(key: args.key),
+      );
+    },
+    LogInPhoneNumberRoute.name: (routeData) {
+      final args = routeData.argsAs<LogInPhoneNumberRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: LogInPhoneNumberView(
+          loginBloc: args.loginBloc,
+          key: args.key,
+        ),
+      );
+    },
+    CategoryRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const CategoryView(),
+      );
+    },
+    ActivityRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const ActivityView(),
       );
     },
   };
 }
 
 /// generated route for
-/// [HomeScreen]
-class HomeRoute extends PageRouteInfo<HomeRouteArgs> {
-  HomeRoute({
-    Key? key,
-    List<PageRouteInfo>? children,
-  }) : super(
+/// [HomeView]
+class HomeRoute extends PageRouteInfo<void> {
+  const HomeRoute({List<PageRouteInfo>? children})
+      : super(
           HomeRoute.name,
-          args: HomeRouteArgs(key: key),
           initialChildren: children,
         );
 
   static const String name = 'HomeRoute';
 
-  static const PageInfo<HomeRouteArgs> page = PageInfo<HomeRouteArgs>(name);
-}
-
-class HomeRouteArgs {
-  const HomeRouteArgs({this.key});
-
-  final Key? key;
-
-  @override
-  String toString() {
-    return 'HomeRouteArgs{key: $key}';
-  }
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for
-/// [DashBoardScreen]
-class DashBoardRoute extends PageRouteInfo<DashBoardRouteArgs> {
-  DashBoardRoute({
-    Key? key,
-    List<PageRouteInfo>? children,
-  }) : super(
-          DashBoardRoute.name,
-          args: DashBoardRouteArgs(key: key),
-          initialChildren: children,
-        );
-
-  static const String name = 'DashBoardRoute';
-
-  static const PageInfo<DashBoardRouteArgs> page =
-      PageInfo<DashBoardRouteArgs>(name);
-}
-
-class DashBoardRouteArgs {
-  const DashBoardRouteArgs({this.key});
-
-  final Key? key;
-
-  @override
-  String toString() {
-    return 'DashBoardRouteArgs{key: $key}';
-  }
-}
-
-/// generated route for
-/// [SplashScreen]
+/// [SplashView]
 class SplashRoute extends PageRouteInfo<void> {
   const SplashRoute({List<PageRouteInfo>? children})
       : super(
@@ -156,21 +109,50 @@ class SplashRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [CategoryScreen]
-class CategoryRoute extends PageRouteInfo<void> {
-  const CategoryRoute({List<PageRouteInfo>? children})
+/// [DashBoardView]
+class DashBoardRoute extends PageRouteInfo<void> {
+  const DashBoardRoute({List<PageRouteInfo>? children})
       : super(
-          CategoryRoute.name,
+          DashBoardRoute.name,
           initialChildren: children,
         );
 
-  static const String name = 'CategoryRoute';
+  static const String name = 'DashBoardRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for
-/// [RegisterScreen]
+/// [SettingView]
+class SettingRoute extends PageRouteInfo<SettingRouteArgs> {
+  SettingRoute({
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
+          SettingRoute.name,
+          args: SettingRouteArgs(key: key),
+          initialChildren: children,
+        );
+
+  static const String name = 'SettingRoute';
+
+  static const PageInfo<SettingRouteArgs> page =
+      PageInfo<SettingRouteArgs>(name);
+}
+
+class SettingRouteArgs {
+  const SettingRouteArgs({this.key});
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'SettingRouteArgs{key: $key}';
+  }
+}
+
+/// generated route for
+/// [RegisterView]
 class RegisterRoute extends PageRouteInfo<void> {
   const RegisterRoute({List<PageRouteInfo>? children})
       : super(
@@ -184,7 +166,7 @@ class RegisterRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [LoginScreen]
+/// [LoginView]
 class LoginRoute extends PageRouteInfo<LoginRouteArgs> {
   LoginRoute({
     Key? key,
@@ -212,17 +194,17 @@ class LoginRouteArgs {
 }
 
 /// generated route for
-/// [LogInPhoneNumberScreen]
+/// [LogInPhoneNumberView]
 class LogInPhoneNumberRoute extends PageRouteInfo<LogInPhoneNumberRouteArgs> {
   LogInPhoneNumberRoute({
-    Key? key,
     required LoginBloc loginBloc,
+    Key? key,
     List<PageRouteInfo>? children,
   }) : super(
           LogInPhoneNumberRoute.name,
           args: LogInPhoneNumberRouteArgs(
-            key: key,
             loginBloc: loginBloc,
+            key: key,
           ),
           initialChildren: children,
         );
@@ -235,22 +217,36 @@ class LogInPhoneNumberRoute extends PageRouteInfo<LogInPhoneNumberRouteArgs> {
 
 class LogInPhoneNumberRouteArgs {
   const LogInPhoneNumberRouteArgs({
-    this.key,
     required this.loginBloc,
+    this.key,
   });
-
-  final Key? key;
 
   final LoginBloc loginBloc;
 
+  final Key? key;
+
   @override
   String toString() {
-    return 'LogInPhoneNumberRouteArgs{key: $key, loginBloc: $loginBloc}';
+    return 'LogInPhoneNumberRouteArgs{loginBloc: $loginBloc, key: $key}';
   }
 }
 
 /// generated route for
-/// [ActivityScreen]
+/// [CategoryView]
+class CategoryRoute extends PageRouteInfo<void> {
+  const CategoryRoute({List<PageRouteInfo>? children})
+      : super(
+          CategoryRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'CategoryRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [ActivityView]
 class ActivityRoute extends PageRouteInfo<void> {
   const ActivityRoute({List<PageRouteInfo>? children})
       : super(
@@ -261,33 +257,4 @@ class ActivityRoute extends PageRouteInfo<void> {
   static const String name = 'ActivityRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
-}
-
-/// generated route for
-/// [SettingScreen]
-class SettingRoute extends PageRouteInfo<SettingRouteArgs> {
-  SettingRoute({
-    Key? key,
-    List<PageRouteInfo>? children,
-  }) : super(
-          SettingRoute.name,
-          args: SettingRouteArgs(key: key),
-          initialChildren: children,
-        );
-
-  static const String name = 'SettingRoute';
-
-  static const PageInfo<SettingRouteArgs> page =
-      PageInfo<SettingRouteArgs>(name);
-}
-
-class SettingRouteArgs {
-  const SettingRouteArgs({this.key});
-
-  final Key? key;
-
-  @override
-  String toString() {
-    return 'SettingRouteArgs{key: $key}';
-  }
 }

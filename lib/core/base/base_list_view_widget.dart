@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import '../bloc/base_bloc.dart';
-import '../bloc/state.dart';
-import 'base_widget.dart';
+
+import 'base_bloc.dart';
+import 'base_view.dart';
+import 'state.dart';
 
 abstract class BaseListView<B extends BaseBloc, M> extends BaseView<B> {
-  const BaseListView({Key? key}) : super(key: key);
+  BaseListView({super.key});
+
 
   @override
   Widget buildView(BuildContext context, BaseState state) {

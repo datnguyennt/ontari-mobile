@@ -1,6 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
-import 'package:ontari_mobile/firebase_options_dev.dart';
-import 'package:ontari_mobile/firebase_options_prod.dart';
+import 'firebase_options_dev.dart';
+import 'firebase_options_prod.dart';
 
 enum Flavor {
   DEV,

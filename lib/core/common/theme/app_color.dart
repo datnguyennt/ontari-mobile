@@ -17,6 +17,7 @@ class AppColors {
   static const kWhite = Colors.white;
   static const kLightBlue = Color(0xffECF3FA);
   static const kBorderColor = Color(0xffC3C4C5);
+  static Color get pageBackground => kWhite;
 
   static const MaterialColor kprimary =
       MaterialColor(kPrimaryValue, <int, Color>{

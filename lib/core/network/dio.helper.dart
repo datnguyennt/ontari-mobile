@@ -6,8 +6,8 @@ import 'package:injectable/injectable.dart';
 import 'package:path/path.dart';
 
 import '../../data/remote/service/service_constants.dart';
-import '../common/logger.dart';
 import '../file.utils.dart';
+import '../utils/logger.dart';
 import 'dio_interceptors.dart';
 
 @lazySingleton

@@ -2,27 +2,28 @@ import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ontari_mobile/core/common/enum/app_index.enum.dart';
-import 'package:ontari_mobile/core/common/extension/context.extension.dart';
-import 'package:ontari_mobile/core/common/theme/theme.export.dart';
-import 'package:ontari_mobile/di/di.dart';
-import 'package:ontari_mobile/generated/assets.gen.dart';
-import 'package:ontari_mobile/generated/locale_keys.g.dart';
-import 'package:ontari_mobile/modules/activity/views/activity_screen.dart';
-import 'package:ontari_mobile/modules/category/views/category_screen.dart';
-import 'package:ontari_mobile/modules/core/blocs/dashboard_bloc/dashboard_bloc.dart';
-import 'package:ontari_mobile/modules/home/views/home_screen.dart';
-import 'package:ontari_mobile/modules/setting/views/setting_screen.dart';
+
+import '../../../core/common/enum/app_index.enum.dart';
+import '../../../core/common/extension/context.extension.dart';
+import '../../../core/common/theme/theme.export.dart';
+import '../../../di/di.dart';
+import '../../../generated/assets.gen.dart';
+import '../../../generated/locale_keys.g.dart';
+import '../../activity/views/activity.view.dart';
+import '../../category/views/category.view.dart';
+import '../../home/views/home.view.dart';
+import '../../setting/views/setting.view.dart';
+import '../blocs/dashboard_bloc/dashboard_bloc.dart';
 
 @RoutePage()
-class DashBoardScreen extends StatefulWidget {
-  const DashBoardScreen({super.key});
+class DashBoardView extends StatefulWidget {
+  const DashBoardView({super.key});
 
   @override
-  State<DashBoardScreen> createState() => _DashBoardScreenState();
+  State<DashBoardView> createState() => _DashBoardViewState();
 }
 
-class _DashBoardScreenState extends State<DashBoardScreen> {
+class _DashBoardViewState extends State<DashBoardView> {
   final DashBoardBloc dashboardBloc = getIt<DashBoardBloc>();
 
   Color get selectedColor => context.isDarkMode
@@ -88,13 +89,13 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
           previous.currentIndex != current.currentIndex,
       builder: (_, state) {
         if (state.currentIndex == AppIndexEnum.homeTab) {
-          return HomeScreen();
+          return HomeView();
         } else if (state.currentIndex == AppIndexEnum.activity) {
-          return const ActivityScreen();
+          return const ActivityView();
         } else if (state.currentIndex == AppIndexEnum.catgory) {
-          return const CategoryScreen();
+          return const CategoryView();
         } else if (state.currentIndex == AppIndexEnum.setting) {
-          return SettingScreen();
+          return SettingView();
         }
         return Container();
       },
