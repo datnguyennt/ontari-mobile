@@ -1,5 +1,5 @@
 
-import 'package:ontari_mobile/flavors.dart';
+import '../../flavors.dart';
 
 abstract class Endpoints {
   static String apiUrl = '${AppFlavor.apiBaseUrl}/api';

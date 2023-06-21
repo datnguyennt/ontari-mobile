@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:ontari_mobile/core/common/size_config.dart';
-import 'package:ontari_mobile/core/common/theme/theme.export.dart';
-import 'package:ontari_mobile/generated/assets.gen.dart';
+
+import '../../generated/assets.gen.dart';
+import '../common/theme/theme.export.dart';
+import '../utils/size_config.dart';
 
 class InternetStatusView extends StatelessWidget {
   const InternetStatusView({super.key});

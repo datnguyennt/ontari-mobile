@@ -1,4 +1,4 @@
-import 'package:ontari_mobile/core/bloc/event.dart';
+import '../../../core/base/event.dart';
 
 abstract class HomeEvent extends BaseEvent {
   @override

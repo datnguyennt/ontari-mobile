@@ -1,38 +1,35 @@
-// import 'package:easy_localization/easy_localization.dart';
-// import 'package:elearning_marketplace/generated/locale_keys.g.dart';
-// import 'package:formz/formz.dart';
+import 'package:easy_localization/easy_localization.dart';
 
-// enum PasswordValidationError { invalid, empty }
+import '../../../generated/locale_keys.g.dart';
+import 'form_validator.dart';
 
-// class PasswordValidateModel
-//     extends FormzInput<String, PasswordValidationError> {
-//   const PasswordValidateModel.pure() : super.pure('');
+class PhoneNumberValidateModel extends FormzInput<String, String> {
+  const PhoneNumberValidateModel.pure() : super.pure('');
 
-//   const PasswordValidateModel.dirty([super.value = '']) : super.dirty();
+  const PhoneNumberValidateModel.dirty([super.value = '']) : super.dirty();
 
-//   static final _passwordRegex =
-//       RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$');
+  static final _phoneRegrex =
+      RegExp(r'^(0?)(3[2-9]|5[6|8|9]|7[0|6-9]|8[0-6|8|9]|9[0-4|6-9])[0-9]{7}$');
 
-//   @override
-//   PasswordValidationError? validator(String value) {
-//     //Password empty
-//     if (value.isEmpty) return PasswordValidationError.empty;
+  @override
+  String? validator(String value) {
+    //Phone number empty
+    if (value.isEmpty) {
+      return LocaleKeys.validator_not_empty.tr(
+        namedArgs: {
+          'field': 'Phone number',
+        },
+      );
+    }
 
-//     //Password invalid
-//     if (!_passwordRegex.hasMatch(value)) return PasswordValidationError.invalid;
-//     return null;
-//   }
-// }
-
-// extension PasswordValidate on PasswordValidationError {
-//   String get getTextValidate {
-//     switch (this) {
-//       case PasswordValidationError.empty:
-//         return LocaleKeys.validator_password_required.tr();
-//       case PasswordValidationError.invalid:
-//         return LocaleKeys.validator_password_include.tr();
-//       default:
-//         return '';
-//     }
-//   }
-// }
+    //Phone number invalid
+    if (!_phoneRegrex.hasMatch(value)) {
+      return LocaleKeys.validator_invalid.tr(
+        namedArgs: {
+          'field': 'Phone number',
+        },
+      );
+    }
+    return null;
+  }
+}

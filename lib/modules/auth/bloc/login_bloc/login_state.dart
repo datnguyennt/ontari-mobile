@@ -19,12 +19,14 @@ class LoginState extends Equatable {
     this.errorMessage = '',
     this.formStatus = FormzSubmissionStatus.initial,
     this.showPassword = false,
+    this.phoneNumber = const PhoneNumberValidateModel.pure(),
   });
 
   final FormzSubmissionStatus formStatus;
   final LoginStatus loginStatus;
   final EmailValidateModel email;
   final PasswordValidateModel password;
+  final PhoneNumberValidateModel phoneNumber;
   final String errorMessage;
   final bool showPassword;
 
@@ -32,6 +34,7 @@ class LoginState extends Equatable {
     LoginStatus? loginStatus,
     EmailValidateModel? email,
     PasswordValidateModel? password,
+    PhoneNumberValidateModel? phoneNumber,
     bool? showPassword,
     String? errorMessage,
     FormzSubmissionStatus? formStatus,
@@ -43,6 +46,7 @@ class LoginState extends Equatable {
       password: password ?? this.password,
       errorMessage: errorMessage ?? this.errorMessage,
       showPassword: showPassword ?? this.showPassword,
+      phoneNumber: phoneNumber ?? this.phoneNumber,
     );
   }
 
@@ -54,5 +58,6 @@ class LoginState extends Equatable {
         errorMessage,
         formStatus,
         showPassword,
+        phoneNumber,
       ];
 }

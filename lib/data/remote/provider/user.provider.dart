@@ -4,10 +4,13 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:injectable/injectable.dart';
-import 'package:ontari_mobile/core/common/exception/auth_exception.dart';
-import 'package:ontari_mobile/core/network/dio.helper.dart';
-import 'package:ontari_mobile/core/network/failure.dart';
-import 'package:ontari_mobile/data/remote/dto/user_credential.dto.dart';
+import '../../../core/common/exception/auth_exception.dart';
+import '../../../core/constant/firebase_constants.dart';
+import '../../../core/network/dio.helper.dart';
+import '../../../core/network/failure.dart';
+import '../../database/firebase_database.dart';
+import '../../models/user.model.dart';
+import '../dto/user_credential.dto.dart';
 
 abstract class IUserProvider {
   Future<void> logout();
@@ -16,8 +19,10 @@ abstract class IUserProvider {
     UserCreadentialDto userDto,
   );
 
-  Future<Either<Failure, User>> signInWithEmail(UserCreadentialDto userDto);
-  Future<Either<Failure, User>> signUpWithEmail({
+  Future<Either<Failure, UserModel>> signInWithPhoneNumber(String phoneNumber);
+  Future<Either<Failure, UserModel>> signInWithEmail(
+      UserCreadentialDto userDto,);
+  Future<Either<Failure, UserModel>> signUpWithEmail({
     required String email,
     required String password,
   });
@@ -25,7 +30,8 @@ abstract class IUserProvider {
 
 @LazySingleton()
 class UserProvider implements IUserProvider {
-  UserProvider({required this.dioClient});
+  FirebaseDataBase firebaseDataBase;
+  UserProvider({required this.dioClient, required this.firebaseDataBase});
 
   final DioHelper dioClient;
   @override
@@ -34,7 +40,7 @@ class UserProvider implements IUserProvider {
   }
 
   @override
-  Future<Either<Failure, User>> signInWithEmail(
+  Future<Either<Failure, UserModel>> signInWithEmail(
     UserCreadentialDto userDto,
   ) async {
     try {
@@ -51,7 +57,13 @@ class UserProvider implements IUserProvider {
           ),
         );
       }
-      return Right(credential.user!);
+      final UserModel user = UserModel.toUserModel(credential.user!);
+      await firebaseDataBase.setDocument(
+        collectionName: FirebaseCollection.users,
+        data: user.toJson(),
+        id: user.userId,
+      );
+      return Right(user);
     } on FirebaseAuthException catch (e) {
       final status = AuthExceptionHandler.handleException(e);
       return Left(
@@ -65,7 +77,7 @@ class UserProvider implements IUserProvider {
   }
 
   @override
-  Future<Either<Failure, User>> signUpWithEmail({
+  Future<Either<Failure, UserModel>> signUpWithEmail({
     required String email,
     required String password,
   }) async {
@@ -84,7 +96,14 @@ class UserProvider implements IUserProvider {
           ),
         );
       }
-      return Right(credential.user!);
+
+      final UserModel user = UserModel.toUserModel(credential.user!);
+      await firebaseDataBase.setDocument(
+        collectionName: FirebaseCollection.users,
+        data: user.toJson(),
+        id: user.userId,
+      );
+      return Right(user);
     } on FirebaseAuthException catch (e) {
       final status = AuthExceptionHandler.handleException(e);
       return Left(
@@ -113,5 +132,11 @@ class UserProvider implements IUserProvider {
     } on DioException catch (e) {
       return Left(e);
     }
+  }
+
+  @override
+  Future<Either<Failure, UserModel>> signInWithPhoneNumber(String phoneNumber) {
+    // TODO: implement signInWithPhoneNumber
+    throw UnimplementedError();
   }
 }

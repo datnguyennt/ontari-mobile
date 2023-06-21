@@ -1,16 +1,16 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:ontari_mobile/core/common/theme/theme.export.dart';
+import '../common/theme/theme.export.dart';
 
 class FooterWidget extends StatelessWidget {
   final String firstString;
   final String lastString;
   final VoidCallback onTap;
   const FooterWidget({
-    super.key,
     required this.firstString,
     required this.lastString,
     required this.onTap,
+    super.key,
   });
 
   @override

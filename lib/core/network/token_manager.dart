@@ -1,5 +1,5 @@
-import 'package:ontari_mobile/core/constant/hive_keys.dart';
-import 'package:ontari_mobile/core/hive.helper.dart';
+import '../constant/hive_keys.dart';
+import '../utils/hive.helper.dart';
 
 class TokenManager {
   const TokenManager();
@@ -15,7 +15,7 @@ class TokenManager {
   }
 
   Future<DateTime?> getTokenExpiredTime() async {
-    String expiredTime = await HiveHelper.get(HiveKeys.expiresIn);
+    final String expiredTime = await HiveHelper.get(HiveKeys.expiresIn);
     return DateTime.parse(expiredTime);
   }
 
@@ -43,7 +43,7 @@ class TokenManager {
 
   Future<bool> isAccessTokenInvalid() async {
     try {
-      DateTime? expiredTime = await getTokenExpiredTime();
+      final DateTime? expiredTime = await getTokenExpiredTime();
       if (DateTime.now()
           .toUtc()
           .add(const Duration(seconds: 10))

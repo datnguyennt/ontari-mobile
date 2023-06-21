@@ -1,4 +1,4 @@
-import 'package:ontari_mobile/flavors.dart';
+import '../../flavors.dart';
 
 abstract class ServiceConstants {
   static final baseUrl = AppFlavor.apiBaseUrl;

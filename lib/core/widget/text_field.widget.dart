@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:ontari_mobile/core/common/theme/theme.export.dart';
-import 'package:ontari_mobile/di/di.dart';
-import 'package:ontari_mobile/modules/core/blocs/bloc/theme_bloc.dart';
+import '../common/extension/context.extension.dart';
+import '../common/theme/theme.export.dart';
 
 class TextFieldWidget extends StatelessWidget {
   final String hintText;
@@ -33,13 +32,13 @@ class TextFieldWidget extends StatelessWidget {
   final bool enabled;
 
   const TextFieldWidget({
+    required this.controller,
     super.key,
     this.hintText = '',
     this.onChanged,
     this.onTapPrefixIcon,
     this.onSaved,
     this.prefixIcon,
-    required this.controller,
     this.label = '',
     this.onFieldSubmitted,
     this.keyboardType,
@@ -61,10 +60,8 @@ class TextFieldWidget extends StatelessWidget {
     this.textInputStyle,
     this.enabled = true,
   });
-
   @override
   Widget build(BuildContext context) {
-    final themeBloc = getIt<ThemeBloc>();
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -95,14 +92,16 @@ class TextFieldWidget extends StatelessWidget {
             textAlign: TextAlign.left,
             textInputAction: textInputAction,
             onChanged: onChanged,
-            cursorColor: AppColors.kSecondaryLight,
+            cursorColor: context.isDarkMode
+                ? AppColors.kprimary.shade600
+                : AppColors.kSecondaryLight,
             style: textInputStyle ??
                 AppStyles.bodyTextMedium(context).copyWith(
                   fontFamily: GoogleFonts.manrope().fontFamily,
                   fontSize: 14.sp,
                   fontWeight: FontWeight.w500,
                   height: 19.12 / 14,
-                  color: themeBloc.isDarkMode
+                  color: context.isDarkMode
                       ? AppColors.kWhite
                       : AppColors.kPrimaryLight,
                 ),
@@ -149,7 +148,9 @@ class TextFieldWidget extends StatelessWidget {
               behavior: HitTestBehavior.opaque,
               child: Padding(
                 padding: suffixPadding ??
-                    EdgeInsets.symmetric(horizontal: AppSize.kSpacing12.w),
+                    EdgeInsets.symmetric(
+                      horizontal: AppSize.kSpacing12.w,
+                    ),
                 child: suffixIcon,
               ),
             )
@@ -157,23 +158,26 @@ class TextFieldWidget extends StatelessWidget {
       hintText: hintText,
       constraints: const BoxConstraints(),
       hintStyle: AppStyles.bodyTextMedium(context).copyWith(
-        color: AppColors.kBorderColor,
+        color: AppColors.kGreyscale.shade500,
       ),
-      border: _buildBorder(),
-      enabledBorder: _buildBorder(),
-      focusedBorder: _buildFocusedBorder(),
+      border: _buildBorder(context),
+      enabledBorder: _buildBorder(context),
+      focusedBorder: _buildFocusedBorder(context),
       errorBorder: _buildErrorBorder(),
-      disabledBorder: _buildBorder(),
+      disabledBorder: _buildBorder(context),
       filled: true,
-      fillColor: AppColors.kWhite,
+      fillColor:
+          context.isDarkMode ? AppColors.kGreyscale.shade800 : AppColors.kWhite,
     );
   }
 
-  OutlineInputBorder _buildFocusedBorder() {
+  OutlineInputBorder _buildFocusedBorder(BuildContext context) {
     return OutlineInputBorder(
       borderSide: BorderSide(
         color: (errorText ?? '').isEmpty
-            ? AppColors.kSecondaryLight
+            ? (context.isDarkMode
+                ? AppColors.kprimary.shade600
+                : AppColors.kprimary.shade900)
             : AppColors.kRed,
         width: 1.r,
       ),
@@ -183,11 +187,14 @@ class TextFieldWidget extends StatelessWidget {
     );
   }
 
-  OutlineInputBorder _buildBorder() {
+  OutlineInputBorder _buildBorder(BuildContext context) {
     return OutlineInputBorder(
       borderSide: BorderSide(
-        color:
-            (errorText ?? '').isEmpty ? AppColors.kBorderColor : AppColors.kRed,
+        color: (errorText ?? '').isEmpty
+            ? (context.isDarkMode
+                ? AppColors.kGreyscale.shade800
+                : AppColors.kGreyscale.shade50)
+            : AppColors.kRed,
         width: 1.r,
       ),
       borderRadius: BorderRadius.circular(

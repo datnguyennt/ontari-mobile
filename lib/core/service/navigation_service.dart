@@ -1,8 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
-import 'package:ontari_mobile/core/routes/router.dart';
-import 'package:ontari_mobile/core/common/logger.dart';
+
+import '../routes/router.dart';
+import '../utils/logger.dart';
 
 /// Singleton navigation service used for navigation between the screens.
 /// This service allows navigation from viewmodel without requiring the context

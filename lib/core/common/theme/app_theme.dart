@@ -1,123 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:ontari_mobile/core/common/theme/theme.export.dart';
+import '../extension/context.extension.dart';
+import 'theme.export.dart';
 
 class AppThemeData {
-  static const MaterialColor kprimary =
-      MaterialColor(_kprimaryPrimaryValue, <int, Color>{
-    50: Color(0xFFEBEEFA),
-    100: Color(0xFFDEE6F8),
-    200: Color(0xFFC9D7F3),
-    300: Color(0xFFA4BCEA),
-    400: Color(0xFF7A9DE1),
-    500: Color(_kprimaryPrimaryValue),
-    600: Color(0xFF356AD1),
-    700: Color(0xFF2C5EBF),
-    800: Color(0xFF003F99),
-    900: Color(0xFF003074),
-  });
-  static const int _kprimaryPrimaryValue = 0xFF5984D9;
+  // Light Theme
+  static ThemeData lightThemeData = themeData(Brightness.light);
 
-  static const MaterialColor kprimaryAccent =
-      MaterialColor(_kprimaryAccentValue, <int, Color>{
-    100: Color(0xFFFFFFFF),
-    200: Color(_kprimaryAccentValue),
-    400: Color(0xFF9DB5FF),
-    700: Color(0xFF84A2FF),
-  });
-  static const int _kprimaryAccentValue = 0xFFD0DCFF;
+  //Dark Theme
+  static ThemeData darkThemeData = themeData(Brightness.dark);
 
-  static const MaterialColor kGreyscale =
-      MaterialColor(_kGreyPrimaryValue, <int, Color>{
-    50: Color(0xFFF0F5F9),
-    100: Color(0xFFF3F7F9),
-    200: Color(0xFFE8EAEE),
-    300: Color(0xFFD0D5DC),
-    400: Color(0xFFB6BEC9),
-    500: Color(_kGreyPrimaryValue),
-    600: Color(0xFF697896),
-    700: Color(0xFF121F3E),
-    800: Color(0xFF21273B),
-    900: Color(0xFF191D2B),
-  });
-  static const int _kGreyPrimaryValue = 0xFF96A0B5;
-
-  static const MaterialColor kgreyAccent =
-      MaterialColor(_kGreyAccentValue, <int, Color>{
-    100: Color(0xFFFFFFFF),
-    200: Color(_kGreyAccentValue),
-    400: Color(0xFF9EBBFF),
-    700: Color(0xFF85A9FF),
-  });
-  static const int _kGreyAccentValue = 0xFFD1DFFF;
-
-  static const _lightFillColor = Color.fromARGB(255, 187, 35, 35);
-  static const _darkFillColor = Color.fromARGB(255, 146, 49, 49);
-
-  static final Color _lightFocusColor = Colors.black.withOpacity(0.12);
-  static final Color _darkFocusColor = Colors.white.withOpacity(0.12);
-
-  static ThemeData lightThemeData =
-      themeData(lightColorScheme, _lightFocusColor);
-  static ThemeData darkThemeData = themeData(darkColorScheme, _darkFocusColor);
-
-  static ThemeData themeData(ColorScheme colorScheme, Color focusColor) {
+  //Common Theme
+  static ThemeData themeData(Brightness brightness) {
     return ThemeData(
-      colorScheme: colorScheme,
+      brightness: brightness,
+      colorScheme: lightColorScheme(brightness),
       textTheme: _textTheme,
       primaryTextTheme: _textTheme,
-      // Matches manifest.json colors and background color.
-      // primaryColor: const Color(0xFF030303),
-      appBarTheme: AppBarTheme(
-        backgroundColor: colorScheme.background,
+      appBarTheme: const AppBarTheme(
         elevation: 0,
-        iconTheme: IconThemeData(color: colorScheme.primary),
+        iconTheme: IconThemeData(),
       ),
-      iconTheme: IconThemeData(color: colorScheme.onPrimary),
-      canvasColor: colorScheme.background,
-      scaffoldBackgroundColor: colorScheme.background,
-      highlightColor: Colors.transparent,
-      focusColor: focusColor,
-      snackBarTheme: SnackBarThemeData(
-        behavior: SnackBarBehavior.floating,
-        backgroundColor: Colors.red,
-        contentTextStyle: _textTheme.titleMedium?.apply(color: _darkFillColor),
-      ),
+      inputDecorationTheme: _textFieldInputdecoration(brightness),
     );
   }
-
-  static const ColorScheme lightColorScheme = ColorScheme(
-    primary: AppColors.kPrimaryLight,
-    primaryContainer: Color(0xFF9e1718),
-    secondary: AppColors.kDotUnselected,
-    secondaryContainer: Color.fromARGB(255, 40, 105, 105),
-    background: Colors.white,
-    surface: Color.fromARGB(255, 21, 97, 97),
-    onBackground: Colors.white,
-    error: _lightFillColor,
-    onError: _lightFillColor,
-    onPrimary: _lightFillColor,
-    onSecondary: Color(0xFF322942),
-    onSurface: Color(0xFF241E30),
-    brightness: Brightness.light,
-  );
-
-  static const ColorScheme darkColorScheme = ColorScheme(
-    primary: Color(0xFFFF8383),
-    primaryContainer: Color(0xFF1CDEC9),
-    secondary: Color(0xFF4D1F7C),
-    secondaryContainer: Color(0xFF451B6F),
-    background: Color(0xFF241E30),
-    surface: Color(0xFF1F1929),
-    onBackground: Color(0x0DFFFFFF),
-    // White with 0.05 opacity
-    error: _darkFillColor,
-    onError: _darkFillColor,
-    onPrimary: _darkFillColor,
-    onSecondary: _darkFillColor,
-    onSurface: _darkFillColor,
-    brightness: Brightness.dark,
-  );
 
   // static const _regular = FontWeight.w400;
   static const _medium = FontWeight.w400;
@@ -134,5 +40,129 @@ class AppThemeData {
     bodyLarge: GoogleFonts.manrope(fontWeight: _medium, fontSize: 16),
     bodyMedium: GoogleFonts.manrope(fontWeight: _medium, fontSize: 14),
     labelLarge: GoogleFonts.manrope(fontWeight: _medium, fontSize: 16),
+  );
+
+  static InputDecorationTheme _textFieldInputdecoration(Brightness brightness) {
+    return InputDecorationTheme(
+      isDense: true,
+      constraints: const BoxConstraints(),
+      border: _buildBorder(brightness),
+      enabledBorder: _buildBorder(brightness),
+      focusedBorder: _buildFocusedBorder(brightness),
+      errorBorder: _buildErrorBorder(brightness),
+      disabledBorder: _buildBorder(brightness),
+      filled: true,
+      fillColor: brightness == Brightness.dark
+          ? AppColors.kGreyscale.shade800
+          : AppColors.kWhite,
+    );
+  }
+
+  static OutlineInputBorder _buildFocusedBorder(Brightness brightness) {
+    return OutlineInputBorder(
+      borderSide: BorderSide(
+        color: brightness == Brightness.dark
+            ? AppColors.kprimary.shade600
+            : AppColors.kprimary.shade900,
+        width: 1.r,
+      ),
+      borderRadius: BorderRadius.circular(
+        AppSize.kRadius10.r,
+      ),
+    );
+  }
+
+  static OutlineInputBorder _buildBorder(Brightness brightness) {
+    return OutlineInputBorder(
+      borderSide: BorderSide(
+        color: brightness == Brightness.dark
+            ? AppColors.kGreyscale.shade800
+            : AppColors.kGreyscale.shade50,
+        width: 1.r,
+      ),
+      borderRadius: BorderRadius.circular(
+        AppSize.kRadius10.r,
+      ),
+    );
+  }
+
+  static OutlineInputBorder _buildErrorBorder(Brightness brightness) {
+    return OutlineInputBorder(
+      borderSide: BorderSide(
+        color: AppColors.kRed,
+        width: 1.r,
+      ),
+      borderRadius: BorderRadius.circular(
+        AppSize.kRadius10.r,
+      ),
+    );
+  }
+
+  static ColorScheme lightColorScheme(Brightness brightness) => ColorScheme(
+    brightness: brightness,
+    primary: brightness.isDarkMode ?const Color(0xFFB0C6FF): const Color(0xFF365CA8),
+    onPrimary: const Color(0xFFFFFFFF),
+    primaryContainer: const Color(0xFFD9E2FF),
+    onPrimaryContainer: const Color(0xFF001944),
+    secondary: const Color(0xFF3F5AA9),
+    onSecondary: const Color(0xFFFFFFFF),
+    secondaryContainer: const Color(0xFFDBE1FF),
+    onSecondaryContainer: const Color(0xFF00174C),
+    tertiary: const Color(0xFF725572),
+    onTertiary: const Color(0xFFFFFFFF),
+    tertiaryContainer: const Color(0xFFFDD7FA),
+    onTertiaryContainer: const Color(0xFF2A132C),
+    error: const Color(0xFFC00011),
+    onError: const Color(0xFFFFFFFF),
+    errorContainer: const Color(0xFFFFDAD6),
+    onErrorContainer: const Color(0xFF410002),
+    outline: const Color(0xFF757780),
+    background: const Color(0xFFFAFDFD),
+    onBackground: const Color(0xFF191C1D),
+    surface: const Color(0xFFF8FAFA),
+    onSurface: const Color(0xFF191C1D),
+    surfaceVariant: const Color(0xFFE1E2EC),
+    onSurfaceVariant: const Color(0xFF44464F),
+    inverseSurface: const Color(0xFF2E3132),
+    onInverseSurface: const Color(0xFFEFF1F1),
+    inversePrimary: const Color(0xFFB0C6FF),
+    shadow: const Color(0xFF000000),
+    surfaceTint: const Color(0xFF365CA8),
+    outlineVariant: const Color(0xFFC5C6D0),
+    scrim: const Color(0xFF000000),
+  );
+
+  static const darkColorScheme = ColorScheme(
+    brightness: Brightness.dark,
+    primary: Color(0xFFB0C6FF),
+    onPrimary: Color(0xFF002D6E),
+    primaryContainer: Color(0xFF18438F),
+    onPrimaryContainer: Color(0xFFD9E2FF),
+    secondary: Color(0xFFB4C4FF),
+    onSecondary: Color(0xFF022978),
+    secondaryContainer: Color(0xFF254290),
+    onSecondaryContainer: Color(0xFFDBE1FF),
+    tertiary: Color(0xFFDFBBDE),
+    onTertiary: Color(0xFF412742),
+    tertiaryContainer: Color(0xFF593D5A),
+    onTertiaryContainer: Color(0xFFFDD7FA),
+    error: Color(0xFFFFB4AB),
+    onError: Color(0xFF690005),
+    errorContainer: Color(0xFF93000A),
+    onErrorContainer: Color(0xFFFFDAD6),
+    outline: Color(0xFF8F9099),
+    background: Color(0xFF191C1D),
+    onBackground: Color(0xFFE1E3E3),
+    surface: Color(0xFF101415),
+    onSurface: Color(0xFFC4C7C7),
+    surfaceVariant: Color(0xFF44464F),
+    onSurfaceVariant: Color(0xFFC5C6D0),
+    inverseSurface: Color(0xFFE1E3E3),
+    onInverseSurface: Color(0xFF191C1D),
+    inversePrimary: Color(0xFF365CA8),
+    shadow: Color(0xFF000000),
+    surfaceTint: Color(0xFFB0C6FF),
+    outlineVariant: Color(0xFF44464F),
+    scrim: Color(0xFF000000),
   );
 }

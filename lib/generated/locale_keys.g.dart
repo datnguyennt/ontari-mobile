@@ -7,6 +7,7 @@ abstract class  LocaleKeys {
   static const button_sign_up = 'button.sign_up';
   static const button_sign_in_google = 'button.sign_in_google';
   static const button_sign_in_facebook = 'button.sign_in_facebook';
+  static const button_sign_in_phone = 'button.sign_in_phone';
   static const button_send_link = 'button.send_link';
   static const button = 'button';
   static const text_enter_email = 'text.enter.email';
@@ -64,5 +65,10 @@ abstract class  LocaleKeys {
   static const validator_invalid = 'validator.invalid';
   static const validator_not_match = 'validator.not_match';
   static const validator = 'validator';
+  static const dashboard_home = 'dashboard.home';
+  static const dashboard_activity = 'dashboard.activity';
+  static const dashboard_category = 'dashboard.category';
+  static const dashboard_setting = 'dashboard.setting';
+  static const dashboard = 'dashboard';
 
 }
