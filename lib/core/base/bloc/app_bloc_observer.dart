@@ -2,14 +2,19 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../utils/logger.dart';
 
 class AppBlocObserver extends BlocObserver {
-  AppBlocObserver({
-    this.logOnChange = LogConfig.logOnBlocChange,
-    this.logOnCreate = LogConfig.logOnBlocCreate,
-    this.logOnClose = LogConfig.logOnBlocClose,
-    this.logOnError = LogConfig.logOnBlocError,
-    this.logOnEvent = LogConfig.logOnBlocEvent,
-    this.logOnTransition = LogConfig.logOnBlocTransition,
-  });
+  AppBlocObserver(
+    bool logOnChange,
+    bool logOnCreate,
+    bool logOnClose,
+    bool logOnError,
+    bool logOnEvent,
+    bool logOnTransition,
+  )   : logOnChange = logOnChange,
+        logOnCreate = logOnCreate,
+        logOnClose = logOnClose,
+        logOnError = logOnError,
+        logOnEvent = logOnEvent,
+        logOnTransition = logOnTransition;
 
   final bool logOnChange;
   final bool logOnCreate;

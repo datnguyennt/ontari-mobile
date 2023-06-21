@@ -42,4 +42,9 @@ class UserModel {
       lastLogin: user.metadata.lastSignInTime,
     );
   }
+
+  @override
+  String toString() {
+    return 'username: $fullName email: $email avatar:$avatarUrl';
+  }
 }
