@@ -4,20 +4,17 @@ publish_to: none
 description: A new Flutter project.
 environment: 
   sdk: '>=2.18.4 <3.0.0'
-dependencies: 
-  auto_route: ^6.0.4
+dependencies:
+  get: ^5.0.0-release-candidate-4
   cloud_firestore: ^4.5.0
   connectivity_plus: ^3.0.0
   cupertino_icons: ^1.0.5
-  dartz: ^0.10.1
   dio: ^5.2.0+1
-  easy_localization: ^3.0.1
   equatable: ^2.0.5
   firebase_auth: ^4.6.2
   firebase_core: ^2.13.1
   firebase_crashlytics: ^3.3.2
   firebase_storage: ^11.2.2
-  flutter_bloc: ^8.1.2
   flutter_screenutil: ^5.6.1
   flutter_svg: ^2.0.5
   get_it: ^7.6.0
@@ -38,7 +35,6 @@ dependencies:
     sdk: flutter
     
 dev_dependencies: 
-  auto_route_generator: ^6.0.4
   build_runner: ^2.3.3
   flutter_flavorizr: ^2.1.4
   flutter_gen_runner: ^5.3.1
@@ -94,3 +90,5 @@ flutter_gen:
   output: lib/generated/
   integrations: 
     flutter_svg: true
+get_cli:
+  separator: .
