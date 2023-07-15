@@ -20,7 +20,7 @@ class HomeView extends BaseView<HomeBloc> {
 
   @override
   PreferredSizeWidget? appBar(BuildContext context) {
-    return CustomAppBar(
+    return const CustomAppBar(
       appBarTitleText: 'Home',
       isBackButtonEnabled: false,
     );

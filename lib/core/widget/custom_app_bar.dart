@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+
 import '../common/theme/theme.export.dart';
 
 //Default appbar customized with the design of our app
-class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
+class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String appBarTitleText;
   final List<Widget>? actions;
   final bool isBackButtonEnabled;
 
-  CustomAppBar({
+  const CustomAppBar({
     required this.appBarTitleText,
     this.actions,
     this.isBackButtonEnabled = true,
